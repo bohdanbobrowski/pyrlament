@@ -5,9 +5,37 @@
 	<title>Pyrlament</title>
 </head>
 <body>
-	<svg width="1200" height="1000">
-		<circle cx="15" cy="15" r="10" stroke="black" stroke-width="1" fill="gray" />
-		<circle cx="40" cy="15" r="10" stroke="black" stroke-width="1" fill="gray" />
+{% set color="white" %}
+	<svg width="1000" height="600" style="background: lightgray">
+
+		<circle cx="500" cy="0" r="290" stroke="gray" stroke-width="1" fill="lightgray" />
+		<circle cx="500" cy="0" r="260" stroke="gray" stroke-width="1" fill="lightgray" />
+		<circle cx="500" cy="0" r="230" stroke="gray" stroke-width="1" fill="lightgray" />
+		<circle cx="500" cy="0" r="200" stroke="gray" stroke-width="1" fill="lightgray" />
+
+		{% for y in range(3) %}
+		{% for x in range(10) %}
+		<circle cx="{{ x * 30 + 15 }}" cy="{{ y * 25 + 15 }}" r="10" stroke="black" stroke-width="1" fill="{{ color }}" />
+		{% endfor %}
+		{% endfor %}
+
+		{% for y in range(3) %}
+		<circle cx="{{ 310 }}" cy="{{ 100 }}" r="10" stroke="black" stroke-width="1" fill="{{ color }}" />
+		<circle cx="{{ 324 }}" cy="{{ 124 }}" r="10" stroke="black" stroke-width="1" fill="{{ color }}" />
+		<circle cx="{{ 342 }}" cy="{{ 145 }}" r="10" stroke="black" stroke-width="1" fill="{{ color }}" />
+		{% endfor %}
+
+		{% for y in range(3) %}
+		{% for x in range(10) %}
+		<circle cx="{{ x * 30 + 715 }}" cy="{{ y * 25 + 15 }}" r="10" stroke="black" stroke-width="1" fill="{{ color }}" />
+		{% endfor %}
+		{% endfor %}
+
+
+		{% for x in range(11) %}
+		<circle cx="{{ x * 30 + 685 }}" cy="{{ 4 * 25 }}" r="10" stroke="black" stroke-width="1" fill="{{ color }}" />
+		{% endfor %}
+
 	</svg>
 </body>
 </html>
