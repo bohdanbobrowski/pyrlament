@@ -9,7 +9,9 @@
 <svg width="1122" height="653" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      overflow="hidden">
 
-    <circle r="10" stroke="red" stroke-width="0" fill="red" cy="638" cx="396.3"></circle>
+    {% for seat in seats %}
+    <circle r="10" stroke="black" stroke-width="1" fill="none" cy="{{ seat[0] }}" cx="{{ seat[1] }}"></circle>
+    {% endfor %}
 
     <g transform="translate(-70 -52)">
         <path d="M786.207 664.988C784.666 669.781 787.302 674.916 792.095 676.457 796.888 677.998 802.023 675.362 803.564 670.568 805.105 665.775 802.469 660.64 797.676 659.099 792.883 657.558 787.748 660.195 786.207 664.988Z"
