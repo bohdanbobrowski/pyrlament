@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pyRLAMENT</title>
+</head>
+<body style="text-align: center">
+<h1>pyRLAMENT</h1>
+{% set color="gray" %}
+{% set textcolor="lightgray" %}
+<svg width="1122" height="841" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     overflow="hidden">
+    <g clip-path="url(#clip0)" transform="translate(0 50)">
+    {% for seat in seats %}
+    <circle r="9" stroke="none" stroke-width="1" fill="{{ seat[3] }}" cx="{{ seat[0] }}" cy="{{ seat[1] }}">
+        <title>{{ seat[2] }}</title>
+    </circle>
+    {% endfor %}
+    </g>
+</svg>
+</body>
+</html>

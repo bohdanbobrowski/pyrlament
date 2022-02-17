@@ -45,13 +45,13 @@ class SeatsGenerator:
         (399, 524, 68),
         (404, 506, 69),
         (411, 488, 70),
-        (421, 472, 71),
+        (422, 471, 71),
         (353, 543, 72),
         (356, 521, 73),
         (362, 500, 74),
         (370, 480, 75),
         (380, 460, 76),
-        (392, 441, 77),
+        (393, 440, 77),
     ]
     _left_center_sector_left = [
         (311, 543, 78),
@@ -178,7 +178,7 @@ class SeatsGenerator:
         return self._colorize_seats(seats)
 
     def _colorize_seats(self, seats):
-        colors = ["aqua", "coral", "crimson", "darkblue", "forestgreen"]
+        colors = ["#FF69B4", "#FE2020", "#FFA500", "#FFFF00", "#008000", "#40E0D0", "#4B0082", "#9400D3"]
         result = []
         for seat in seats:
             result.append((seat[0], seat[1], seat[2], random.choice(colors)))
