@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyRLAMENT_logo_RAW.svg" width="400" alt="pyRLAMENT" />
+
 # pyRLAMENT
 
 _Python library visualizing the distribution of seats in the Polish Sejm_
