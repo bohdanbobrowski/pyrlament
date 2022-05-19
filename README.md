@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyRLAMENT_logo_RAW.svg" width="400" alt="pyRLAMENT" />
+<img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyRLAMENT_logo_RAW.svg?token=GHSAT0AAAAAABUXNW53UVBYBLYQODWIY3QWYUGBZAA" width="400" alt="pyRLAMENT" />
 
 # pyRLAMENT
 
