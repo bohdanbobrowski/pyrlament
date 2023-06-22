@@ -3,7 +3,6 @@ import random
 
 
 class SeatsGenerator:
-
     _left_sector = [
         (396, 638, 34),
         (396, 616, 35),
@@ -178,7 +177,16 @@ class SeatsGenerator:
         return self._colorize_seats(seats)
 
     def _colorize_seats(self, seats):
-        colors = ["#FF69B4", "#FE2020", "#FFA500", "#FFFF00", "#008000", "#40E0D0", "#4B0082", "#9400D3"]
+        colors = [
+            "#FF69B4",
+            "#FE2020",
+            "#FFA500",
+            "#FFFF00",
+            "#008000",
+            "#40E0D0",
+            "#4B0082",
+            "#9400D3",
+        ]
         result = []
         for seat in seats:
             result.append((seat[0], seat[1], seat[2], random.choice(colors)))
