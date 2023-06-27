@@ -1,13 +1,13 @@
 from typing import List
 
-from pyrlament.data import Party, Election
+from pyrlament.data import Party
 
 
 class SeatsCounter:
-    election: Election
+    parties: List[Party]
 
     def __init__(self, parties: List[Party]):
-        self.election = Election(parties=parties)
+        self.parties = parties
 
     def count(self):
         pass
