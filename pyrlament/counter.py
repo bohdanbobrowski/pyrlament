@@ -1,6 +1,6 @@
 from typing import List
 
-from pyrlament.data import Party
+from pyrlament.data import DEPUTIES, Party
 
 
 class SeatsCounter:
@@ -10,4 +10,5 @@ class SeatsCounter:
         self.parties = parties
 
     def count(self):
-        pass
+        for party in self.parties:
+            party.seats = DEPUTIES
