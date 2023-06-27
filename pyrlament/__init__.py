@@ -1,1 +1,1 @@
-from pyrlament.seats_generator import SeatsGenerator
+from pyrlament.generator import SeatsGenerator
