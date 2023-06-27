@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class Party(BaseModel):
     name: str
     votes: float
+    seats: Optional[int]
 
 
 class Election(BaseModel):
