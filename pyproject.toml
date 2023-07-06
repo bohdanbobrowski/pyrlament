@@ -7,14 +7,9 @@ authors = [
     {name = "Bohdan Bobrowski", email = "bohdan@bobrowski.com.pl"}
 ]
 dependencies = [
-    "click",
     "Flask",
-    "itsdangerous",
-    "Jinja2",
-    "MarkupSafe",
     "numpy",
-    "python-dotenv",
-    "Werkzeug",
+    "pydantic",
 ]
 
 [project.optional-dependencies]
@@ -24,6 +19,7 @@ dev = [
     "isort",
     "mypy",
     "ruff",
+    "pipreqs",
 ]
 
 [tool.ruff]

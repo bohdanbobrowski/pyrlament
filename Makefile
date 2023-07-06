@@ -6,3 +6,6 @@ help:
 
 test:
 	pytest tests/unit -W ignore::DeprecationWarning
+
+requirements:
+    pipreqs . --force
