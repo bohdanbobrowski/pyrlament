@@ -1,5 +1,5 @@
 from pyrlament.counter import SeatsCounter
-from pyrlament.data import DEPUTIES, Party
+from pyrlament.data import DEPUTIES, DISTRICTS, Party
 
 
 class TestSeatsCounter:
@@ -35,3 +35,6 @@ class TestSeatsCounter:
         }
         for party in election.parties:
             assert party.seats == expected[party.name]
+
+    def test_districts(self):
+        print(len(DISTRICTS))
