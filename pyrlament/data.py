@@ -8,4 +8,4 @@ DEPUTIES = 460
 class Party(BaseModel):
     name: str
     votes: float
-    seats: Optional[int]
+    seats: Optional[int] = None
