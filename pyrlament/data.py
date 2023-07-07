@@ -10,3 +10,171 @@ class Party(BaseModel):
     votes: float
     threshold: int = 5
     seats: Optional[int] = None
+
+
+class District(BaseModel):
+    mandates: int
+    votes: int
+    capital: str
+    voivodeship: str
+
+
+GERMAN_MINORITY = Party(
+    name="Mniejszość niemiecka",
+    votes=1,
+    threshold=0,
+    seats=1,
+)
+
+DISTRICTS = [
+    District(
+        mandates=12,
+        votes=432436,
+        capital="Legnica",
+        voivodeship="dolnośląskie",
+    ),
+    District(
+        mandates=8,
+        votes=283002,
+        capital="Wałbrzych",
+        voivodeship="dolnośląskie",
+    ),
+    District(
+        mandates=14,
+        votes=654455,
+        capital="Wrocław",
+        voivodeship="dolnośląskie",
+    ),
+    District(
+        mandates=12,
+        votes=459982,
+        capital="Bydgoszcz",
+        voivodeship="kujawsko-pomorskie",
+    ),
+    District(
+        mandates=13,
+        votes=452330,
+        capital="Toruń",
+        voivodeship="kujawsko-pomorskie",
+    ),
+    District(mandates=15, votes=565597, capital="Lublin", voivodeship="lubelskie"),
+    District(mandates=12, votes=401318, capital="Chełm", voivodeship="lubelskie"),
+    District(mandates=12, votes=437917, capital="Zielona Góra", voivodeship="lubuskie"),
+    District(
+        mandates=10,
+        votes=415540,
+        capital="Łódź",
+        voivodeship="łódzkie",
+    ),
+    District(
+        mandates=9,
+        votes=346326,
+        capital="Piotrków Trybunalski",
+        voivodeship="łódzkie",
+    ),
+    District(
+        mandates=12,
+        votes=460239,
+        capital="Sieradz",
+        voivodeship="łódzkie",
+    ),
+    District(
+        mandates=8,
+        votes=316214,
+        capital="Kraków",
+        voivodeship="małopolskie",
+    ),
+    District(
+        mandates=14,
+        votes=649287,
+        capital="Kraków",
+        voivodeship="małopolskie",
+    ),
+    District(
+        mandates=10,
+        votes=370199,
+        capital="Nowy Sącz",
+        voivodeship="małopolskie",
+    ),
+    District(
+        mandates=9,
+        votes=347088,
+        capital="Tarnów",
+        voivodeship="małopolskie",
+    ),
+    District(mandates=10, votes=370561, capital="Płock", voivodeship="mazowieckie"),
+    District(mandates=9, votes=335009, capital="Radom", voivodeship="mazowieckie"),
+    District(mandates=12, votes=452906, capital="Siedlce", voivodeship="mazowieckie"),
+    District(mandates=20, votes=1381917, capital="Warszawa", voivodeship="mazowieckie"),
+    District(mandates=12, votes=598727, capital="Warszawa", voivodeship="mazowieckie"),
+    District(mandates=11, votes=406439, capital="Opole", voivodeship="opolskie"),
+    District(mandates=11, votes=390581, capital="Krosno", voivodeship="podkarpackie"),
+    District(mandates=15, votes=588786, capital="Rzeszów", voivodeship="podkarpackie"),
+    District(mandates=14, votes=520578, capital="Białystok", voivodeship="podlaskie"),
+    District(mandates=12, votes=528829, capital="Gdańsk", voivodeship="pomorskie"),
+    District(mandates=14, votes=580722, capital="Słupsk", voivodeship="pomorskie"),
+    District(
+        mandates=9,
+        votes=389256,
+        capital="Bielsko-Biała",
+        voivodeship="śląskie",
+    ),
+    District(
+        mandates=7,
+        votes=284517,
+        capital="Częstochowa",
+        voivodeship="śląskie",
+    ),
+    District(
+        mandates=9,
+        votes=340647,
+        capital="Katowice",
+        voivodeship="śląskie",
+    ),
+    District(
+        mandates=9,
+        votes=333836,
+        capital="Bielsko-Biała",
+        voivodeship="śląskie",
+    ),
+    District(
+        mandates=12,
+        votes=469633,
+        capital="Katowice",
+        voivodeship="śląskie",
+    ),
+    District(
+        mandates=9,
+        votes=335431,
+        capital="Katowice",
+        voivodeship="śląskie",
+    ),
+    District(
+        mandates=16,
+        votes=569891,
+        capital="Kielce",
+        voivodeship="świętokrzyskie",
+    ),
+    District(
+        mandates=8,
+        votes=250819,
+        capital="Elbląg",
+        voivodeship="warmińsko-mazurskie",
+    ),
+    District(
+        mandates=10,
+        votes=331684,
+        capital="Olsztyn",
+        voivodeship="warmińsko-mazurskie",
+    ),
+    District(mandates=12, votes=459152, capital="Kalisz", voivodeship="wielkopolskie"),
+    District(mandates=9, votes=353041, capital="Konin", voivodeship="wielkopolskie"),
+    District(mandates=9, votes=349051, capital="Piła", voivodeship="wielkopolskie"),
+    District(mandates=10, votes=514527, capital="Poznań", voivodeship="wielkopolskie"),
+    District(
+        mandates=8, votes=271711, capital="Koszalin", voivodeship="zachodniopomorskie"
+    ),
+    District(
+        mandates=12, votes=470529, capital="Szczecin", voivodeship="zachodniopomorskie"
+    ),
+]
