@@ -9,6 +9,13 @@ class TestSeatsCounter:
         election.count()
         assert election.parties[0].seats == DEPUTIES
 
+    def test_get_german_minority(self):
+        parties = [Party(name="A", votes=100.0)]
+        election = SeatsCounter(parties=parties)
+        election._get_german_minority()
+        election._get_german_minority()
+        assert len(election.parties) == 2
+
     def test_count_2019_election(self):
         parties = [
             Party(name="PiS", votes=43.59),

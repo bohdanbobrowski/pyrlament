@@ -1,6 +1,6 @@
 from typing import List
 
-from pyrlament.data import DEPUTIES, GERMAN_MINORITY, Party
+from pyrlament.data import DEPUTIES, DISTRICTS, GERMAN_MINORITY, Party, District
 
 
 class SeatsCounter:
@@ -18,4 +18,6 @@ class SeatsCounter:
     def count(self):
         for party in self.parties:
             party.seats = DEPUTIES
+        for distr in DISTRICTS:
+            pass
         self._get_german_minority()
