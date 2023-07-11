@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from pydantic import BaseModel
 
@@ -16,6 +16,16 @@ class ArchivalSupport(BaseModel):
     name: str
     support: float
     year: int
+
+
+def sg(year: int, support: Dict) -> List[ArchivalSupport]:
+    """Support generator."""
+    output = []
+    for party_name in support:
+        output.append(
+            ArchivalSupport(name=party_name, support=support[party_name], year=year)
+        )
+    return output
 
 
 class District(BaseModel):
