@@ -36,6 +36,17 @@ class District(BaseModel):
     archive: List[ArchivalSupport]
 
 
+GENERAL_SUPPORT = sg(
+    2019,
+    {
+        "PiS": 43.59,
+        "KO": 27.4,
+        "Lewica": 12.56,
+        "PSL": 8.55,
+        "Konfederacja": 6.81,
+    },
+)
+
 GERMAN_MINORITY = Party(
     name="Mniejszość niemiecka",
     votes=1,
