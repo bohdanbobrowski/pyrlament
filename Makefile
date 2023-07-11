@@ -12,3 +12,27 @@ test:
 
 requirements:
 	pipreqs . --force
+
+
+
+format: ruff autoflake black isort no_implicit_optional
+
+
+ruff:
+	poetry run ruff --fix .
+
+
+autoflake:
+	poetry run autoflake --remove-all-unused-imports -i .
+
+
+black:
+	poetry run black .
+
+
+isort:
+	poetry run isort  --profile black .
+
+
+no_implicit_optional:
+	poetry run no_implicit_optional .

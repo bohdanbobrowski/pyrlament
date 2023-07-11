@@ -1,6 +1,6 @@
 from typing import List
 
-from pyrlament.data import DEPUTIES, DISTRICTS, GERMAN_MINORITY, Party, District
+from pyrlament.data import DEPUTIES, DISTRICTS, GERMAN_MINORITY, Party
 
 
 class SeatsCounter:
