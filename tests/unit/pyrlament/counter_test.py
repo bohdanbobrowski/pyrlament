@@ -22,7 +22,7 @@ class TestSeatsCounter:
             Party(name="KO", votes=27.4),
             Party(name="SLD", votes=12.56),
             Party(name="PSL", votes=8.55),
-            Party(name="KWIN", votes=6.81),
+            Party(name="Konfederacja", votes=6.81),
         ]
         election = SeatsCounter(parties=parties)
         election.count()
@@ -31,7 +31,7 @@ class TestSeatsCounter:
             "KO": 134,
             "SLD": 49,
             "PSL": 30,
-            "KWIN": 11,
+            "Konfederacja": 11,
         }
         for party in election.parties:
             assert party.seats == expected[party.name]
