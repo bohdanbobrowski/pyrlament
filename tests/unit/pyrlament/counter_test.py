@@ -37,4 +37,5 @@ class TestSeatsCounter:
             assert party.seats == expected[party.name]
 
     def test_districts(self):
-        print(len(DISTRICTS))
+        """This test is awkward."""
+        assert len(DISTRICTS), 41
