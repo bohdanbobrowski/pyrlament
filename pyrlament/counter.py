@@ -24,7 +24,7 @@ class SeatsCounter:
             if GERMAN_MINORITY not in self.parties:
                 self.parties.append(GERMAN_MINORITY)
 
-    def _update_district_support(self) -> List:
+    def _update_district_support(self):
         self.districts_updated = []
         for d in DISTRICTS:
             new_district = District(
@@ -32,6 +32,7 @@ class SeatsCounter:
                 votes=d.votes,
                 capital=d.capital,
                 voivodeship=d.voivodeship,
+                support=[],
             )
             for party in self.parties:
                 past_support = 0
@@ -39,10 +40,16 @@ class SeatsCounter:
                     if sup.name == party.name:
                         past_support = sup.support
                 p_sup = d.get_support(party.name)
-                new_district.add_support(
-                    party_name=party.name,
-                    party_support=party.support / past_support * p_sup.support,
-                )
+                if p_sup and past_support > 0:
+                    new_district.add_support(
+                        party_name=party.name,
+                        party_support=party.support / past_support * p_sup.support,
+                    )
+                else:
+                    new_district.add_support(
+                        party_name=party.name,
+                        party_support=party.support
+                    )
             self.districts_updated.append(new_district)
 
     def _calculate_deputies_seats(self):

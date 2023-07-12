@@ -4,7 +4,7 @@ from pyrlament.data import DEPUTIES, DISTRICTS, Party
 
 class TestSeatsCounter:
     def test_count_one_takes_all(self):
-        parties = [Party(name="A", support=100.0)]
+        parties = [Party(name="PiS", support=100.0)]
         election = SeatsCounter(parties=parties)
         election.count()
         assert election.parties[0].seats == DEPUTIES
