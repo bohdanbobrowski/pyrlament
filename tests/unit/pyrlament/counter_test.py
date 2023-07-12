@@ -56,7 +56,7 @@ class TestSeatsCounter:
                 "Lewica": "16.43",
                 "PSL": "7.17",
                 "Konfederacja": "5.85",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 8,
@@ -68,7 +68,7 @@ class TestSeatsCounter:
                 "Lewica": "12.53",
                 "PSL": "7.25",
                 "Konfederacja": "5.42",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 14,
@@ -80,7 +80,7 @@ class TestSeatsCounter:
                 "Lewica": "15.41",
                 "PSL": "6.46",
                 "Konfederacja": "7.45",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -92,7 +92,7 @@ class TestSeatsCounter:
                 "Lewica": "15.17",
                 "PSL": "9.02",
                 "Konfederacja": "7.05",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 13,
@@ -104,7 +104,7 @@ class TestSeatsCounter:
                 "Lewica": "14.83",
                 "PSL": "10.88",
                 "Konfederacja": "6.33",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 15,
@@ -116,7 +116,7 @@ class TestSeatsCounter:
                 "Lewica": "9.10",
                 "PSL": "7.81",
                 "Konfederacja": "7.07",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -128,7 +128,7 @@ class TestSeatsCounter:
                 "Lewica": "6.83",
                 "PSL": "11.86",
                 "Konfederacja": "5.84",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -140,7 +140,7 @@ class TestSeatsCounter:
                 "Lewica": "15.61",
                 "PSL": "11.63",
                 "Konfederacja": "7.19",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 10,
@@ -152,7 +152,7 @@ class TestSeatsCounter:
                 "Lewica": "20.10",
                 "PSL": "4.53",
                 "Konfederacja": "6.65",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -164,7 +164,7 @@ class TestSeatsCounter:
                 "Lewica": "10.95",
                 "PSL": "10.44",
                 "Konfederacja": "6.76",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -176,7 +176,7 @@ class TestSeatsCounter:
                 "Lewica": "11.98",
                 "PSL": "10.29",
                 "Konfederacja": "5.88",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 8,
@@ -188,7 +188,7 @@ class TestSeatsCounter:
                 "Lewica": "8.51",
                 "PSL": "7.90",
                 "Konfederacja": "7.06",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 14,
@@ -200,7 +200,7 @@ class TestSeatsCounter:
                 "Lewica": "13.01",
                 "PSL": "7.27",
                 "Konfederacja": "7.99",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 10,
@@ -212,7 +212,7 @@ class TestSeatsCounter:
                 "Lewica": "6.07",
                 "PSL": "7.35",
                 "Konfederacja": "6.95",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -224,7 +224,7 @@ class TestSeatsCounter:
                 "Lewica": "5.94",
                 "PSL": "13.35",
                 "Konfederacja": "7.11",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 10,
@@ -236,7 +236,7 @@ class TestSeatsCounter:
                 "Lewica": "8.76",
                 "PSL": "15.17",
                 "Konfederacja": "5.24",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -248,7 +248,7 @@ class TestSeatsCounter:
                 "Lewica": "7.43",
                 "PSL": "10.20",
                 "Konfederacja": "5.89",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -260,7 +260,7 @@ class TestSeatsCounter:
                 "Lewica": "6.45",
                 "PSL": "11.94",
                 "Konfederacja": "6.49",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 20,
@@ -272,7 +272,7 @@ class TestSeatsCounter:
                 "Lewica": "18.19",
                 "PSL": "4.75",
                 "Konfederacja": "7.51",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -284,7 +284,7 @@ class TestSeatsCounter:
                 "Lewica": "13.09",
                 "PSL": "8.60",
                 "Konfederacja": "6.63",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 11,
@@ -296,7 +296,7 @@ class TestSeatsCounter:
                 "Lewica": "11.74",
                 "PSL": "10.31",
                 "Konfederacja": "5.70",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 11,
@@ -308,7 +308,7 @@ class TestSeatsCounter:
                 "Lewica": "6.04",
                 "PSL": "7.85",
                 "Konfederacja": "6.81",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 15,
@@ -320,7 +320,7 @@ class TestSeatsCounter:
                 "Lewica": "6.59",
                 "PSL": "7.79",
                 "Konfederacja": "8.25",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 14,
@@ -332,7 +332,7 @@ class TestSeatsCounter:
                 "Lewica": "9.09",
                 "PSL": "9.33",
                 "Konfederacja": "6.96",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -344,7 +344,7 @@ class TestSeatsCounter:
                 "Lewica": "13.47",
                 "PSL": "5.90",
                 "Konfederacja": "7.21",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 14,
@@ -356,7 +356,7 @@ class TestSeatsCounter:
                 "Lewica": "12.47",
                 "PSL": "7.94",
                 "Konfederacja": "7.30",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -368,7 +368,7 @@ class TestSeatsCounter:
                 "Lewica": "11.48",
                 "PSL": "7.13",
                 "Konfederacja": "7.48",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 7,
@@ -380,7 +380,7 @@ class TestSeatsCounter:
                 "Lewica": "15.59",
                 "PSL": "8.68",
                 "Konfederacja": "6.07",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -392,7 +392,7 @@ class TestSeatsCounter:
                 "Lewica": "13.38",
                 "PSL": "5.99",
                 "Konfederacja": "7.67",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -404,7 +404,7 @@ class TestSeatsCounter:
                 "Lewica": "9.68",
                 "PSL": "5.64",
                 "Konfederacja": "7.17",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -416,7 +416,7 @@ class TestSeatsCounter:
                 "Lewica": "11.92",
                 "PSL": "4.37",
                 "Konfederacja": "7.33",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -428,7 +428,7 @@ class TestSeatsCounter:
                 "Lewica": "21.90",
                 "PSL": "4.85",
                 "Konfederacja": "6.45",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 16,
@@ -440,7 +440,7 @@ class TestSeatsCounter:
                 "Lewica": "9.95",
                 "PSL": "9.88",
                 "Konfederacja": "5.95",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 8,
@@ -452,7 +452,7 @@ class TestSeatsCounter:
                 "Lewica": "11.64",
                 "PSL": "10.89",
                 "Konfederacja": "5.66",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 10,
@@ -464,7 +464,7 @@ class TestSeatsCounter:
                 "Lewica": "13.84",
                 "PSL": "13.19",
                 "Konfederacja": "6.97",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -476,7 +476,7 @@ class TestSeatsCounter:
                 "Lewica": "13.43",
                 "PSL": "12.80",
                 "Konfederacja": "6.57",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -488,7 +488,7 @@ class TestSeatsCounter:
                 "Lewica": "15.04",
                 "PSL": "9.81",
                 "Konfederacja": "6.74",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 9,
@@ -500,7 +500,7 @@ class TestSeatsCounter:
                 "Lewica": "13.28",
                 "PSL": "13.86",
                 "Konfederacja": "6.62",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 10,
@@ -512,7 +512,7 @@ class TestSeatsCounter:
                 "Lewica": "16.49",
                 "PSL": "6.20",
                 "Konfederacja": "6.61",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 8,
@@ -524,7 +524,7 @@ class TestSeatsCounter:
                 "Lewica": "15.44",
                 "PSL": "9.43",
                 "Konfederacja": "5.98",
-                "PL2050": 0
+                "PL2050": 0,
             },
             {
                 "Liczba mandatow": 12,
@@ -536,8 +536,8 @@ class TestSeatsCounter:
                 "Lewica": "15.25",
                 "PSL": "7.40",
                 "Konfederacja": "6.53",
-                "PL2050": 0
-            }
+                "PL2050": 0,
+            },
         ]
         # when
         election = SeatsCounter(parties=parties)
@@ -548,7 +548,6 @@ class TestSeatsCounter:
             given = election.districts_updated[i]
             for given_p in given.support:
                 assert given_p.support, expected[given_p.name]
-
 
     def test_districts(self):
         """This test is awkward."""

@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import Dict, List
 
 from pyrlament.data import (
     DEPUTIES,
@@ -47,8 +47,7 @@ class SeatsCounter:
                     )
                 else:
                     new_district.add_support(
-                        party_name=party.name,
-                        party_support=party.support
+                        party_name=party.name, party_support=party.support
                     )
             self.districts_updated.append(new_district)
 
@@ -56,8 +55,15 @@ class SeatsCounter:
         output = {}
         for party in self.parties:
             party_support_in_district = district.get_support(party_name=party.name)
-            output[party.name] = round(party_support_in_district.support * district.votes / 100, 0)
+            output[party.name] = round(
+                party_support_in_district.support * district.votes / 100, 0
+            )
         return output
+
+    def _calculate_candidates_votes(
+        self,
+    ) -> list[int]:
+        return []
 
     def _calculate_deputies_seats(self):
         for district in self.districts_updated:

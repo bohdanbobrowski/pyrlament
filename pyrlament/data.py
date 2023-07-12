@@ -12,11 +12,29 @@ class Party(BaseModel):
     seats: Optional[int] = None
 
 
+class Candidate(BaseModel):
+    party_name: str
+    votes: int
+
+
 class PartySupport(BaseModel):
     name: str
     support: float
-    votes: int = 0
+    votes: Optional[int] = None
+    seats: Optional[int] = None
+    candidates_votes: List[Candidate] = []
     year: Optional[int]
+
+    def add_candidate_vote(self, votes: int):
+        self.candidates_votes.append(
+            Candidate(
+                party_name=self.name,
+                votes=votes,
+            )
+        )
+
+    def sort_candidates_votes(self):
+        self.candidates_votes.sort(key=lambda x: x.votes)
 
 
 class PartySupportList(BaseModel):
@@ -54,6 +72,13 @@ class District(PartySupportList):
     votes: int
     capital: str
     voivodeship: str
+
+    def calculate_candidate_votes(self, mandates: int):
+        candidates_votes = []
+        for party_support in self.support:
+            for i in range(1, self.mandates + 1):
+                candidates_votes.append(round(party_support.votes / i, 0))
+        self.candidates_votes = candidates_votes
 
 
 GENERAL_SUPPORT = PartySupportList.load(
