@@ -33,6 +33,10 @@ class TestSeatsCounter:
             "PSL": 30,
             "Konfederacja": 11,
         }
+        all_seats = 0
+        for party in election.parties:
+            all_seats += party.seats
+        assert all_seats, DEPUTIES
         for party in election.parties:
             assert party.seats == expected[party.name]
 
@@ -545,7 +549,7 @@ class TestSeatsCounter:
         # then
         for i in range(0, len(district_support)):
             expected = district_support[i]
-            given = election.districts_updated[i]
+            given = election.districts[i]
             for given_p in given.support:
                 assert given_p.support, expected[given_p.name]
 

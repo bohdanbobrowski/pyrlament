@@ -22,19 +22,19 @@ class PartySupport(BaseModel):
     support: float
     votes: Optional[int] = None
     seats: Optional[int] = None
-    candidates_votes: List[Candidate] = []
     year: Optional[int]
+    candidates_votes: List[Candidate] = []
 
-    def add_candidate_vote(self, votes: int):
+    def add_candidate_vote(self, party_name: str, votes: int):
         self.candidates_votes.append(
             Candidate(
-                party_name=self.name,
+                party_name=party_name,
                 votes=votes,
             )
         )
 
     def sort_candidates_votes(self):
-        self.candidates_votes.sort(key=lambda x: x.votes)
+        self.candidates_votes.sort(key=lambda x: x.votes, reverse=True)
 
 
 class PartySupportList(BaseModel):
@@ -50,6 +50,11 @@ class PartySupportList(BaseModel):
         for party_support in self.support:
             if party_support.name == party_name:
                 party_support.votes = votes
+
+    def set_seats(self, party_name: str, seats: int):
+        for party_support in self.support:
+            if party_support.name == party_name:
+                party_support.seats = seats
 
     def get_support(self, party_name: str) -> Optional[PartySupport]:
         for party_support in self.support:
@@ -72,13 +77,22 @@ class District(PartySupportList):
     votes: int
     capital: str
     voivodeship: str
+    candidates_votes: List[Candidate] = []
 
-    def calculate_candidate_votes(self, mandates: int):
-        candidates_votes = []
-        for party_support in self.support:
-            for i in range(1, self.mandates + 1):
-                candidates_votes.append(round(party_support.votes / i, 0))
-        self.candidates_votes = candidates_votes
+    def add_candidate_vote(self, party_name: str, votes: int):
+        self.candidates_votes.append(
+            Candidate(
+                party_name=party_name,
+                votes=votes,
+            )
+        )
+
+    def sort_candidates_votes(self):
+        self.candidates_votes.sort(key=lambda x: x.votes, reverse=True)
+        self._cut_candidates()
+
+    def _cut_candidates(self):
+        self.candidates_votes = self.candidates_votes[0 : self.mandates]
 
 
 GENERAL_SUPPORT = PartySupportList.load(
