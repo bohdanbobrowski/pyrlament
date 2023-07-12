@@ -62,8 +62,8 @@ class SeatsCounter:
     def _calculate_deputies_seats(self):
         for district in self.districts_updated:
             party_votes = self._get_party_votes(district)
-
-
+            for party_name in party_votes:
+                district.set_votes(party_name=party_name, votes=party_votes[party_name])
         for party in self.parties:
             party.seats = DEPUTIES
 

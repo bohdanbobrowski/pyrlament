@@ -15,6 +15,7 @@ class Party(BaseModel):
 class PartySupport(BaseModel):
     name: str
     support: float
+    votes: int = 0
     year: Optional[int]
 
 
@@ -27,12 +28,16 @@ class PartySupportList(BaseModel):
         ps = PartySupport(name=party_name, support=party_support, year=year)
         self.support.append(ps)
 
-    def get_support(self, party_name: str) -> Optional[PartySupport]:
-        result = 0
+    def set_votes(self, party_name: str, votes: int):
         for party_support in self.support:
             if party_support.name == party_name:
-                result = party_support
-        return result
+                party_support.votes = votes
+
+    def get_support(self, party_name: str) -> Optional[PartySupport]:
+        for party_support in self.support:
+            if party_support.name == party_name:
+                return party_support
+        return None
 
     @staticmethod
     def load(support: Dict, year: int):
