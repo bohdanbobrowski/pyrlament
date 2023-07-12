@@ -28,7 +28,7 @@ class PartySupportList(BaseModel):
         self.support.append(ps)
 
     def get_support(self, party_name: str) -> Optional[PartySupport]:
-        result = None
+        result = 0
         for party_support in self.support:
             if party_support.name == party_name:
                 result = party_support
