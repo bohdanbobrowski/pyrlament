@@ -7,36 +7,55 @@ DEPUTIES = 460
 
 class Party(BaseModel):
     name: str
-    votes: float
+    support: float
     threshold: int = 5
     seats: Optional[int] = None
 
 
-class ArchivalSupport(BaseModel):
+class PartySupport(BaseModel):
     name: str
     support: float
-    year: int
+    year: Optional[int]
 
 
-def sg(year: int, support: Dict) -> List[ArchivalSupport]:
-    """Support generator."""
-    output = []
-    for party_name in support:
-        output.append(
-            ArchivalSupport(name=party_name, support=support[party_name], year=year)
-        )
-    return output
+class PartySupportList(BaseModel):
+    support: List[PartySupport]
+
+    def add_support(
+        self, party_name: str, party_support: float, year: Optional[int] = None
+    ):
+        pass
+        # ps = PartySupport(name=party_name, support=party_support, year=year)
+        # self.support.append(ps)
+
+    def get_support(self, party_name: str) -> Optional[PartySupport]:
+        result = None
+        for party_support in self.support:
+            if party_support.name == party_name:
+                result = party_support
+        return result
+
+    def _generate_support(self, support: Dict, year: Optional[int] = None):
+        for party_name in support:
+            self.add_support(party_name, support[party_name], year)
+
+    def __init__(self, *args, **kwargs):
+        if len(args) == 2 and isinstance(args[0], int) and isinstance(args[1], dict):
+            self._generate_support(support=args[1], year=args[0])
+        if len(args) == 1 and isinstance(args[0], dict):
+            self._generate_support(support=args[0])
+        super().__init__(**kwargs)
 
 
-class District(BaseModel):
+
+class District(PartySupportList):
     mandates: int
     votes: int
     capital: str
     voivodeship: str
-    archive: List[ArchivalSupport]
 
 
-GENERAL_SUPPORT = sg(
+GENERAL_SUPPORT = PartySupportList(
     2019,
     {
         "PiS": 43.59,
@@ -49,7 +68,7 @@ GENERAL_SUPPORT = sg(
 
 GERMAN_MINORITY = Party(
     name="Mniejszość niemiecka",
-    votes=1,
+    support=1,
     threshold=0,
     seats=1,
 )
@@ -60,7 +79,7 @@ DISTRICTS = [
         votes=432436,
         capital="Legnica",
         voivodeship="dolnośląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 42.4,
@@ -76,7 +95,7 @@ DISTRICTS = [
         votes=283002,
         capital="Wałbrzych",
         voivodeship="dolnośląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 40.54,
@@ -92,7 +111,7 @@ DISTRICTS = [
         votes=654455,
         capital="Wrocław",
         voivodeship="dolnośląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 34.67,
@@ -108,7 +127,7 @@ DISTRICTS = [
         votes=459982,
         capital="Bydgoszcz",
         voivodeship="kujawsko-pomorskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 36.43,
@@ -124,7 +143,7 @@ DISTRICTS = [
         votes=452330,
         capital="Toruń",
         voivodeship="kujawsko-pomorskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 40.38,
@@ -140,7 +159,7 @@ DISTRICTS = [
         votes=565597,
         capital="Lublin",
         voivodeship="lubelskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 55.39,
@@ -156,7 +175,7 @@ DISTRICTS = [
         votes=401318,
         capital="Chełm",
         voivodeship="lubelskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 59.5,
@@ -172,7 +191,7 @@ DISTRICTS = [
         votes=437917,
         capital="Zielona Góra",
         voivodeship="lubuskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 34.3,
@@ -188,7 +207,7 @@ DISTRICTS = [
         votes=415540,
         capital="Łódź",
         voivodeship="łódzkie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 32.9,
@@ -204,14 +223,14 @@ DISTRICTS = [
         votes=346326,
         capital="Piotrków Trybunalski",
         voivodeship="łódzkie",
-        archive=sg(2019, {}),
+        support=sg(2019, {}),
     ),
     District(
         mandates=12,
         votes=460239,
         capital="Sieradz",
         voivodeship="łódzkie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 56.21,
@@ -227,7 +246,7 @@ DISTRICTS = [
         votes=316214,
         capital="Kraków",
         voivodeship="małopolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 49.81,
@@ -243,7 +262,7 @@ DISTRICTS = [
         votes=649287,
         capital="Kraków",
         voivodeship="małopolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 39.56,
@@ -259,7 +278,7 @@ DISTRICTS = [
         votes=370199,
         capital="Nowy Sącz",
         voivodeship="małopolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 65.8,
@@ -275,7 +294,7 @@ DISTRICTS = [
         votes=347088,
         capital="Tarnów",
         voivodeship="małopolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 59.59,
@@ -291,7 +310,7 @@ DISTRICTS = [
         votes=370561,
         capital="Płock",
         voivodeship="mazowieckie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 52.45,
@@ -307,7 +326,7 @@ DISTRICTS = [
         votes=335009,
         capital="Radom",
         voivodeship="mazowieckie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 57.82,
@@ -323,7 +342,7 @@ DISTRICTS = [
         votes=452906,
         capital="Siedlce",
         voivodeship="mazowieckie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 59.76,
@@ -339,7 +358,7 @@ DISTRICTS = [
         votes=1381917,
         capital="Warszawa",
         voivodeship="mazowieckie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 27.49,
@@ -355,7 +374,7 @@ DISTRICTS = [
         votes=598727,
         capital="Warszawa",
         voivodeship="mazowieckie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 40.89,
@@ -371,7 +390,7 @@ DISTRICTS = [
         votes=406439,
         capital="Opole",
         voivodeship="opolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 37.64,
@@ -387,7 +406,7 @@ DISTRICTS = [
         votes=390581,
         capital="Krosno",
         voivodeship="podkarpackie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 63.36,
@@ -403,7 +422,7 @@ DISTRICTS = [
         votes=588786,
         capital="Rzeszów",
         voivodeship="podkarpackie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 62.38,
@@ -419,7 +438,7 @@ DISTRICTS = [
         votes=520578,
         capital="Białystok",
         voivodeship="podlaskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 52.04,
@@ -435,7 +454,7 @@ DISTRICTS = [
         votes=528829,
         capital="Gdańsk",
         voivodeship="pomorskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 32.1,
@@ -451,7 +470,7 @@ DISTRICTS = [
         votes=580722,
         capital="Słupsk",
         voivodeship="pomorskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 36.43,
@@ -467,7 +486,7 @@ DISTRICTS = [
         votes=389256,
         capital="Bielsko-Biała",
         voivodeship="śląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 46.76,
@@ -483,7 +502,7 @@ DISTRICTS = [
         votes=284517,
         capital="Częstochowa",
         voivodeship="śląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 44.28,
@@ -499,7 +518,7 @@ DISTRICTS = [
         votes=340647,
         capital="Katowice",
         voivodeship="śląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 37.75,
@@ -515,7 +534,7 @@ DISTRICTS = [
         votes=333836,
         capital="Bielsko-Biała",
         voivodeship="śląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 48.28,
@@ -531,7 +550,7 @@ DISTRICTS = [
         votes=469633,
         capital="Katowice",
         voivodeship="śląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 39.19,
@@ -547,7 +566,7 @@ DISTRICTS = [
         votes=335431,
         capital="Katowice",
         voivodeship="śląskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 37.13,
@@ -563,7 +582,7 @@ DISTRICTS = [
         votes=569891,
         capital="Kielce",
         voivodeship="świętokrzyskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 55.18,
@@ -579,7 +598,7 @@ DISTRICTS = [
         votes=250819,
         capital="Elbląg",
         voivodeship="warmińsko-mazurskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 40.86,
@@ -595,7 +614,7 @@ DISTRICTS = [
         votes=331684,
         capital="Olsztyn",
         voivodeship="warmińsko-mazurskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 38.82,
@@ -611,7 +630,7 @@ DISTRICTS = [
         votes=459152,
         capital="Kalisz",
         voivodeship="wielkopolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 42.48,
@@ -627,7 +646,7 @@ DISTRICTS = [
         votes=353041,
         capital="Konin",
         voivodeship="wielkopolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 47.29,
@@ -643,7 +662,7 @@ DISTRICTS = [
         votes=349051,
         capital="Piła",
         voivodeship="wielkopolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 35.64,
@@ -659,7 +678,7 @@ DISTRICTS = [
         votes=514527,
         capital="Poznań",
         voivodeship="wielkopolskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 25.33,
@@ -675,7 +694,7 @@ DISTRICTS = [
         votes=271711,
         capital="Koszalin",
         voivodeship="zachodniopomorskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 36.83,
@@ -691,7 +710,7 @@ DISTRICTS = [
         votes=470529,
         capital="Szczecin",
         voivodeship="zachodniopomorskie",
-        archive=sg(
+        support=sg(
             2019,
             {
                 "PiS": 35.11,

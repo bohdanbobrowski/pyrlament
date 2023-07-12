@@ -4,13 +4,13 @@ from pyrlament.data import DEPUTIES, DISTRICTS, Party
 
 class TestSeatsCounter:
     def test_count_one_takes_all(self):
-        parties = [Party(name="A", votes=100.0)]
+        parties = [Party(name="A", support=100.0)]
         election = SeatsCounter(parties=parties)
         election.count()
         assert election.parties[0].seats == DEPUTIES
 
     def test_get_german_minority(self):
-        parties = [Party(name="A", votes=100.0)]
+        parties = [Party(name="A", support=100.0)]
         election = SeatsCounter(parties=parties)
         election._get_german_minority()
         election._get_german_minority()
@@ -18,11 +18,11 @@ class TestSeatsCounter:
 
     def test_count_2019_election(self):
         parties = [
-            Party(name="PiS", votes=43.59),
-            Party(name="KO", votes=27.4),
-            Party(name="SLD", votes=12.56),
-            Party(name="PSL", votes=8.55),
-            Party(name="Konfederacja", votes=6.81),
+            Party(name="PiS", support=43.59),
+            Party(name="KO", support=27.4),
+            Party(name="SLD", support=12.56),
+            Party(name="PSL", support=8.55),
+            Party(name="Konfederacja", support=6.81),
         ]
         election = SeatsCounter(parties=parties)
         election.count()
