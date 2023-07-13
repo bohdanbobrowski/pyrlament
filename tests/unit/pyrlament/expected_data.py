@@ -1842,9 +1842,9 @@ expected_candidates_votes = [
 
 expected_data = []
 
-for x in range(0, len(expected_candidates_votes)):
-    district = expected_candidates_votes[x]
-    district_obj = DISTRICTS[x]
+for i in range(0, len(expected_candidates_votes)):
+    district = expected_candidates_votes[i]
+    district_obj = DISTRICTS[i]
     expected_data_d = []
     expected_data_f = []
     for party_name in district:
@@ -1856,6 +1856,6 @@ for x in range(0, len(expected_candidates_votes)):
         expected_data_f.append([c.party_name, c.votes])
     expected_data.append(expected_data_f)
 
-print("===")
+print("=== paste result to A.py")
 print(json.dumps(expected_data))
 print("===")

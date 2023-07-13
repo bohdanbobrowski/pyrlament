@@ -1,3 +1,4 @@
+import math
 from typing import Dict, List
 
 from pyrlament.data import DISTRICTS, GENERAL_SUPPORT, GERMAN_MINORITY, District, Party
@@ -45,7 +46,8 @@ class SeatsCounter:
         output = {}
         for party in self.parties:
             party_support_in_district = district.get_support(party_name=party.name)
-            output[party.name] = round(party_support_in_district.support * district.votes / 100, 0)
+            party_votes = party_support_in_district.support * district.votes / 100
+            output[party.name] = int(math.floor(party_votes + 0.5))
         return output
 
     def _calculate_candidates_votes(
@@ -54,7 +56,8 @@ class SeatsCounter:
         for district in self.districts:
             for party_support in district.support:
                 for i in range(1, district.mandates + 1):
-                    votes = round(party_support.votes / i)
+                    votes = party_support.votes / i
+                    votes = int(math.floor(votes + 0.5))
                     party_support.add_candidate_vote(party_support.name, votes)
                     district.add_candidate_vote(party_support.name, votes)
                 party_support.sort_candidates_votes()

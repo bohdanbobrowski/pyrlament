@@ -2,7 +2,7 @@ import unittest
 
 from pyrlament.configs import PYRLAMENT_PROPERTIES
 from pyrlament.counter import SeatsCounter
-from pyrlament.data import DISTRICTS, Candidate, Party
+from pyrlament.data import DISTRICTS, Party
 
 PARTIES_2019 = [
     Party(name="PiS", support=43.59, threshold=8),
@@ -391,25 +391,25 @@ class TestSeatsCounter(unittest.TestCase):
 
     def test_district_support_votes(self):
         # given
-        expected_candidates_votes = [
+        expected_candidates_votes = expected = [
             [
                 ["PiS", 183353],
                 ["KO", 108195],
-                ["PiS", 91676],
+                ["PiS", 91677],
                 ["Lewica", 71049],
                 ["PiS", 61118],
                 ["KO", 54098],
                 ["PiS", 45838],
                 ["PiS", 36671],
                 ["KO", 36065],
-                ["Lewica", 35524],
+                ["Lewica", 35525],
                 ["PSL", 31006],
                 ["PiS", 30559],
             ],
             [
                 ["PiS", 114729],
                 ["KO", 90815],
-                ["PiS", 57364],
+                ["PiS", 57365],
                 ["KO", 45408],
                 ["PiS", 38243],
                 ["Lewica", 35460],
@@ -420,7 +420,7 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 226900],
                 ["KO", 214661],
                 ["PiS", 113450],
-                ["KO", 107330],
+                ["KO", 107331],
                 ["Lewica", 100852],
                 ["PiS", 75633],
                 ["KO", 71554],
@@ -457,9 +457,9 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 45663],
                 ["KO", 39835],
                 ["PiS", 36530],
-                ["Lewica", 33540],
+                ["Lewica", 33541],
                 ["PiS", 30442],
-                ["KO", 29876],
+                ["KO", 29877],
             ],
             [
                 ["PiS", 313284],
@@ -474,7 +474,7 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 44755],
                 ["PSL", 44173],
                 ["Konfederacja", 39988],
-                ["PiS", 39160],
+                ["PiS", 39161],
                 ["KO", 36387],
                 ["PiS", 34809],
             ],
@@ -496,7 +496,7 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 150206],
                 ["KO", 136937],
                 ["PiS", 75103],
-                ["KO", 68468],
+                ["KO", 68469],
                 ["Lewica", 68359],
                 ["PSL", 50930],
                 ["PiS", 50069],
@@ -511,7 +511,7 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 136713],
                 ["Lewica", 83524],
                 ["KO", 74423],
-                ["PiS", 68356],
+                ["PiS", 68357],
                 ["KO", 49615],
                 ["PiS", 45571],
                 ["Lewica", 41762],
@@ -530,28 +530,28 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 32445],
             ],
             [
-                ["PiS", 258700],
-                ["PiS", 129350],
-                ["PiS", 86233],
-                ["KO", 71981],
-                ["PiS", 64675],
-                ["PiS", 51740],
-                ["Lewica", 50396],
-                ["PSL", 48049],
-                ["PiS", 43117],
-                ["PiS", 36957],
-                ["KO", 35990],
-                ["PiS", 32338],
+                ["PiS", 229245],
+                ["PiS", 114623],
+                ["KO", 94257],
+                ["PiS", 76415],
+                ["PiS", 57311],
+                ["Lewica", 55137],
+                ["PSL", 47359],
+                ["KO", 47129],
+                ["PiS", 45849],
+                ["PiS", 38208],
+                ["PiS", 32749],
+                ["KO", 31419],
             ],
             [
-                ["PiS", 157506],
-                ["PiS", 78753],
-                ["KO", 64761],
-                ["PiS", 52502],
-                ["PiS", 39376],
-                ["Lewica", 37882],
-                ["PSL", 32538],
-                ["KO", 32380],
+                ["PiS", 169111],
+                ["PiS", 84556],
+                ["KO", 72856],
+                ["PiS", 56370],
+                ["PiS", 42278],
+                ["KO", 36428],
+                ["PiS", 33822],
+                ["PiS", 28185],
             ],
             [
                 ["PiS", 256858],
@@ -561,7 +561,7 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 85619],
                 ["Lewica", 84472],
                 ["KO", 65968],
-                ["PiS", 64214],
+                ["PiS", 64215],
                 ["Konfederacja", 51878],
                 ["PiS", 51372],
                 ["KO", 49476],
@@ -576,7 +576,7 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 60898],
                 ["KO", 51199],
                 ["PiS", 48718],
-                ["PiS", 40598],
+                ["PiS", 40599],
                 ["PiS", 34799],
                 ["PiS", 30449],
                 ["PSL", 27210],
@@ -617,7 +617,7 @@ class TestSeatsCounter(unittest.TestCase):
             ],
             [
                 ["PiS", 270657],
-                ["PiS", 135328],
+                ["PiS", 135329],
                 ["PiS", 90219],
                 ["PiS", 67664],
                 ["KO", 63135],
@@ -635,7 +635,7 @@ class TestSeatsCounter(unittest.TestCase):
                 ["KO", 290548],
                 ["Lewica", 251371],
                 ["KO", 193699],
-                ["PiS", 189944],
+                ["PiS", 189945],
                 ["KO", 145274],
                 ["PiS", 126630],
                 ["Lewica", 125686],
@@ -693,7 +693,7 @@ class TestSeatsCounter(unittest.TestCase):
             ],
             [
                 ["PiS", 367285],
-                ["PiS", 183642],
+                ["PiS", 183643],
                 ["PiS", 122428],
                 ["PiS", 91821],
                 ["KO", 84726],
@@ -706,11 +706,11 @@ class TestSeatsCounter(unittest.TestCase):
                 ["KO", 42363],
                 ["PiS", 40809],
                 ["Lewica", 38801],
-                ["PiS", 36728],
+                ["PiS", 36729],
             ],
             [
                 ["PiS", 270909],
-                ["PiS", 135454],
+                ["PiS", 135455],
                 ["KO", 109530],
                 ["PiS", 90303],
                 ["PiS", 67727],
@@ -734,15 +734,15 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 56585],
                 ["KO", 54615],
                 ["KO", 43692],
-                ["PiS", 42438],
+                ["PiS", 42439],
                 ["Konfederacja", 38129],
                 ["KO", 36410],
             ],
             [
                 ["PiS", 211557],
                 ["KO", 208189],
-                ["PiS", 105778],
-                ["KO", 104094],
+                ["PiS", 105779],
+                ["KO", 104095],
                 ["Lewica", 72416],
                 ["PiS", 70519],
                 ["KO", 69396],
@@ -778,11 +778,11 @@ class TestSeatsCounter(unittest.TestCase):
                 ["PiS", 128594],
                 ["KO", 111085],
                 ["PiS", 64297],
-                ["KO", 55542],
+                ["KO", 55543],
                 ["Lewica", 45579],
                 ["PiS", 42865],
                 ["KO", 37028],
-                ["PiS", 32148],
+                ["PiS", 32149],
                 ["KO", 27771],
             ],
             [
@@ -799,7 +799,7 @@ class TestSeatsCounter(unittest.TestCase):
             [
                 ["PiS", 184049],
                 ["KO", 174703],
-                ["PiS", 92024],
+                ["PiS", 92025],
                 ["KO", 87352],
                 ["PiS", 61350],
                 ["KO", 58234],
@@ -815,18 +815,18 @@ class TestSeatsCounter(unittest.TestCase):
                 ["KO", 99489],
                 ["Lewica", 73459],
                 ["PiS", 62273],
-                ["KO", 49744],
+                ["KO", 49745],
                 ["PiS", 41515],
                 ["Lewica", 36730],
                 ["KO", 33163],
-                ["PiS", 31136],
+                ["PiS", 31137],
             ],
             [
                 ["PiS", 314466],
                 ["PiS", 157233],
                 ["PiS", 104822],
                 ["KO", 94887],
-                ["PiS", 78616],
+                ["PiS", 78617],
                 ["PiS", 62893],
                 ["Lewica", 56704],
                 ["PSL", 56305],
@@ -842,7 +842,7 @@ class TestSeatsCounter(unittest.TestCase):
             [
                 ["PiS", 102485],
                 ["KO", 71308],
-                ["PiS", 51242],
+                ["PiS", 51243],
                 ["KO", 35654],
                 ["PiS", 34162],
                 ["Lewica", 29195],
@@ -877,7 +877,7 @@ class TestSeatsCounter(unittest.TestCase):
             ],
             [
                 ["PiS", 166953],
-                ["PiS", 83476],
+                ["PiS", 83477],
                 ["KO", 72303],
                 ["PiS", 55651],
                 ["Lewica", 53097],
@@ -895,7 +895,7 @@ class TestSeatsCounter(unittest.TestCase):
                 ["Lewica", 46354],
                 ["PiS", 41467],
                 ["KO", 35603],
-                ["PiS", 31100],
+                ["PiS", 31101],
             ],
             [
                 ["KO", 233492],
@@ -927,13 +927,14 @@ class TestSeatsCounter(unittest.TestCase):
                 ["Lewica", 71756],
                 ["KO", 56009],
                 ["PiS", 55068],
-                ["KO", 42006],
+                ["KO", 42007],
                 ["PiS", 41301],
                 ["Lewica", 35878],
                 ["PSL", 34819],
                 ["KO", 33605],
             ],
         ]
+
 
         # when
         election = SeatsCounter(parties=PARTIES_2019)
@@ -943,13 +944,10 @@ class TestSeatsCounter(unittest.TestCase):
 
         for i in range(0, len(expected_candidates_votes)):
             expected = expected_candidates_votes[i]
-            given = election.districts[i]
-            for expected_candidate_data in expected:
-                expected_candidate = Candidate(
-                    party_name=expected_candidate_data[0],
-                    votes=expected_candidate_data[1],
-                )
-                self.assertIn(expected_candidate, given.candidates_votes)
+            given = []
+            for c in election.districts[i].candidates_votes:
+                given.append([c.party_name, c.votes])
+            self.assertListEqual(expected, given)
 
     def test_district_mandates(self):
         # given
