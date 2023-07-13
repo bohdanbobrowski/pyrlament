@@ -176,6 +176,5 @@ class SeatsGenerator:
         ]
         result = []
         for seat in seats:
-            print(seat)
             result.append((seat[0], seat[1], seat[2], random.choice(colors)))
         return result

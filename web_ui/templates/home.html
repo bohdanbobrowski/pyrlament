@@ -16,7 +16,7 @@
     <circle r="9" stroke="black" stroke-width="1" fill="{{ seat[3] }}" cx="{{ seat[0] }}" cy="{{ seat[1] }}">
         <title>{{ seat[2] }}</title>
     </circle>
-    <text font-family="Helvetica, sans-serif" font-size="0.4em" x="{{ seat[0] }}" y="{{ seat[1] }}" text-anchor="middle" stroke="#000" stroke-width="0.1" dy=".3em" stroke-opacity="0.3">{{loop.index}}</text>
+    <text font-family="Helvetica, sans-serif" font-size="0.4em" x="{{ seat[0] }}" y="{{ seat[1] }}" text-anchor="middle" stroke="#000" stroke-width="0.1" dy=".3em" stroke-opacity="0.3">{{loop.index + 33}}</text>
     {% endfor %}
     </g>
 </svg>
