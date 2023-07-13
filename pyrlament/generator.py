@@ -4,12 +4,15 @@ from typing import List
 import numpy as np
 from pydantic import BaseModel
 
+from pyrlament.configs import PYRLAMENT_PROPERTIES
+
 
 class Seat(BaseModel):
     cx: float
     cy: float
     number: int
     fill: str = "#000000"
+    color: str = "#000000"
     order: int
 
 
@@ -179,19 +182,23 @@ class SeatsGenerator:
         self._colorize_seats()
         return self.seats
 
+    @staticmethod
+    def get_rgb(h: str) -> tuple:
+        return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))
+
+    @staticmethod
+    def invert_rgb(c: tuple) -> tuple:
+        return (255 - c[0], 255 - c[1], 255 - c[2])
+
+    @staticmethod
+    def rgb_to_hex(rgb: tuple) -> str:
+        return "#{:02x}{:02x}{:02x}".format(rgb[0], rgb[1], rgb[2])
+
     def _colorize_seats(self):
         result = []
         for seat in self.seats:
-            seat.fill = random.choice(
-                [
-                    "#FF69B4",
-                    "#FE2020",
-                    "#FFA500",
-                    "#FFFF00",
-                    "#008000",
-                    "#40E0D0",
-                    "#4B0082",
-                    "#9400D3",
-                ]
-            )
+            fill = self.get_rgb(random.choice(PYRLAMENT_PROPERTIES.COLORS))
+            color = self.invert_rgb(fill)
+            seat.fill = self.rgb_to_hex(fill)
+            seat.color = self.rgb_to_hex(color)
         return result
