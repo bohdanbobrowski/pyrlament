@@ -1,6 +1,17 @@
 import random
+from typing import List
 
 import numpy as np
+
+from pydantic import BaseModel
+
+
+class Seat(BaseModel):
+    cx: float
+    cy: float
+    number: int
+    fill: str = "#000000"
+    order: int
 
 
 class SeatsGenerator:
@@ -133,6 +144,8 @@ class SeatsGenerator:
         (1110, 638, 501),
     ]
 
+    seats: List[Seat]
+
     @staticmethod
     def _rotate(points, origin, angle):
         rotated = (points - origin) * np.exp(complex(0, angle)) + origin
@@ -161,9 +174,15 @@ class SeatsGenerator:
     def get_seats(self):
         self._multiply_center_sectors()
         seats = self._left_sector + self._center_sector + self._right_sector
-        return self._colorize_seats(seats)
+        self.seats = []
+        for seat in seats:
+            self.seats.append(
+                Seat(cx=seat[0], cy=seat[1], number=seat[2], order=0)
+            )
+        self._colorize_seats()
+        return self.seats
 
-    def _colorize_seats(self, seats):
+    def _colorize_seats(self):
         colors = [
             "#FF69B4",
             "#FE2020",
@@ -175,6 +194,6 @@ class SeatsGenerator:
             "#9400D3",
         ]
         result = []
-        for seat in seats:
-            result.append((seat[0], seat[1], seat[2], random.choice(colors)))
+        for seat in self.seats:
+            seat.color = random.choice(colors)
         return result
