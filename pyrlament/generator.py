@@ -138,14 +138,10 @@ class SeatsGenerator:
         rotated = (points - origin) * np.exp(complex(0, angle)) + origin
         return (rotated.real, rotated.imag)
 
-    def _rotate_sector(
-        self, sector, angle, seat_nr, rotate_by=complex(561, 561), move_by=(0, 0)
-    ):
+    def _rotate_sector(self, sector, angle, seat_nr, rotate_by=complex(561, 561), move_by=(0, 0)):
         result = []
         for seat in sector:
-            rotated = self._rotate(
-                complex(seat[0], seat[1]), rotate_by, np.deg2rad(angle)
-            )
+            rotated = self._rotate(complex(seat[0], seat[1]), rotate_by, np.deg2rad(angle))
             result.append((rotated[0] + move_by[0], rotated[1] + move_by[1], seat_nr))
             seat_nr += 1
         return result
@@ -154,22 +150,12 @@ class SeatsGenerator:
         left_center_sector_right = self._rotate_sector(
             self._left_center_sector_left, angle=21, seat_nr=122, move_by=(5, -5)
         )
-        left_center_sector = (
-            self._left_center_sector
-            + self._left_center_sector_left
-            + left_center_sector_right
-        )
+        left_center_sector = self._left_center_sector + self._left_center_sector_left + left_center_sector_right
         self._center_sector = (
             left_center_sector
-            + self._rotate_sector(
-                left_center_sector, angle=45, seat_nr=166, move_by=(5, 0)
-            )
-            + self._rotate_sector(
-                left_center_sector, angle=92, seat_nr=268, move_by=(-5, 5)
-            )
-            + self._rotate_sector(
-                left_center_sector, angle=135, seat_nr=370, move_by=(1, 16)
-            )
+            + self._rotate_sector(left_center_sector, angle=45, seat_nr=166, move_by=(5, 0))
+            + self._rotate_sector(left_center_sector, angle=92, seat_nr=268, move_by=(-5, 5))
+            + self._rotate_sector(left_center_sector, angle=135, seat_nr=370, move_by=(1, 16))
         )
 
     def get_seats(self):

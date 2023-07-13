@@ -87,6 +87,9 @@ fail_under = 80
 [tool.coverage.html]
 directory = "tests/coverage"
 
+[tool.black]
+line-length = 120
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

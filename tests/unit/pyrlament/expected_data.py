@@ -1,7 +1,6 @@
-from pyrlament.data import DISTRICTS
-from pyrlament.data import Candidate
 import json
 
+from pyrlament.data import DISTRICTS, Candidate
 
 expected_candidates_votes = [
     {

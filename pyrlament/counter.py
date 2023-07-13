@@ -38,18 +38,14 @@ class SeatsCounter:
                         party_support=party.support / past_support * p_sup.support,
                     )
                 else:
-                    new_district.add_support(
-                        party_name=party.name, party_support=party.support
-                    )
+                    new_district.add_support(party_name=party.name, party_support=party.support)
             self.districts.append(new_district)
 
     def _get_party_votes(self, district: District) -> Dict:
         output = {}
         for party in self.parties:
             party_support_in_district = district.get_support(party_name=party.name)
-            output[party.name] = round(
-                party_support_in_district.support * district.votes / 100, 0
-            )
+            output[party.name] = round(party_support_in_district.support * district.votes / 100, 0)
         return output
 
     def _calculate_candidates_votes(
@@ -76,9 +72,7 @@ class SeatsCounter:
                 party_support[cv.party_name] += 1
                 total_party_support[cv.party_name] += 1
             for party_name in party_support:
-                district.set_seats(
-                    party_name=party_name, seats=party_support[party_name]
-                )
+                district.set_seats(party_name=party_name, seats=party_support[party_name])
         for party in self.parties:
             if party.name in total_party_support:
                 party.seats = total_party_support[party.name]

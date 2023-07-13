@@ -15,7 +15,7 @@ requirements:
 
 
 
-format: ruff autoflake black isort no_implicit_optional
+format: black ruff autoflake isort no_implicit_optional
 
 
 ruff:

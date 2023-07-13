@@ -38,9 +38,7 @@ class PartySupport(BaseModel):
 class PartySupportList(BaseModel):
     support: List[PartySupport]
 
-    def add_support(
-        self, party_name: str, party_support: float, year: Optional[int] = None
-    ):
+    def add_support(self, party_name: str, party_support: float, year: Optional[int] = None):
         ps = PartySupport(name=party_name, support=party_support, year=year)
         self.support.append(ps)
 
@@ -64,9 +62,7 @@ class PartySupportList(BaseModel):
     def load(support: Dict, year: int):
         support_list = []
         for party_name in support:
-            support_list.append(
-                PartySupport(name=party_name, support=support[party_name], year=year)
-            )
+            support_list.append(PartySupport(name=party_name, support=support[party_name], year=year))
         return support_list
 
 
