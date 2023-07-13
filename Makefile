@@ -36,3 +36,17 @@ isort:
 
 no_implicit_optional:
 	poetry run no_implicit_optional .
+
+check_mypy:
+	poetry run mypy --incremental --show-error-codes --pretty .
+
+mypy: check_mypy
+
+pyclean:
+	poetry run pyclean .
+
+check_coverage: pyclean
+	poetry run coverage run -m pytest tests/unit && poetry run coverage report -m
+
+check_coverage_html: pyclean
+	poetry run coverage run -m pytest tests/unit && poetry run coverage html
