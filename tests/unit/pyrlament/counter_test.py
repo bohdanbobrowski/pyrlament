@@ -1,7 +1,8 @@
 import unittest
 
+from pyrlament.configs import PYRLAMENT_PROPERTIES
 from pyrlament.counter import SeatsCounter
-from pyrlament.data import DEPUTIES, DISTRICTS, Candidate, Party
+from pyrlament.data import DISTRICTS, Candidate, Party
 
 PARTIES_2019 = [
     Party(name="PiS", support=43.59, threshold=8),
@@ -17,7 +18,8 @@ class TestSeatsCounter(unittest.TestCase):
         parties = [Party(name="PiS", support=100.0)]
         election = SeatsCounter(parties=parties)
         election.count()
-        assert election.parties[0].seats == DEPUTIES
+        total_seats = sum(p.seats for p in election.parties)
+        assert total_seats == PYRLAMENT_PROPERTIES.DEPUTIES
 
     def test_get_german_minority(self):
         parties = [Party(name="A", support=100.0)]
@@ -39,7 +41,7 @@ class TestSeatsCounter(unittest.TestCase):
         all_seats = 0
         for party in election.parties:
             all_seats += party.seats
-        assert all_seats, DEPUTIES
+        assert all_seats, PYRLAMENT_PROPERTIES.DEPUTIES
         for party in election.parties:
             assert party.seats == expected[party.name]
 

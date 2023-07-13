@@ -2,8 +2,6 @@ from typing import Dict, List, Optional
 
 from pydantic import BaseModel
 
-DEPUTIES = 460
-
 
 class Party(BaseModel):
     name: str
