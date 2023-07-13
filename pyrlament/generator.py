@@ -2,7 +2,6 @@ import random
 from typing import List
 
 import numpy as np
-
 from pydantic import BaseModel
 
 
@@ -176,24 +175,23 @@ class SeatsGenerator:
         seats = self._left_sector + self._center_sector + self._right_sector
         self.seats = []
         for seat in seats:
-            self.seats.append(
-                Seat(cx=seat[0], cy=seat[1], number=seat[2], order=0)
-            )
+            self.seats.append(Seat(cx=seat[0], cy=seat[1], number=seat[2], order=0))
         self._colorize_seats()
         return self.seats
 
     def _colorize_seats(self):
-        colors = [
-            "#FF69B4",
-            "#FE2020",
-            "#FFA500",
-            "#FFFF00",
-            "#008000",
-            "#40E0D0",
-            "#4B0082",
-            "#9400D3",
-        ]
         result = []
         for seat in self.seats:
-            seat.color = random.choice(colors)
+            seat.fill = random.choice(
+                [
+                    "#FF69B4",
+                    "#FE2020",
+                    "#FFA500",
+                    "#FFFF00",
+                    "#008000",
+                    "#40E0D0",
+                    "#4B0082",
+                    "#9400D3",
+                ]
+            )
         return result
