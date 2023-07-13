@@ -26,8 +26,8 @@ class SeatsCounter:
                 voivodeship=d.voivodeship,
                 support=[],
             )
+            past_support = 0
             for party in self.parties:
-                past_support = 0
                 for sup in GENERAL_SUPPORT:
                     if sup.name == party.name:
                         past_support = sup.support
@@ -79,13 +79,11 @@ class SeatsCounter:
                 district.set_seats(
                     party_name=party_name, seats=party_support[party_name]
                 )
-        pass
         for party in self.parties:
             if party.name in total_party_support:
                 party.seats = total_party_support[party.name]
             else:
                 party.seats = 0
-        pass
 
     def _calculate_deputies_seats(self):
         for district in self.districts:

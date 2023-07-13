@@ -18,8 +18,8 @@ class TestSeatsCounter:
 
     def test_count_2019_election(self):
         parties = [
-            Party(name="PiS", support=43.59),
-            Party(name="KO", support=27.4),
+            Party(name="PiS", support=43.59, threshold=8),
+            Party(name="KO", support=27.4, threshold=8),
             Party(name="SLD", support=12.56),
             Party(name="PSL", support=8.55),
             Party(name="Konfederacja", support=6.81),
