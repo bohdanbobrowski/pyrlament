@@ -275,11 +275,11 @@ DISTRICTS = [
         voivodeship="łódzkie",
         support=PartySupportList.load(
             {
-                "PiS": 56.21,
-                "KO": 15.64,
-                "Lewica": 10.95,
-                "PSL": 10.44,
-                "Konfederacja": 6.76,
+                "PiS": 49.81,
+                "KO": 20.48,
+                "Lewica": 11.98,
+                "PSL": 10.29,
+                "Konfederacja": 5.88
             },
             2019,
         ),
@@ -291,11 +291,11 @@ DISTRICTS = [
         voivodeship="małopolskie",
         support=PartySupportList.load(
             {
-                "PiS": 49.81,
-                "KO": 20.48,
-                "Lewica": 11.98,
-                "PSL": 10.29,
-                "Konfederacja": 5.88,
+                "PiS": 53.48,
+                "KO": 23.04,
+                "Lewica": 8.51,
+                "PSL": 7.9,
+                "Konfederacja": 7.06
             },
             2019,
         ),

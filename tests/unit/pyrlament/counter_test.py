@@ -935,7 +935,6 @@ class TestSeatsCounter(unittest.TestCase):
             ],
         ]
 
-
         # when
         election = SeatsCounter(parties=PARTIES_2019)
         election.count()
