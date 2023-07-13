@@ -1,8 +1,10 @@
+import unittest
+
 from pyrlament.counter import SeatsCounter
-from pyrlament.data import DEPUTIES, DISTRICTS, Party
+from pyrlament.data import DEPUTIES, DISTRICTS, Candidate, Party
 
 
-class TestSeatsCounter:
+class TestSeatsCounter(unittest.TestCase):
     def test_count_one_takes_all(self):
         parties = [Party(name="PiS", support=100.0)]
         election = SeatsCounter(parties=parties)
@@ -49,7 +51,7 @@ class TestSeatsCounter:
             Party(name="PSL", support=8.55),
             Party(name="Konfederacja", support=6.81),
         ]
-        district_support = [
+        expected_district_support = [
             {
                 "PiS": 42.40,
                 "KO": 25.02,
@@ -383,19 +385,48 @@ class TestSeatsCounter:
         election = SeatsCounter(parties=parties)
         election.count()
         # then
-        for i in range(0, len(district_support)):
-            expected = district_support[i]
+        assert len(expected_district_support), len(election.districts)
+        for i in range(0, len(expected_district_support)):
+            expected = expected_district_support[i]
             given = election.districts[i]
             for given_p in given.support:
                 assert given_p.support, expected[given_p.name]
 
     def test_district_support_votes(self):
         # given
-        pass
+        parties = [
+            Party(name="PiS", support=43.59, threshold=8),
+            Party(name="KO", support=27.4, threshold=8),
+            Party(name="SLD", support=12.56),
+            Party(name="PSL", support=8.55),
+            Party(name="Konfederacja", support=6.81),
+        ]
+        expected_candidates_votes = [
+            [
+                Candidate(party_name="PiS", votes=183353),
+                Candidate(party_name="KO", votes=108195),
+                Candidate(party_name="PiS", votes=91676),
+                Candidate(party_name="PiS", votes=61118),
+                Candidate(party_name="SLD", votes=54314),
+                Candidate(party_name="KO", votes=54098),
+                Candidate(party_name="PiS", votes=45838),
+                Candidate(party_name="PiS", votes=36671),
+                Candidate(party_name="KO", votes=36065),
+                Candidate(party_name="PSL", votes=31006),
+                Candidate(party_name="PiS", votes=30559),
+                Candidate(party_name="SLD", votes=27157),
+            ]
+        ]
         # when
-
+        election = SeatsCounter(parties=parties)
+        election.count()
         # then
-
+        # assert len(expected_candidates_votes), len(election.districts)
+        for i in range(0, len(expected_candidates_votes)):
+            expected = expected_candidates_votes[i]
+            given = election.districts[i]
+            for expected_candidate in expected:
+                self.assertIn(expected_candidate, given.candidates_votes)
 
     def test_districts(self):
         """This test is awkward."""
