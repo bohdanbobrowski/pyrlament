@@ -3,6 +3,14 @@ import unittest
 from pyrlament.counter import SeatsCounter
 from pyrlament.data import DEPUTIES, DISTRICTS, Candidate, Party
 
+PARTIES_2019 = [
+    Party(name="PiS", support=43.59, threshold=8),
+    Party(name="KO", support=27.4, threshold=8),
+    Party(name="SLD", support=12.56),
+    Party(name="PSL", support=8.55),
+    Party(name="Konfederacja", support=6.81),
+]
+
 
 class TestSeatsCounter(unittest.TestCase):
     def test_count_one_takes_all(self):
@@ -19,14 +27,7 @@ class TestSeatsCounter(unittest.TestCase):
         assert len(election.parties) == 2
 
     def test_count_2019_election(self):
-        parties = [
-            Party(name="PiS", support=43.59, threshold=8),
-            Party(name="KO", support=27.4, threshold=8),
-            Party(name="SLD", support=12.56),
-            Party(name="PSL", support=8.55),
-            Party(name="Konfederacja", support=6.81),
-        ]
-        election = SeatsCounter(parties=parties)
+        election = SeatsCounter(parties=PARTIES_2019)
         election.count()
         expected = {
             "PiS": 235,
@@ -44,13 +45,6 @@ class TestSeatsCounter(unittest.TestCase):
 
     def test_district_support(self):
         # given
-        parties = [
-            Party(name="PiS", support=43.59),
-            Party(name="KO", support=27.4),
-            Party(name="SLD", support=12.56),
-            Party(name="PSL", support=8.55),
-            Party(name="Konfederacja", support=6.81),
-        ]
         expected_district_support = [
             {
                 "PiS": 42.40,
@@ -382,7 +376,7 @@ class TestSeatsCounter(unittest.TestCase):
             },
         ]
         # when
-        election = SeatsCounter(parties=parties)
+        election = SeatsCounter(parties=PARTIES_2019)
         election.count()
         # then
         assert len(expected_district_support), len(election.districts)
@@ -394,39 +388,43 @@ class TestSeatsCounter(unittest.TestCase):
 
     def test_district_support_votes(self):
         # given
-        parties = [
-            Party(name="PiS", support=43.59, threshold=8),
-            Party(name="KO", support=27.4, threshold=8),
-            Party(name="SLD", support=12.56),
-            Party(name="PSL", support=8.55),
-            Party(name="Konfederacja", support=6.81),
-        ]
         expected_candidates_votes = [
             [
-                Candidate(party_name="PiS", votes=183353),
-                Candidate(party_name="KO", votes=108195),
-                Candidate(party_name="PiS", votes=91676),
-                Candidate(party_name="PiS", votes=61118),
-                Candidate(party_name="SLD", votes=54314),
-                Candidate(party_name="KO", votes=54098),
-                Candidate(party_name="PiS", votes=45838),
-                Candidate(party_name="PiS", votes=36671),
-                Candidate(party_name="KO", votes=36065),
-                Candidate(party_name="PSL", votes=31006),
-                Candidate(party_name="PiS", votes=30559),
-                Candidate(party_name="SLD", votes=27157),
+                ["PiS", 183353],
+                ["KO", 108195],
+                ["PiS", 91676],
+                ["PiS", 61118],
+                ["SLD", 54314],
+                ["KO", 54098],
+                ["PiS", 45838],
+                ["PiS", 36671],
+                ["KO", 36065],
+                ["PSL", 31006],
+                ["PiS", 30559],
+                ["SLD", 27157],
             ]
         ]
         # when
-        election = SeatsCounter(parties=parties)
+        election = SeatsCounter(parties=PARTIES_2019)
         election.count()
         # then
         # assert len(expected_candidates_votes), len(election.districts)
         for i in range(0, len(expected_candidates_votes)):
             expected = expected_candidates_votes[i]
             given = election.districts[i]
-            for expected_candidate in expected:
+            for expected_candidate_data in expected:
+                expected_candidate = Candidate(
+                    party_name=expected_candidate_data[0],
+                    votes=expected_candidate_data[1],
+                )
                 self.assertIn(expected_candidate, given.candidates_votes)
+
+    def test_district_mandates(self):
+        # given
+        # when
+        election = SeatsCounter(parties=PARTIES_2019)
+        election.count()
+        # then
 
     def test_districts(self):
         """This test is awkward."""
