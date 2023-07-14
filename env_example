@@ -1,2 +1,0 @@
-FLASK_ENV=development
-FLASK_APP=web_ui/pyrlament.py
