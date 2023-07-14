@@ -8,7 +8,7 @@ Python library for visualizing seats in the Sejm of the Republic of Poland. So f
 
 ## SeatsGenerator:
 
-    from pyrlament.generator import SeatsGenerator
+    from pyrlament import SeatsGenerator
     
     g = SeatsGenerator()
     g.randomize()

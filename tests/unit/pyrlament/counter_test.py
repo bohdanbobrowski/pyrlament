@@ -1,7 +1,6 @@
 import unittest
 
-from pyrlament.configs import PYRLAMENT_PROPERTIES
-from pyrlament.counter import SeatsCounter
+from pyrlament import PYRLAMENT_PROPERTIES, SeatsCounter
 from pyrlament.data import DISTRICTS, Party
 
 PARTIES_2019 = [

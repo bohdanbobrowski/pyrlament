@@ -1,7 +1,7 @@
 import random
-import drawsvg
 from typing import List
 
+import drawsvg
 import numpy as np
 from pydantic import BaseModel
 
@@ -183,26 +183,26 @@ class SeatsGenerator:
         self._colorize_seats()
 
     def svg(self) -> str:
-        svg = "<svg width=\"1122\" height=\"841\" xmlns=\"http://www.w3.org/2000/svg\" overflow=\"hidden\">"
-        svg += "<g clip-path=\"url(#clip0)\" transform=\"translate(0 50)\">"
+        svg = '<svg width="1122" height="841" xmlns="http://www.w3.org/2000/svg" overflow="hidden">'
+        svg += '<g clip-path="url(#clip0)" transform="translate(0 50)">'
         for seat in self.seats:
-            svg += f"<circle r=\"9\" stroke=\"black\" stroke-width=\"1\" fill=\"{seat.fill}\" "
-            svg += f"cx=\"{seat.cx}\" cy=\"{seat.cy}\">"
+            svg += f'<circle r="9" stroke="black" stroke-width="1" fill="{seat.fill}" '
+            svg += f'cx="{seat.cx}" cy="{seat.cy}">'
             svg += f"<title>{seat.number}</title>"
-            svg += f"</circle>"
-            svg += f"<text font-family=\"Helvetica, sans-serif\" font-size=\"0.4em\" x=\"{seat.cx}\" y=\"{seat.cy}\" "
-            svg += f"text-anchor=\"middle\" stroke=\"{seat.color}\" fill=\"{seat.color}\" stroke-width=\"0.1\" "
-            svg += f"dy=\".3em\" stroke-opacity=\"0.3\">{seat.number}</text>"
+            svg += "</circle>"
+            svg += f'<text font-family="Helvetica, sans-serif" font-size="0.4em" x="{seat.cx}" y="{seat.cy}" '
+            svg += f'text-anchor="middle" stroke="{seat.color}" fill="{seat.color}" stroke-width="0.1" '
+            svg += f'dy=".3em" stroke-opacity="0.3">{seat.number}</text>'
         svg += "</g></svg>"
         return svg
 
     def svg_drawsvg(self):
-        d = drawsvg.Drawing(1122, 841, overflow="hidden")
-        g = drawsvg.g()
+        drawsvg.Drawing(1122, 841, overflow="hidden")
+        drawsvg.g()
 
     @staticmethod
     def get_rgb(h: str) -> tuple:
-        return tuple(int(h[i: i + 2], 16) for i in (0, 2, 4))
+        return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))
 
     @staticmethod
     def invert_rgb(c: tuple) -> tuple:
