@@ -13,7 +13,7 @@ class Seat(BaseModel):
     cx: float
     cy: float
     number: int
-    fill: str = "#000000"
+    fill: str = "#FFFFFF"
     color: str = "#000000"
     order: int
 
@@ -202,9 +202,6 @@ class SeatsGenerator:
             color = self.invert_rgb(fill)
             self.seats[y].fill = self.rgb_to_hex(fill)
             self.seats[y].color = self.rgb_to_hex(color)
-        for z in range(len(seat_map), len(self.seats)):
-            self.seats[z].fill = "#FFFFFF"
-            self.seats[z].color = "#000000"
 
     def svg(self) -> str:
         svg = '<svg width="1122" height="841" xmlns="http://www.w3.org/2000/svg" overflow="hidden">'
