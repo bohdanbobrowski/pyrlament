@@ -225,11 +225,11 @@ class SeatsGenerator:
 
     def save_svg(self, filename):
         svg = self._get_svg()
-        return svg.save_svg(filename)
+        svg.save_svg(filename)
 
     def save_png(self, filename):
         svg = self._get_svg()
-        return svg.save_png(filename)
+        svg.save_png(filename)
 
     @staticmethod
     def hex_to_rgb(h: str) -> tuple:
