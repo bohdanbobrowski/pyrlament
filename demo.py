@@ -16,5 +16,5 @@ for party in election.parties:
 
 g = SeatsGenerator(parties=election.parties)
 g.colorize()
-with open("assets/pyrlament_sample.svg", "w") as f:
-    f.write(g.svg())
+g.save_svg("assets/pyrlament_sample.svg")
+g.save_png("assets/pyrlament_sample.png")

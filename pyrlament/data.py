@@ -1,4 +1,5 @@
 from typing import Dict, List, Optional
+
 from pydantic import BaseModel
 
 
@@ -101,13 +102,7 @@ GENERAL_SUPPORT = PartySupportList.load(
     2019,
 )
 
-GERMAN_MINORITY = Party(
-    name="Mniejszość niemiecka",
-    support=1,
-    threshold=0,
-    seats=1,
-    color="999999"
-)
+GERMAN_MINORITY = Party(name="Mniejszość niemiecka", support=1, threshold=0, seats=1, color="999999")
 
 DISTRICTS = [
     District(

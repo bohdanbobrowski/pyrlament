@@ -1,5 +1,5 @@
 import random
-from typing import Dict, List
+from typing import List
 
 import drawsvg
 import numpy as np
@@ -203,27 +203,37 @@ class SeatsGenerator:
             self.seats[y].fill = self.rgb_to_hex(fill)
             self.seats[y].color = self.rgb_to_hex(color)
 
-    def svg(self) -> str:
-        svg = '<svg width="1122" height="841" xmlns="http://www.w3.org/2000/svg" overflow="hidden">'
-        svg += '<g clip-path="url(#clip0)" transform="translate(0 50)">'
+    def _get_svg(self):
+        svg = drawsvg.Drawing(1122, 841, overflow="hidden")
+        g = drawsvg.Group(transform="translate(0 50)")
         for seat in self.seats:
-            svg += f'<circle r="9" stroke="black" stroke-width="1" fill="{seat.fill}" '
-            svg += f'cx="{seat.cx}" cy="{seat.cy}">'
-            svg += f"<title>{seat.number}</title>"
-            svg += "</circle>"
-            svg += f'<text font-family="Helvetica, sans-serif" font-size="0.4em" x="{seat.cx}" y="{seat.cy}" '
-            svg += f'text-anchor="middle" stroke="{seat.color}" fill="{seat.color}" stroke-width="0.1" '
-            svg += f'dy=".3em" stroke-opacity="0.3">{seat.number}</text>'
-        svg += "</g></svg>"
+            circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.5")
+            seat_number = drawsvg.Text(
+                f"{seat.number}",
+                8,
+                seat.cx,
+                seat.cy,
+                center=0.6,
+                fill=seat.color,
+                text_anchor="middle",
+                font_family="sans-serif",
+            )
+            g.append(circle)
+            g.append(seat_number)
+        svg.append(g)
         return svg
 
-    def svg_drawsvg(self):
-        drawsvg.Drawing(1122, 841, overflow="hidden")
-        drawsvg.g()
+    def save_svg(self, filename):
+        svg = self._get_svg()
+        return svg.save_svg(filename)
+
+    def save_png(self, filename):
+        svg = self._get_svg()
+        return svg.save_png(filename)
 
     @staticmethod
     def hex_to_rgb(h: str) -> tuple:
-        return tuple(int(h[i: i + 2], 16) for i in (0, 2, 4))
+        return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))
 
     @staticmethod
     def invert_rgb(c: tuple) -> tuple:

@@ -49,7 +49,15 @@ As a result of the operation of the `count` method, the `parties` parameter will
     with open('pyrlament.svg', 'w') as f:
         f.write(g.svg())
 
+#### SVG example:
+
 <img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyrlament_sample.svg" width="100%" alt="pyRLAMENT example" />
+
+#### PNG example:
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyrlament_sample.png" alt="pyRLAMENT example" />
+</p>
 
 ## Implemented and planned features
 
@@ -64,7 +72,7 @@ Here are my plans (some already implemented) for this library:
 - [ ] split seats between parties
 - [ ] improve seats placement (it's a bit messy)
 - [x] svg output
-- [ ] png and pdf output
+- [x] png and pdf output
 - [ ] build weapp using Flask
 - [ ] build mobile app using Kivy
 - [ ] build desktop app using Kivy
