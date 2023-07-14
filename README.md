@@ -42,9 +42,9 @@ As a result of the operation of the `count` method, the `parties` parameter will
 
 ## SeatsGenerator:
 
-    from pyrlament import SeatsGenerator
+    from pyrlament import SeatsGenerator 
     
-    g = SeatsGenerator()
+    g = SeatsGenerator(parties=election.parties)
     g.randomize()
     with open('pyrlament.svg', 'w') as f:
         f.write(g.svg())

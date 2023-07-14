@@ -90,6 +90,15 @@ class SeatsCounter:
         self._calculate_candidates_votes()
         self._calculate_mandates()
 
+    def sort_parties_by_support(self, reverse: bool = True):
+        self.parties.sort(key=lambda x: x.support, reverse=reverse)
+
+    def sort_parties_by_seats(self, reverse: bool = True):
+        self.parties.sort(key=lambda x: x.seats, reverse=reverse)
+
+    def sort_parties_by_order(self, reverse: bool = False):
+        self.parties.sort(key=lambda x: x.order, reverse=reverse)
+
     def count(self):
         self._update_district_support()
         self._calculate_deputies_seats()

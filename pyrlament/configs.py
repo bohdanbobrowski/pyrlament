@@ -6,6 +6,7 @@ from pydantic_settings import BaseSettings
 
 class PyrlamentProperties(BaseSettings):
     DEPUTIES: int = 460
+    SEATS: int = 467
     COLORS: List[str] = [
         "FF69B4",
         "FE2020",

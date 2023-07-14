@@ -6,6 +6,7 @@ import numpy as np
 from pydantic import BaseModel
 
 from pyrlament.configs import PYRLAMENT_PROPERTIES
+from pyrlament.data import Party
 
 
 class Seat(BaseModel):
@@ -148,8 +149,10 @@ class SeatsGenerator:
     ]
 
     seats: List[Seat]
+    parties = List[Party]
 
-    def __init__(self):
+    def __init__(self, parties: List[Party]):
+        self.parties = parties
         self._multiply_center_sectors()
         seats = self._left_sector + self._center_sector + self._right_sector
         self.seats = []
@@ -183,14 +186,25 @@ class SeatsGenerator:
 
     def randomize(self):
         for seat in self.seats:
-            fill = self.get_rgb(random.choice(PYRLAMENT_PROPERTIES.COLORS))
+            fill = self.hex_to_rgb(random.choice(PYRLAMENT_PROPERTIES.COLORS))
             color = self.invert_rgb(fill)
             seat.fill = self.rgb_to_hex(fill)
             seat.color = self.rgb_to_hex(color)
 
-    def colorize(self, parties: Dict):
-        # TODO: still needs implementation
-        pass
+    def colorize(self):
+        # First implementation of colorize
+        seat_map = []
+        for party in self.parties:
+            for x in range(0, party.seats):
+                seat_map.append(party.color)
+        for y in range(0, len(seat_map)):
+            fill = self.hex_to_rgb(seat_map[y])
+            color = self.invert_rgb(fill)
+            self.seats[y].fill = self.rgb_to_hex(fill)
+            self.seats[y].color = self.rgb_to_hex(color)
+        for z in range(len(seat_map), len(self.seats)):
+            self.seats[z].fill = "#FFFFFF"
+            self.seats[z].color = "#000000"
 
     def svg(self) -> str:
         svg = '<svg width="1122" height="841" xmlns="http://www.w3.org/2000/svg" overflow="hidden">'
@@ -211,8 +225,8 @@ class SeatsGenerator:
         drawsvg.g()
 
     @staticmethod
-    def get_rgb(h: str) -> tuple:
-        return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))
+    def hex_to_rgb(h: str) -> tuple:
+        return tuple(int(h[i: i + 2], 16) for i in (0, 2, 4))
 
     @staticmethod
     def invert_rgb(c: tuple) -> tuple:

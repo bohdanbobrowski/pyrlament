@@ -1,5 +1,4 @@
 from typing import Dict, List, Optional
-
 from pydantic import BaseModel
 
 
@@ -8,6 +7,8 @@ class Party(BaseModel):
     support: float
     threshold: int = 5
     seats: Optional[int] = None
+    color: Optional[str] = None
+    order: int = 0
 
 
 class Candidate(BaseModel):
@@ -105,6 +106,7 @@ GERMAN_MINORITY = Party(
     support=1,
     threshold=0,
     seats=1,
+    color="DDDDDD"
 )
 
 DISTRICTS = [
