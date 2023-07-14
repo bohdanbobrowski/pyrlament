@@ -1,5 +1,5 @@
 import random
-from typing import List
+from typing import Dict, List
 
 import drawsvg
 import numpy as np
@@ -188,8 +188,7 @@ class SeatsGenerator:
             seat.fill = self.rgb_to_hex(fill)
             seat.color = self.rgb_to_hex(color)
 
-
-    def colorize(self, parties:Dict):
+    def colorize(self, parties: Dict):
         # TODO: still needs implementation
         pass
 
