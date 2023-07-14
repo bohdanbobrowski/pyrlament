@@ -2,12 +2,11 @@
 name = "pyrlament"
 description = "Pyrlament"
 version = "0.1"
-license = "Proprietary"
+license = ""
 authors = [
     {name = "Bohdan Bobrowski", email = "bohdan@bobrowski.com.pl"}
 ]
 dependencies = [
-    "Flask",
     "numpy",
     "pydantic",
 ]
@@ -43,6 +42,7 @@ python = "^3.10"
 numpy = "^1.25.0"
 pydantic = "^2.0.2"
 pydantic-settings = "^2.0.1"
+drawsvg = "^2.2.0"
 
 [tool.poetry.group.dev.dependencies]
 autoflake = "^2.1.1"
