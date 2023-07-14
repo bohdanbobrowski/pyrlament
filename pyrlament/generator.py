@@ -174,7 +174,7 @@ class SeatsGenerator:
             + self._rotate_sector(left_center_sector, angle=135, seat_nr=370, move_by=(1, 16))
         )
 
-    def split_seats(self):
+    def randomize(self):
         self._multiply_center_sectors()
         seats = self._left_sector + self._center_sector + self._right_sector
         self.seats = []
@@ -182,7 +182,7 @@ class SeatsGenerator:
             self.seats.append(Seat(cx=seat[0], cy=seat[1], number=seat[2], order=0))
         self._colorize_seats()
 
-    def svg_bare(self) -> str:
+    def svg(self) -> str:
         svg = "<svg width=\"1122\" height=\"841\" xmlns=\"http://www.w3.org/2000/svg\" overflow=\"hidden\">"
         svg += "<g clip-path=\"url(#clip0)\" transform=\"translate(0 50)\">"
         for seat in self.seats:
@@ -196,7 +196,7 @@ class SeatsGenerator:
         svg += "</g></svg>"
         return svg
 
-    def svg(self):
+    def svg_drawsvg(self):
         d = drawsvg.Drawing(1122, 841, overflow="hidden")
         g = drawsvg.g()
 

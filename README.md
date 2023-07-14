@@ -2,11 +2,21 @@
 
 # pyRLAMENT
 
-Pythonowa biblioteka służąca do wizualizacji miejsc w Sejmie RP. Póki co bardzo robocza wersja, a jej głównym celem jest przećwiczenie możliwości języka python na różnych platformach (web/mobile/desktop).
-
-<img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyrlament_sample.svg" width="400" alt="pyRLAMENT example" />
-
-### English: 
-
 Python library for visualizing seats in the Sejm of the Republic of Poland. So far, a very early version, and its main goal is to practice the capabilities of the python language on various platforms (web/mobile/desktop).
+
+## SeatsCounter:
+
+## SeatsGenerator:
+
+    from pyrlament.generator import SeatsGenerator
+    
+    g = SeatsGenerator()
+    g.randomize()
+    with open('pyrlament.svg', 'w') as f:
+        f.write(g.svg())
+
+<img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyrlament_sample.svg" width="100%" alt="pyRLAMENT example" />
+
+ 
+
 
