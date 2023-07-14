@@ -106,7 +106,7 @@ GERMAN_MINORITY = Party(
     support=1,
     threshold=0,
     seats=1,
-    color="DDDDDD"
+    color="999999"
 )
 
 DISTRICTS = [
