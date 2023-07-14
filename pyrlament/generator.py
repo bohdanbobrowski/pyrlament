@@ -149,6 +149,13 @@ class SeatsGenerator:
 
     seats: List[Seat]
 
+    def __init__(self):
+        self._multiply_center_sectors()
+        seats = self._left_sector + self._center_sector + self._right_sector
+        self.seats = []
+        for seat in seats:
+            self.seats.append(Seat(cx=seat[0], cy=seat[1], number=seat[2], order=0))
+
     @staticmethod
     def _rotate(points, origin, angle):
         rotated = (points - origin) * np.exp(complex(0, angle)) + origin
@@ -175,12 +182,16 @@ class SeatsGenerator:
         )
 
     def randomize(self):
-        self._multiply_center_sectors()
-        seats = self._left_sector + self._center_sector + self._right_sector
-        self.seats = []
-        for seat in seats:
-            self.seats.append(Seat(cx=seat[0], cy=seat[1], number=seat[2], order=0))
-        self._colorize_seats()
+        for seat in self.seats:
+            fill = self.get_rgb(random.choice(PYRLAMENT_PROPERTIES.COLORS))
+            color = self.invert_rgb(fill)
+            seat.fill = self.rgb_to_hex(fill)
+            seat.color = self.rgb_to_hex(color)
+
+
+    def colorize(self, parties:Dict):
+        # TODO: still needs implementation
+        pass
 
     def svg(self) -> str:
         svg = '<svg width="1122" height="841" xmlns="http://www.w3.org/2000/svg" overflow="hidden">'
@@ -211,12 +222,3 @@ class SeatsGenerator:
     @staticmethod
     def rgb_to_hex(rgb: tuple) -> str:
         return "#{:02x}{:02x}{:02x}".format(rgb[0], rgb[1], rgb[2])
-
-    def _colorize_seats(self):
-        result = []
-        for seat in self.seats:
-            fill = self.get_rgb(random.choice(PYRLAMENT_PROPERTIES.COLORS))
-            color = self.invert_rgb(fill)
-            seat.fill = self.rgb_to_hex(fill)
-            seat.color = self.rgb_to_hex(color)
-        return result
