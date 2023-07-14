@@ -2,7 +2,7 @@
 name = "pyrlament"
 description = "Pyrlament"
 version = "0.1"
-license = ""
+license = "MIT"
 authors = [
     {name = "Bohdan Bobrowski", email = "bohdan@bobrowski.com.pl"}
 ]
