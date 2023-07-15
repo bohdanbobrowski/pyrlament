@@ -4,11 +4,11 @@ from pyrlament.data import Party
 
 def demo():
     election2019 = [
-        Party(name="PiS", support=43.59, threshold=8, color="FF69B4"),
-        Party(name="KO", support=27.4, threshold=8, color="008000"),
-        Party(name="Lewica", support=12.56, color="4B0082"),
-        Party(name="PSL", support=8.55, color="9400D3"),
-        Party(name="Konfederacja", support=6.81, color="FE2020"),
+        Party(name="Lewica", support=9.4, color="8A281E"),
+        Party(name="KO", support=27.4, threshold=8, color="C53F29"),
+        Party(name="PSL", support=10.8, color="DCB44B"),
+        Party(name="Konfederacja", support=15.7, color="719AB7"),
+        Party(name="PiS", support=35.1, threshold=8, color="5778A2"),
     ]
     election = SeatsCounter(parties=election2019)
     election.count()
