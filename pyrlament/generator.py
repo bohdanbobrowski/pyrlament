@@ -1,5 +1,5 @@
 import random
-from typing import List
+from typing import List, Optional
 
 import drawsvg
 import numpy as np
@@ -149,10 +149,13 @@ class SeatsGenerator:
     ]
 
     seats: List[Seat]
-    parties = List[Party]
+    parties: List[Party]
+    logotype: Optional[str] = None
+    legend: bool = False
 
-    def __init__(self, parties: List[Party]):
+    def __init__(self, parties: List[Party], logotype: str = None):
         self.parties = parties
+        # self.logotype = logotype
         self._multiply_center_sectors()
         seats = self._left_sector + self._center_sector + self._right_sector
         self.seats = []
@@ -203,6 +206,9 @@ class SeatsGenerator:
             self.seats[y].fill = self.rgb_to_hex(fill)
             self.seats[y].color = self.rgb_to_hex(color)
 
+    def _put_logotype(self):
+        pass
+
     def _get_svg(self):
         svg = drawsvg.Drawing(1122, 841, overflow="hidden")
         g = drawsvg.Group(transform="translate(0 50)")
@@ -221,6 +227,11 @@ class SeatsGenerator:
             g.append(circle)
             g.append(seat_number)
         svg.append(g)
+
+        if self.logotype:
+            logotype = drawsvg.Rectangle(0, 0, 190, 190)
+            svg.append(logotype)
+
         return svg
 
     def get_svg(self):
