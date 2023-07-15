@@ -223,7 +223,7 @@ class SeatsGenerator:
         svg.append(g)
         return svg
 
-    def get_svg(self, filename):
+    def get_svg(self):
         svg = self._get_svg()
         return svg
 
