@@ -64,7 +64,7 @@ pipreqs = "^0.4.13"
 pyclean = "^2.7.3"
 
 [tool.poetry.scripts]
-start = "flask run"
+pyrlament_demo = 'pyrlament.scripts:demo'
 
 [tool.coverage.run]
 omit = [".*", "*/site-packages/*", "*/tests/*"]
