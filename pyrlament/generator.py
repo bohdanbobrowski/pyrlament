@@ -216,9 +216,10 @@ class SeatsGenerator:
         seats_moved = []
         rows_modified = []
         while len(seats_moved) < seats_to_move:
+            print("_move_random_seats_to_end")
             for row_nr in range(len(self.seats_order)):
                 if row_nr > 2 and row_nr < 59:
-                    dice = random.randint(1, 9)
+                    dice = random.randint(1, 3)
                     if dice == 1 and row_nr not in rows_modified:
                         row = self.seats_order[row_nr]
                         seats_moved.append(row[-1])
@@ -237,24 +238,6 @@ class SeatsGenerator:
         self.seats_order += self._generate_seats_order_c(306)
         self.seats_order += self._generate_seats_order_l(438)
         self._move_random_seats_to_end()
-
-    @staticmethod
-    def _sseq(start, stop, step=1):
-        """Seat sequence generator."""
-        num = start
-        while num <= stop:
-            yield num
-            num += step
-
-    @staticmethod
-    def _sseq_v(start, stop, step=(5, 6, 3, 4, 5, 5, 6, 7, 7, 8)):
-        """Seat sequence generator with variable step"""
-        num = start
-        cnt = 0
-        while num <= stop and cnt < len(step):
-            yield num
-            num += step[cnt]
-            cnt += 1
 
     @staticmethod
     def _rotate(points, origin, angle):
@@ -364,19 +347,18 @@ class SeatsGenerator:
     def colorize(self):
         german_minority, parties = self._get_parties_and_german_minority()
         seat_map = self._get_seat_map(parties)
-        """
         if german_minority:
             good_position = None
             while good_position is None:
+                self._clear_colors()
                 self._colorize_seats(seat_map)
                 good_position = self._check_for_good_position_for_german_minority()
                 if good_position:
                     german_minority_seat = self._get_seat_by_number(good_position)
                     self._set_seat_color(german_minority_seat, german_minority.color)
         else:
-        """
-        self._clear_colors()
-        self._colorize_seats(seat_map)
+            self._clear_colors()
+            self._colorize_seats(seat_map)
 
     def colorize_by_sequence(self):
         self._generate_seats_order()
