@@ -29,7 +29,7 @@ extend-exclude = [
 
 [tool.poetry]
 name = "pyrlament"
-version = "0.0.2"
+version = "0.1"
 description = ""
 authors = ["Bohdan Bobrowski <bohdan@bobrowski.com.pl>"]
 readme = "README.md"
