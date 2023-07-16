@@ -6,7 +6,7 @@ import numpy as np
 from pydantic import BaseModel
 
 from pyrlament.configs import PYRLAMENT_PROPERTIES
-from pyrlament.data import Party
+from pyrlament.data import Party, GERMAN_MINORITY
 
 
 class Seat(BaseModel):
@@ -16,6 +16,10 @@ class Seat(BaseModel):
     fill: str = "#ffffff"
     color: str = "#000000"
     order: int
+
+    def reset_colors(self):
+        self.fill = "#ffffff"
+        self.color = "#000000"
 
 
 class SeatsGenerator:
@@ -311,19 +315,22 @@ class SeatsGenerator:
             seats_for_german_minority.append(row[-1])
         return seats_for_german_minority
 
+    def _get_seats_fill_colors(self, seats:List[int]) -> List[str]:
+        seats_colors = []
+        for seat in self.seats:
+            if seat.number in seats:
+                seats_colors.append(seat.fill)
+        return seats_colors
+
     def _check_for_good_position_for_german_minority(self) -> Optional[int]:
         possible_seats = self._get_seats_for_german_minority()
-        possible_seats_f = []
+        possible_seats_f = self._get_seats_fill_colors(possible_seats)
         good_seat = None
-        for seat in self.seats:
-            if seat.number in possible_seats:
-                possible_seats_f.append(seat.fill)
         for x in range(1, len(possible_seats)-1):
             p_f = possible_seats_f[x-1]
             n_f = possible_seats_f[x+1]
             if p_f != n_f and '#ffffff' not in [p_f, n_f] and possible_seats_f[x] == '#ffffff':
                 good_seat = possible_seats[x]
-                break
         return good_seat
 
 
@@ -336,14 +343,19 @@ class SeatsGenerator:
 
     def _get_parties_and_german_minority(self):
         german_minority = None
-        if self.parties[-1].name == "Mniejszość niemiecka":
+        if self.parties[-1].name == GERMAN_MINORITY.name:
             parties = self.parties[:-1]
             german_minority = self.parties[-1]
         else:
             parties = self.parties
         return german_minority, parties
 
+    def _clear_colors(self):
+        for seat in self.seats:
+            seat.reset_colors()
+
     def _colorize_seats(self, seat_map):
+        self._clear_colors()
         self._generate_seats_order()
         for y in range(0, len(seat_map)):
             real_y = self._get_seat_by_sequence(y)
@@ -375,11 +387,8 @@ class SeatsGenerator:
             color = new_color
             for seat_number in seats_row:
                 seat = self.seats[seat_number - 1]
-                if seat.fill != "#ffffff":
-                    print(f"{cnt} == {seat.fill}")
                 self._set_seat_color(seat, color)
                 cnt += 1
-        print(f"{cnt} seats generated")
 
     def _put_logotype(self):
         pass
