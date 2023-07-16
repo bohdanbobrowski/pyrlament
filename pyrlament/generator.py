@@ -216,7 +216,6 @@ class SeatsGenerator:
         seats_moved = []
         rows_modified = []
         while len(seats_moved) < seats_to_move:
-            print("_move_random_seats_to_end")
             row_nr = random.randint(2, 59)
             if row_nr not in rows_modified:
                 row = self.seats_order[row_nr]
