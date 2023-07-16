@@ -364,6 +364,7 @@ class SeatsGenerator:
     def colorize(self):
         german_minority, parties = self._get_parties_and_german_minority()
         seat_map = self._get_seat_map(parties)
+        """
         if german_minority:
             good_position = None
             while good_position is None:
@@ -373,8 +374,9 @@ class SeatsGenerator:
                     german_minority_seat = self._get_seat_by_number(good_position)
                     self._set_seat_color(german_minority_seat, german_minority.color)
         else:
-            self._clear_colors()
-            self._colorize_seats(seat_map)
+        """
+        self._clear_colors()
+        self._colorize_seats(seat_map)
 
     def colorize_by_sequence(self):
         self._generate_seats_order()
