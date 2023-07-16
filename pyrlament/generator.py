@@ -162,7 +162,6 @@ class SeatsGenerator:
         # self.logotype = logotype
         self._skip_empty_seats = skip_empty_seats
         self._multiply_center_sectors()
-        self._generate_seats_order()
         seats = self._left_sector + self._center_sector + self._right_sector
         self.seats = []
         cnt = 1
@@ -170,7 +169,8 @@ class SeatsGenerator:
             self.seats.append(Seat(cx=seat[0], cy=seat[1], number=cnt, order=0))
             cnt += 1
 
-    def _generate_seats_order_l(self, offset: int = 0):
+    def _generate_seats_order_l(self, offset: int = 0) -> List[List[int]]:
+        seats_order = []
         sequence = [
             [1, 4, 7, 10, 13, 16, 19, 22, 25, 28],
             [2, 5, 8, 11, 14, 17, 20, 23, 26, 29],
@@ -180,9 +180,11 @@ class SeatsGenerator:
             new_row = []
             for nr in row:
                 new_row.append(nr + offset)
-            self.seats_order.append(new_row)
+            seats_order.append(new_row)
+        return seats_order
 
-    def _generate_seats_order_c(self, offset: int = 0):
+    def _generate_seats_order_c(self, offset: int = 0) -> List[List[int]]:
+        seats_order = []
         sequence = [
             [31, 34, 39, 45, 48, 52, 57, 62, 68, 75, 82],
             [32, 35, 40, 46, 49, 53, 58, 63, 69, 76, 83],
@@ -203,7 +205,8 @@ class SeatsGenerator:
             new_row = []
             for nr in row:
                 new_row.append(nr + offset)
-            self.seats_order.append(new_row)
+            seats_order.append(new_row)
+        return seats_order
 
     def _move_random_seats_to_end(self, seats_to_move: int = 9):
         seats_moved = []
@@ -223,12 +226,12 @@ class SeatsGenerator:
 
     def _generate_seats_order(self):
         self.seats_order = []
-        self._generate_seats_order_l()
-        self._generate_seats_order_c()
-        self._generate_seats_order_c(102)
-        self._generate_seats_order_c(204)
-        self._generate_seats_order_c(306)
-        self._generate_seats_order_l(438)
+        self.seats_order += self._generate_seats_order_l()
+        self.seats_order += self._generate_seats_order_c()
+        self.seats_order += self._generate_seats_order_c(102)
+        self.seats_order += self._generate_seats_order_c(204)
+        self.seats_order += self._generate_seats_order_c(306)
+        self.seats_order += self._generate_seats_order_l(438)
         self._move_random_seats_to_end()
 
     @staticmethod
@@ -284,6 +287,11 @@ class SeatsGenerator:
         for seat in self.seats:
             self._set_seat_color(seat, random.choice(PYRLAMENT_PROPERTIES.COLORS))
 
+    def _get_seat_by_number(self, seat_nr: int) -> Seat:
+        for seat in self.seats:
+            if seat.number == seat_nr:
+                return seat
+
     def _get_seat_by_sequence(self, seat_nr: int) -> int:
         cnt = 0
         for row in self.seats_order:
@@ -292,17 +300,72 @@ class SeatsGenerator:
                     return real_seat_nr-1
                 cnt += 1
 
-    def colorize(self):
+    def _get_seats_for_german_minority(self) -> List[int]:
+        seats_order = []
+        seats_order += self._generate_seats_order_c()
+        seats_order += self._generate_seats_order_c(102)
+        seats_order += self._generate_seats_order_c(204)
+        seats_order += self._generate_seats_order_c(306)
+        seats_for_german_minority = []
+        for row in seats_order:
+            seats_for_german_minority.append(row[-1])
+        return seats_for_german_minority
+
+    def _check_for_good_position_for_german_minority(self) -> Optional[int]:
+        possible_seats = self._get_seats_for_german_minority()
+        possible_seats_f = []
+        good_seat = None
+        for seat in self.seats:
+            if seat.number in possible_seats:
+                possible_seats_f.append(seat.fill)
+        for x in range(1, len(possible_seats)-1):
+            p_f = possible_seats_f[x-1]
+            n_f = possible_seats_f[x+1]
+            if p_f != n_f and '#ffffff' not in [p_f, n_f] and possible_seats_f[x] == '#ffffff':
+                good_seat = possible_seats[x]
+                break
+        return good_seat
+
+
+    def _get_seat_map(self, parties: List[Party]):
         seat_map = []
-        for party in self.parties:
+        for party in parties:
             for x in range(0, party.seats):
                 seat_map.append(party.color)
+        return seat_map
+
+    def _get_parties_and_german_minority(self):
+        german_minority = None
+        if self.parties[-1].name == "Mniejszość niemiecka":
+            parties = self.parties[:-1]
+            german_minority = self.parties[-1]
+        else:
+            parties = self.parties
+        return german_minority, parties
+
+    def _colorize_seats(self, seat_map):
+        self._generate_seats_order()
         for y in range(0, len(seat_map)):
             real_y = self._get_seat_by_sequence(y)
             seat = self.seats[real_y]
             self._set_seat_color(seat, seat_map[y])
 
+    def colorize(self):
+        german_minority, parties = self._get_parties_and_german_minority()
+        seat_map = self._get_seat_map(parties)
+        if german_minority:
+            good_position = None
+            while good_position is None:
+                self._colorize_seats(seat_map)
+                good_position = self._check_for_good_position_for_german_minority()
+                if good_position:
+                    german_minority_seat = self._get_seat_by_number(good_position)
+                    self._set_seat_color(german_minority_seat, german_minority.color)
+        else:
+            self._colorize_seats(seat_map)
+
     def colorize_by_sequence(self):
+        self._generate_seats_order()
         color = None
         new_color = None
         cnt = 0
