@@ -1,4 +1,5 @@
 import random
+from json import JSONEncoder
 from typing import List, Optional
 
 import drawsvg
@@ -237,6 +238,10 @@ class SeatsGenerator:
     def get_svg(self):
         svg = self._get_svg()
         return svg.as_svg()
+
+    def get_gif(self):
+        svg = self._get_svg()
+        return svg.as_gif()
 
     def save_svg(self, filename):
         svg = self._get_svg()
