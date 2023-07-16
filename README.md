@@ -69,7 +69,7 @@ Here are my plans (some already implemented) for this library:
 - [ ] check if all support does not reach 100% 
 - [x] draw svg with seats
 - [x] randomise seats colors
-- [ ] split seats between parties
+- [x] split seats between parties
 - [ ] improve seats placement (it's a bit messy)
 - [x] svg output
 - [x] png output
