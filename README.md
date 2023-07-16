@@ -73,7 +73,7 @@ Here are my plans (some already implemented) for this library:
 - [ ] improve seats placement (it's a bit messy)
 - [x] svg output
 - [x] png output
-- [x] build weapp using Flask
+- [x] [build webapp using Flask](https://www.pyrlament.pl)
 - [ ] build mobile app using Kivy
 - [ ] build desktop app using Kivy
 - [ ] cli interface for library
