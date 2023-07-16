@@ -355,7 +355,6 @@ class SeatsGenerator:
             seat.reset_colors()
 
     def _colorize_seats(self, seat_map):
-        self._clear_colors()
         self._generate_seats_order()
         for y in range(0, len(seat_map)):
             real_y = self._get_seat_by_sequence(y)
@@ -374,6 +373,7 @@ class SeatsGenerator:
                     german_minority_seat = self._get_seat_by_number(good_position)
                     self._set_seat_color(german_minority_seat, german_minority.color)
         else:
+            self._clear_colors()
             self._colorize_seats(seat_map)
 
     def colorize_by_sequence(self):
