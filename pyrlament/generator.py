@@ -217,16 +217,12 @@ class SeatsGenerator:
         rows_modified = []
         while len(seats_moved) < seats_to_move:
             print("_move_random_seats_to_end")
-            for row_nr in range(len(self.seats_order)):
-                if row_nr > 2 and row_nr < 59:
-                    dice = random.randint(1, 3)
-                    if dice == 1 and row_nr not in rows_modified:
-                        row = self.seats_order[row_nr]
-                        seats_moved.append(row[-1])
-                        self.seats_order[row_nr] = row[:-1]
-                        rows_modified.append(row_nr)
-                if len(seats_moved) >= seats_to_move:
-                    break
+            row_nr = random.randint(2, 59)
+            if row_nr not in rows_modified:
+                row = self.seats_order[row_nr]
+                seats_moved.append(row[-1])
+                self.seats_order[row_nr] = row[:-1]
+                rows_modified.append(row_nr)
         self.seats_order.append(seats_moved)
 
     def _generate_seats_order(self):
