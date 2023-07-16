@@ -13,8 +13,8 @@ class Party(BaseModel):
     order: int = 0
 
     def __init__(self, **kwargs):
-        if 'name' in kwargs and 'label' not in kwargs:
-            kwargs['label'] = kwargs['name']
+        if "name" in kwargs and "label" not in kwargs:
+            kwargs["label"] = kwargs["name"]
         super(Party, self).__init__(**kwargs)
 
 

@@ -6,7 +6,7 @@ import numpy as np
 from pydantic import BaseModel
 
 from pyrlament.configs import PYRLAMENT_PROPERTIES
-from pyrlament.data import Party, GERMAN_MINORITY
+from pyrlament.data import GERMAN_MINORITY, Party
 
 
 class Seat(BaseModel):
@@ -161,8 +161,9 @@ class SeatsGenerator:
 
     _skip_empty_seats = True
 
-    def __init__(self, parties: List[Party], logotype: Optional[str] = None, legend: bool = True,
-                 skip_empty_seats: bool = True):
+    def __init__(
+        self, parties: List[Party], logotype: Optional[str] = None, legend: bool = True, skip_empty_seats: bool = True
+    ):
         self.parties = parties
         self.logotype = logotype
         self.legend = legend
@@ -281,7 +282,7 @@ class SeatsGenerator:
         for row in self.seats_order:
             for real_seat_nr in row:
                 if seat_nr == cnt:
-                    return real_seat_nr-1
+                    return real_seat_nr - 1
                 cnt += 1
 
     def _get_seats_for_german_minority(self) -> List[int]:
@@ -295,7 +296,7 @@ class SeatsGenerator:
             seats_for_german_minority.append(row[-1])
         return seats_for_german_minority
 
-    def _get_seats_fill_colors(self, seats:List[int]) -> List[str]:
+    def _get_seats_fill_colors(self, seats: List[int]) -> List[str]:
         seats_colors = []
         for seat in self.seats:
             if seat.number in seats:
@@ -306,13 +307,12 @@ class SeatsGenerator:
         possible_seats = self._get_seats_for_german_minority()
         possible_seats_f = self._get_seats_fill_colors(possible_seats)
         good_seat = None
-        for x in range(1, len(possible_seats)-1):
-            p_f = possible_seats_f[x-1]
-            n_f = possible_seats_f[x+1]
-            if p_f != n_f and '#ffffff' not in [p_f, n_f] and possible_seats_f[x] == '#ffffff':
+        for x in range(1, len(possible_seats) - 1):
+            p_f = possible_seats_f[x - 1]
+            n_f = possible_seats_f[x + 1]
+            if p_f != n_f and "#ffffff" not in [p_f, n_f] and possible_seats_f[x] == "#ffffff":
                 good_seat = possible_seats[x]
         return good_seat
-
 
     def _get_seat_map(self, parties: List[Party]):
         seat_map = []
@@ -375,7 +375,7 @@ class SeatsGenerator:
         svg = drawsvg.Drawing(1122, 841, overflow="hidden")
         g = drawsvg.Group(transform="translate(0 50)")
         for seat in self.seats:
-            if not self._skip_empty_seats or (self._skip_empty_seats and seat.fill != '#ffffff'):
+            if not self._skip_empty_seats or (self._skip_empty_seats and seat.fill != "#ffffff"):
                 circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.5")
                 seat_number = drawsvg.Text(
                     f"{seat.number}",
@@ -401,8 +401,17 @@ class SeatsGenerator:
             cr_x = 20
             cr_y = 20
             for party in self.parties:
-                legend.append(drawsvg.Circle(cr_x-12, cr_y-3, 5, fill=f"#{party.color}"))
-                legend.append(drawsvg.Text(f"{party.label} - {party.support}% ({party.seats} mandatów)", 9, cr_x, cr_y, fill="#000000", font_family="sans-serif"))
+                legend.append(drawsvg.Circle(cr_x - 12, cr_y - 3, 5, fill=f"#{party.color}"))
+                legend.append(
+                    drawsvg.Text(
+                        f"{party.label} - {party.support}% ({party.seats} mandatów)",
+                        9,
+                        cr_x,
+                        cr_y,
+                        fill="#000000",
+                        font_family="sans-serif",
+                    )
+                )
                 cr_y += 15
             svg.append(legend)
 
