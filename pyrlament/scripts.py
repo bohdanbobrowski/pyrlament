@@ -16,7 +16,7 @@ def demo():
     for party in election.parties:
         print(f"{party.name}: {party.seats}")
 
-    with open('./assets/pyRLAMENT_logo.svg') as f:
+    with open("./assets/pyRLAMENT_logo.svg") as f:
         logotype = f.readlines()
 
     g = SeatsGenerator(parties=election.parties, logotype=logotype)

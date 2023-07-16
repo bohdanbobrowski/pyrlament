@@ -1,5 +1,4 @@
 import random
-from json import JSONEncoder
 from typing import List, Optional
 
 import drawsvg
@@ -14,7 +13,7 @@ class Seat(BaseModel):
     cx: float
     cy: float
     number: int
-    fill: str = "#FFFFFF"
+    fill: str = "#ffffff"
     color: str = "#000000"
     order: int
 
@@ -149,19 +148,86 @@ class SeatsGenerator:
         (1110, 638, 501),
     ]
 
+    _seats_order = []
+
     seats: List[Seat]
     parties: List[Party]
     logotype: Optional[str] = None
     legend: bool = False
 
-    def __init__(self, parties: List[Party], logotype: str = None):
+    def __init__(self, parties: List[Party], logotype: Optional[str] = None):
         self.parties = parties
         # self.logotype = logotype
         self._multiply_center_sectors()
+        self._generate_seats_order()
         seats = self._left_sector + self._center_sector + self._right_sector
         self.seats = []
+        cnt = 1
         for seat in seats:
-            self.seats.append(Seat(cx=seat[0], cy=seat[1], number=seat[2], order=0))
+            self.seats.append(Seat(cx=seat[0], cy=seat[1], number=cnt, order=0))
+            cnt += 1
+
+    def _generate_seats_order_l(self, offset: int = 0):
+        sequence = [
+            [1, 4, 7, 10, 13, 16, 19, 22, 25, 28],
+            [2, 5, 8, 11, 14, 17, 20, 23, 26, 29],
+            [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+        ]
+        for row in sequence:
+            new_row = []
+            for nr in row:
+                new_row.append(nr + offset)
+            self._seats_order.append(new_row)
+
+    def _generate_seats_order_c(self, offset: int = 0):
+        sequence = [
+            [31, 34, 39, 45, 48, 52, 57, 62, 68, 75, 82],
+            [32, 35, 40, 46, 49, 53, 58, 63, 69, 76, 83],
+            [36, 41, 47, 50, 54, 59, 64, 70, 77, 84],
+            [51, 55, 60, 65, 71, 78, 85],
+            [66, 72, 79, 86],
+            [73, 80, 87],
+            [56, 61, 67, 74, 81, 88],
+            [96, 101, 106, 112, 119, 126],
+            [113, 120, 127],
+            [107, 114, 121, 128],
+            [92, 97, 102, 108, 115, 122, 129],
+            [37, 42, 89, 93, 98, 103, 109, 116, 123, 130],
+            [43, 90, 94, 99, 104, 110, 117, 124, 131],
+            [33, 38, 44, 91, 95, 100, 105, 111, 118, 125, 132],
+        ]
+        for row in sequence:
+            new_row = []
+            for nr in row:
+                new_row.append(nr + offset)
+            self._seats_order.append(new_row)
+
+    def _generate_seats_order(self):
+        self._seats_order = []
+        self._generate_seats_order_l()
+        self._generate_seats_order_c()
+        self._generate_seats_order_c(102)
+        self._generate_seats_order_c(204)
+        self._generate_seats_order_c(306)
+        self._generate_seats_order_l(438)
+
+    @staticmethod
+    def _sseq(start, stop, step=1):
+        """Seat sequence generator."""
+        num = start
+        while num <= stop:
+            yield num
+            num += step
+
+    @staticmethod
+    def _sseq_v(start, stop, step=(5, 6, 3, 4, 5, 5, 6, 7, 7, 8)):
+        """Seat sequence generator with variable step"""
+        num = start
+        cnt = 0
+        while num <= stop and cnt < len(step):
+            yield num
+            num += step[cnt]
+            cnt += 1
 
     @staticmethod
     def _rotate(points, origin, angle):
@@ -188,24 +254,50 @@ class SeatsGenerator:
             + self._rotate_sector(left_center_sector, angle=135, seat_nr=370, move_by=(1, 16))
         )
 
+    def _set_seat_color(self, seat: Seat, x: str):
+        fill = self.hex_to_rgb(x)
+        color = self.invert_rgb(fill)
+        seat.fill = self.rgb_to_hex(fill)
+        seat.color = self.rgb_to_hex(color)
+
     def randomize(self):
         for seat in self.seats:
-            fill = self.hex_to_rgb(random.choice(PYRLAMENT_PROPERTIES.COLORS))
-            color = self.invert_rgb(fill)
-            seat.fill = self.rgb_to_hex(fill)
-            seat.color = self.rgb_to_hex(color)
+            self._set_seat_color(seat, random.choice(PYRLAMENT_PROPERTIES.COLORS))
+
+    def _get_seat_by_sequence(self, seat_nr: int) -> int:
+        cnt = 0
+        for row in self._seats_order:
+            for real_seat_nr in row:
+                if seat_nr == cnt:
+                    return real_seat_nr-1
+                cnt += 1
 
     def colorize(self):
-        # First implementation of colorize
         seat_map = []
         for party in self.parties:
             for x in range(0, party.seats):
                 seat_map.append(party.color)
         for y in range(0, len(seat_map)):
-            fill = self.hex_to_rgb(seat_map[y])
-            color = self.invert_rgb(fill)
-            self.seats[y].fill = self.rgb_to_hex(fill)
-            self.seats[y].color = self.rgb_to_hex(color)
+            real_y = self._get_seat_by_sequence(y)
+            seat = self.seats[real_y]
+            self._set_seat_color(seat, seat_map[y])
+
+
+    def colorize_by_sequence(self):
+        color = None
+        new_color = None
+        cnt = 0
+        for seats_row in self._seats_order:
+            while new_color == color:
+                new_color = random.choice(PYRLAMENT_PROPERTIES.COLORS)
+            color = new_color
+            for seat_number in seats_row:
+                seat = self.seats[seat_number - 1]
+                if seat.fill != "#ffffff":
+                    print(f"{cnt} == {seat.fill}")
+                self._set_seat_color(seat, color)
+                cnt += 1
+        print(f"{cnt} seats generated")
 
     def _put_logotype(self):
         pass
