@@ -20,7 +20,7 @@ Python library for visualizing seats in the Sejm of the Republic of Poland. So f
         Party(name="PiS", support=43.59, threshold=8),
         Party(name="KO", support=27.4, threshold=8),
         Party(name="Lewica", support=12.56),
-        Party(name="PSL", support=8.55),
+        Party(name="PSL", label="Polska 2050-PSL", support=10.8, threshold=8, color="DCB44B"),
         Party(name="Konfederacja", support=6.81),
     }
     election = SeatsCounter(parties=election2019)

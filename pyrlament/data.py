@@ -5,11 +5,18 @@ from pydantic import BaseModel
 
 class Party(BaseModel):
     name: str
+    label: str
     support: float
     threshold: int = 5
     seats: Optional[int] = None
     color: Optional[str] = None
     order: int = 0
+
+    def __init__(self, **kwargs):
+        print(kwargs)
+        if 'name' in kwargs and 'label' not in kwargs:
+            kwargs['label'] = kwargs['name']
+        super(Party, self).__init__(**kwargs)
 
 
 class Candidate(BaseModel):
@@ -102,7 +109,7 @@ GENERAL_SUPPORT = PartySupportList.load(
     2019,
 )
 
-GERMAN_MINORITY = Party(name="Mniejszość niemiecka", support=1, threshold=0, seats=1, color="999999")
+GERMAN_MINORITY = Party(name="Mniejszość niemiecka", support=1, threshold=0, seats=1, color="444444")
 
 DISTRICTS = [
     District(

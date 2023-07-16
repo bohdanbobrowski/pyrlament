@@ -161,9 +161,11 @@ class SeatsGenerator:
 
     _skip_empty_seats = True
 
-    def __init__(self, parties: List[Party], logotype: Optional[str] = None, skip_empty_seats: bool = True):
+    def __init__(self, parties: List[Party], logotype: Optional[str] = None, legend: bool = True,
+                 skip_empty_seats: bool = True):
         self.parties = parties
-        # self.logotype = logotype
+        self.logotype = logotype
+        self.legend = legend
         self._skip_empty_seats = skip_empty_seats
         self._multiply_center_sectors()
         seats = self._left_sector + self._center_sector + self._right_sector
@@ -369,9 +371,6 @@ class SeatsGenerator:
                 self._set_seat_color(seat, color)
                 cnt += 1
 
-    def _put_logotype(self):
-        pass
-
     def _get_svg(self):
         svg = drawsvg.Drawing(1122, 841, overflow="hidden")
         g = drawsvg.Group(transform="translate(0 50)")
@@ -392,9 +391,20 @@ class SeatsGenerator:
                 g.append(seat_number)
         svg.append(g)
 
-        if self.logotype:
-            logotype = drawsvg.Rectangle(0, 0, 190, 190)
-            svg.append(logotype)
+        # if self.logotype:
+        #     logotype = drawsvg.Rectangle(0, 0, 190, 190)
+        #    svg.append(logotype)
+
+        if self.legend:
+            legend = drawsvg.Group(transform="translate(900 730)")
+            legend.append(drawsvg.Text("Legenda:", 15, 0, 0, fill="#000000", font_family="sans-serif"))
+            cr_x = 20
+            cr_y = 20
+            for party in self.parties:
+                legend.append(drawsvg.Circle(cr_x-12, cr_y-3, 5, fill=f"#{party.color}"))
+                legend.append(drawsvg.Text(f"{party.label} - {party.support}% ({party.seats} mandatów)", 9, cr_x, cr_y, fill="#000000", font_family="sans-serif"))
+                cr_y += 15
+            svg.append(legend)
 
         return svg
 
