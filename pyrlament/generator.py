@@ -148,16 +148,19 @@ class SeatsGenerator:
         (1110, 638, 501),
     ]
 
-    _seats_order = []
+    seats_order = []
 
     seats: List[Seat]
     parties: List[Party]
     logotype: Optional[str] = None
     legend: bool = False
 
-    def __init__(self, parties: List[Party], logotype: Optional[str] = None):
+    _skip_empty_seats = True
+
+    def __init__(self, parties: List[Party], logotype: Optional[str] = None, skip_empty_seats: bool = True):
         self.parties = parties
         # self.logotype = logotype
+        self._skip_empty_seats = skip_empty_seats
         self._multiply_center_sectors()
         self._generate_seats_order()
         seats = self._left_sector + self._center_sector + self._right_sector
@@ -177,7 +180,7 @@ class SeatsGenerator:
             new_row = []
             for nr in row:
                 new_row.append(nr + offset)
-            self._seats_order.append(new_row)
+            self.seats_order.append(new_row)
 
     def _generate_seats_order_c(self, offset: int = 0):
         sequence = [
@@ -200,16 +203,33 @@ class SeatsGenerator:
             new_row = []
             for nr in row:
                 new_row.append(nr + offset)
-            self._seats_order.append(new_row)
+            self.seats_order.append(new_row)
+
+    def _move_random_seats_to_end(self, seats_to_move: int = 9):
+        seats_moved = []
+        rows_modified = []
+        while len(seats_moved) < seats_to_move:
+            for row_nr in range(len(self.seats_order)):
+                if row_nr > 2 and row_nr < 59:
+                    dice = random.randint(1, 9)
+                    if dice == 1 and row_nr not in rows_modified:
+                        row = self.seats_order[row_nr]
+                        seats_moved.append(row[-1])
+                        self.seats_order[row_nr] = row[:-1]
+                        rows_modified.append(row_nr)
+                if len(seats_moved) >= seats_to_move:
+                    break
+        self.seats_order.append(seats_moved)
 
     def _generate_seats_order(self):
-        self._seats_order = []
+        self.seats_order = []
         self._generate_seats_order_l()
         self._generate_seats_order_c()
         self._generate_seats_order_c(102)
         self._generate_seats_order_c(204)
         self._generate_seats_order_c(306)
         self._generate_seats_order_l(438)
+        self._move_random_seats_to_end()
 
     @staticmethod
     def _sseq(start, stop, step=1):
@@ -266,7 +286,7 @@ class SeatsGenerator:
 
     def _get_seat_by_sequence(self, seat_nr: int) -> int:
         cnt = 0
-        for row in self._seats_order:
+        for row in self.seats_order:
             for real_seat_nr in row:
                 if seat_nr == cnt:
                     return real_seat_nr-1
@@ -282,12 +302,11 @@ class SeatsGenerator:
             seat = self.seats[real_y]
             self._set_seat_color(seat, seat_map[y])
 
-
     def colorize_by_sequence(self):
         color = None
         new_color = None
         cnt = 0
-        for seats_row in self._seats_order:
+        for seats_row in self.seats_order:
             while new_color == color:
                 new_color = random.choice(PYRLAMENT_PROPERTIES.COLORS)
             color = new_color
@@ -306,19 +325,20 @@ class SeatsGenerator:
         svg = drawsvg.Drawing(1122, 841, overflow="hidden")
         g = drawsvg.Group(transform="translate(0 50)")
         for seat in self.seats:
-            circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.5")
-            seat_number = drawsvg.Text(
-                f"{seat.number}",
-                8,
-                seat.cx,
-                seat.cy,
-                center=0.6,
-                fill=seat.color,
-                text_anchor="middle",
-                font_family="sans-serif",
-            )
-            g.append(circle)
-            g.append(seat_number)
+            if not self._skip_empty_seats or (self._skip_empty_seats and seat.fill != '#ffffff'):
+                circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.5")
+                seat_number = drawsvg.Text(
+                    f"{seat.number}",
+                    8,
+                    seat.cx,
+                    seat.cy,
+                    center=0.6,
+                    fill=seat.color,
+                    text_anchor="middle",
+                    font_family="sans-serif",
+                )
+                g.append(circle)
+                g.append(seat_number)
         svg.append(g)
 
         if self.logotype:
