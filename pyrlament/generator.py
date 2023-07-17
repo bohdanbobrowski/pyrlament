@@ -159,6 +159,7 @@ class SeatsGenerator:
     parties: List[Party]
     logotype: Optional[str] = None
     legend: bool = False
+    caption: str = ""
 
     _skip_empty_seats = True
 
@@ -168,10 +169,12 @@ class SeatsGenerator:
         logotype: Optional[str] = None,
         legend: bool = True,
         skip_empty_seats: bool = True,
+        caption: str = ""
     ):
         self.parties = parties
         self.logotype = logotype if logotype else "assets/pyRLAMENT_logo.svg"
         self.legend = legend
+        self.caption = caption
         self._skip_empty_seats = skip_empty_seats
         self._multiply_center_sectors()
         seats = self._left_sector + self._center_sector + self._right_sector
@@ -378,7 +381,6 @@ class SeatsGenerator:
 
     def _get_svg(self):
         svg = drawsvg.Drawing(1122, 841, overflow="hidden")
-        svg.append(self._draw_seats())
         if self.parties and self.logotype:
             svg.append(self._draw_logotype())
             svg.append(
@@ -386,6 +388,8 @@ class SeatsGenerator:
             )
         if self.parties and self.legend:
             svg.append(self._draw_legend())
+        svg.append(self._draw_seats())
+        svg.append(self._draw_caption())
         return svg
 
     def _draw_seats(self) -> drawsvg.Group:
@@ -409,6 +413,9 @@ class SeatsGenerator:
 
     def _draw_logotype(self) -> drawsvg.Image:
         return drawsvg.Image(x="0", y="0", width="200", height="115", path=self.logotype, embed=True)
+
+    def _draw_caption(self) -> drawsvg.Text:
+        return drawsvg.Text(self.caption, 14, 0, 730, fill="#000000", font_family="sans-serif")
 
     def _draw_legend(self) -> drawsvg.Group:
         legend = drawsvg.Group(transform="translate(900 20)")
