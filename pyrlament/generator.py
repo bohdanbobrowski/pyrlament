@@ -3,6 +3,7 @@ from typing import List, Optional
 
 import drawsvg
 import numpy as np
+from cairosvg import svg2png
 from pydantic import BaseModel
 
 from pyrlament.configs import PYRLAMENT_PROPERTIES
@@ -391,20 +392,24 @@ class SeatsGenerator:
                 g.append(seat_number)
         svg.append(g)
 
-        # if self.logotype:
-        #     logotype = drawsvg.Rectangle(0, 0, 190, 190)
-        #    svg.append(logotype)
+        if self.logotype:
+            with open("assets/pyRLAMENT_logo.svg", "rb") as f:
+                logotype_data = f.read()
+            logotype = drawsvg.Image(
+                x="0", y="0", width="200", height="115", mime_type="image/svg+xml", data=logotype_data
+            )
+            svg.append(logotype)
 
         if self.legend:
             legend = drawsvg.Group(transform="translate(900 730)")
             legend.append(drawsvg.Text("Legenda:", 15, 0, 0, fill="#000000", font_family="sans-serif"))
             cr_x = 20
             cr_y = 20
-            for party in self.parties:
-                legend.append(drawsvg.Circle(cr_x - 12, cr_y - 3, 5, fill=f"#{party.color}"))
+            for p in self.parties:
+                legend.append(drawsvg.Circle(cr_x - 12, cr_y - 3, 5, fill=f"#{p.color}"))
                 legend.append(
                     drawsvg.Text(
-                        f"{party.label} - {party.support}% ({party.seats} mandatów)",
+                        f"{p.label} - {p.support}% ({p.seats} {self._get_mandates_label(p.seats)})",
                         9,
                         cr_x,
                         cr_y,
@@ -416,6 +421,14 @@ class SeatsGenerator:
             svg.append(legend)
 
         return svg
+
+    @staticmethod
+    def _get_mandates_label(seats) -> str:
+        if seats == 1:
+            return "mandat"
+        if 1 < seats < 6 or seats > 20 and str(seats)[-1] in ["2", "3", "4"]:
+            return "mandaty"
+        return "mandatów"
 
     def get_svg(self):
         svg = self._get_svg()
@@ -431,7 +444,7 @@ class SeatsGenerator:
 
     def save_png(self, filename):
         svg = self._get_svg()
-        svg.save_png(filename)
+        svg2png(bytestring=svg.as_svg(), write_to=filename)
 
     @staticmethod
     def hex_to_rgb(h: str) -> tuple:
