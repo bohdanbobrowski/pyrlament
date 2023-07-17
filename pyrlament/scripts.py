@@ -22,4 +22,4 @@ def demo():
     g = SeatsGenerator(parties=election.parties, logotype=logotype)
     g.colorize()
     g.save_svg("assets/pyrlament_sample.svg")
-    g.save_png("assets/pyrlament_sample.png")
+    g.convert_svg_to_png("assets/pyrlament_sample.svg", "assets/pyrlament_sample.png")
