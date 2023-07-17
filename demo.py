@@ -18,10 +18,7 @@ election.count()
 for party in election.parties:
     print(f"{party.name}: {party.seats}")
 
-with open("./assets/pyRLAMENT_logo.svg") as f:
-    logotype = f.readlines()
-
-g = SeatsGenerator(parties=election.parties, logotype=logotype)
+g = SeatsGenerator(parties=election.parties)
 g.colorize()
 # g.colorize_by_sequence()
 g.save_svg("assets/pyrlament_sample.svg")

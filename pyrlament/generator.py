@@ -3,7 +3,6 @@ from typing import List, Optional
 
 import drawsvg
 import numpy as np
-from cairosvg import svg2png
 from cairosvg.surface import PNGSurface
 from pydantic import BaseModel
 
@@ -164,10 +163,14 @@ class SeatsGenerator:
     _skip_empty_seats = True
 
     def __init__(
-        self, parties: List[Party], logotype: Optional[str] = None, legend: bool = True, skip_empty_seats: bool = True
+        self,
+        parties: List[Party],
+        logotype: Optional[str] = None,
+        legend: bool = True,
+        skip_empty_seats: bool = True,
     ):
         self.parties = parties
-        self.logotype = logotype
+        self.logotype = logotype if logotype else "assets/pyRLAMENT_logo.png"
         self.legend = legend
         self._skip_empty_seats = skip_empty_seats
         self._multiply_center_sectors()
@@ -378,7 +381,9 @@ class SeatsGenerator:
         svg.append(self._draw_seats())
         if self.logotype:
             svg.append(self._draw_logotype())
-            svg.append(drawsvg.Text("https://pyrlament.pl", 15, 100, 130, fill="#000000", center=1, font_family="sans-serif"))
+            svg.append(
+                drawsvg.Text("https://pyrlament.pl", 15, 100, 130, fill="#000000", center=1, font_family="sans-serif")
+            )
         if self.legend:
             svg.append(self._draw_legend())
         return svg
@@ -403,11 +408,9 @@ class SeatsGenerator:
         return seats
 
     def _draw_logotype(self) -> drawsvg.Image:
-        with open("assets/pyRLAMENT_logo.png", "rb") as f:
+        with open(self.logotype, "rb") as f:
             logotype_data = f.read()
-        return drawsvg.Image(
-            x="0", y="0", width="200", height="115", mime_type="image/png", data=logotype_data
-        )
+        return drawsvg.Image(x="0", y="0", width="200", height="115", mime_type="image/png", data=logotype_data)
 
     def _draw_legend(self) -> drawsvg.Group:
         legend = drawsvg.Group(transform="translate(900 20)")
@@ -447,13 +450,8 @@ class SeatsGenerator:
 
     @staticmethod
     def convert_svg_to_png(svg_filename: str, png_filename: str):
-        with open(svg_filename, 'rb') as svg_file:
-            PNGSurface.convert(
-                bytestring=svg_file.read(),
-                width=1122,
-                height=841,
-                write_to=open(png_filename, 'wb')
-            )
+        with open(svg_filename, "rb") as svg_file:
+            PNGSurface.convert(bytestring=svg_file.read(), width=1122, height=841, write_to=open(png_filename, "wb"))
 
     @staticmethod
     def hex_to_rgb(h: str) -> tuple:
