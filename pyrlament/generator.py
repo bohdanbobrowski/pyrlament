@@ -170,7 +170,7 @@ class SeatsGenerator:
         skip_empty_seats: bool = True,
     ):
         self.parties = parties
-        self.logotype = logotype if logotype else "assets/pyRLAMENT_logo.png"
+        self.logotype = logotype if logotype else "assets/pyRLAMENT_logo.svg"
         self.legend = legend
         self._skip_empty_seats = skip_empty_seats
         self._multiply_center_sectors()
@@ -408,9 +408,7 @@ class SeatsGenerator:
         return seats
 
     def _draw_logotype(self) -> drawsvg.Image:
-        with open(self.logotype, "rb") as f:
-            logotype_data = f.read()
-        return drawsvg.Image(x="0", y="0", width="200", height="115", mime_type="image/png", data=logotype_data)
+        return drawsvg.Image(x="0", y="0", width="200", height="115", path=self.logotype, embed=True)
 
     def _draw_legend(self) -> drawsvg.Group:
         legend = drawsvg.Group(transform="translate(900 20)")
