@@ -16,9 +16,6 @@ def demo():
     for party in election.parties:
         print(f"{party.name}: {party.seats}")
 
-    with open("./assets/pyRLAMENT_logo.svg") as f:
-        logotype = f.readlines()
-
     g = SeatsGenerator(parties=election.parties, caption="Źródło: CBOS, Lipiec 2023")
     g.colorize()
     g.save_svg("assets/pyrlament_sample.svg")
