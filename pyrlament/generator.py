@@ -379,12 +379,12 @@ class SeatsGenerator:
     def _get_svg(self):
         svg = drawsvg.Drawing(1122, 841, overflow="hidden")
         svg.append(self._draw_seats())
-        if self.logotype:
+        if self.parties and self.logotype:
             svg.append(self._draw_logotype())
             svg.append(
                 drawsvg.Text("https://pyrlament.pl", 15, 100, 130, fill="#000000", center=1, font_family="sans-serif")
             )
-        if self.legend:
+        if self.parties and self.legend:
             svg.append(self._draw_legend())
         return svg
 
