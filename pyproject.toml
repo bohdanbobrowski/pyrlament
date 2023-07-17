@@ -1,7 +1,7 @@
 [project]
 name = "pyrlament"
 description = "Pyrlament"
-version = "0.3"
+version = "0.4"
 license = "MIT"
 authors = [
     {name = "Bohdan Bobrowski", email = "bohdan@bobrowski.com.pl"}
@@ -29,7 +29,7 @@ extend-exclude = [
 
 [tool.poetry]
 name = "pyrlament"
-version = "0.3"
+version = "0.4"
 description = ""
 authors = ["Bohdan Bobrowski <bohdan@bobrowski.com.pl>"]
 readme = "README.md"

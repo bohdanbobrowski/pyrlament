@@ -55,6 +55,8 @@ As a result of the operation of the `count` method, the `parties` parameter will
 
 #### PNG example:
 
+Known bug: for some reason png output is missing logotype. 
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyrlament_sample.png" alt="pyRLAMENT example" />
 </p>
@@ -66,13 +68,13 @@ Here are my plans (some already implemented) for this library:
 - [x] count seats basing on election support
 - [x] cover code with unit tests
 - [ ] 5% and 8% support threshold
-- [ ] check if all support does not reach 100% 
+- [ ] check if all support does not reach 100%
 - [x] draw svg with seats
 - [x] randomise seats colors
 - [x] split seats between parties
 - [ ] improve seats placement (it's a bit messy)
 - [x] svg output
-- [x] png output
+- [ ] fix png output
 - [x] [build webapp using Flask](https://www.pyrlament.pl)
 - [ ] build mobile app using Kivy
 - [ ] build desktop app using Kivy
