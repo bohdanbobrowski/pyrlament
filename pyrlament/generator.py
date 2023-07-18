@@ -115,7 +115,7 @@ class SeatsGenerator:
         self.seats = []
         self.parties = parties
         self.caption = caption
-        self.logotype = logotype if logotype else "assets/pyRLAMENT_logo.svg"
+        self.logotype = logotype if logotype else "assets/pyRLAMENT_icon.svg"
 
         self._include_legend = legend
         self._include_seats_numbers = include_seats_numbers
@@ -367,7 +367,7 @@ class SeatsGenerator:
         if self.parties and self.logotype:
             svg.append(self._draw_logotype())
             svg.append(
-                drawsvg.Text("https://pyrlament.pl", 15, 100, 130, fill="#000000", center=1, font_family="sans-serif")
+                drawsvg.Text("https://pyrlament.pl", 12, 100, 160, fill="#ffffff", center=1, font_family="sans-serif", opacity=0.5)
             )
         if self.parties and self._include_legend:
             svg.append(self._draw_legend())
@@ -395,7 +395,7 @@ class SeatsGenerator:
         return seats
 
     def _draw_logotype(self) -> drawsvg.Image:
-        return drawsvg.Image(x="0", y="0", width="200", height="115", path=self.logotype, embed=True)
+        return drawsvg.Image(x="0", y="0", width="200", height="200", path=self.logotype, embed=True)
 
     def _draw_caption(self) -> drawsvg.Text:
         return drawsvg.Text(self.caption, 14, 0, 730, fill="#000000", font_family="sans-serif")

@@ -8,14 +8,11 @@ class PyrlamentProperties(BaseSettings):
     DEPUTIES: int = 460
     SEATS: int = 467
     COLORS: List[str] = [
-        "FF69B4",
-        "FE2020",
-        "FFA500",
-        "FFFF00",
-        "008000",
-        "40E0D0",
-        "4B0082",
-        "9400D3",
+        "8a281e",
+        "c53f29",
+        "dcb44b",
+        "719ab7",
+        "5778a2",
     ]
 
     class Config:

@@ -10,7 +10,6 @@
     <orderEntry type="jdk" jdkName="Pyrlament" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="pyrlament-web" />
-    <orderEntry type="module" module-name="pyrlament-mobile" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
