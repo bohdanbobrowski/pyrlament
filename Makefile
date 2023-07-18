@@ -8,6 +8,10 @@ help:
 start:
 	poetry run flask --app web_ui/pyrlament.py run --reload
 
+update:
+	poetry lock
+	poetry install
+
 test:
 	pytest tests/unit -W ignore::DeprecationWarning
 
