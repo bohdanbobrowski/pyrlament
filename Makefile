@@ -13,7 +13,7 @@ update:
 	poetry install
 
 test:
-	pytest tests/unit -W ignore::DeprecationWarning
+	poetry run pytest tests/unit -W ignore::DeprecationWarning
 
 requirements:
 	pipreqs . --force
