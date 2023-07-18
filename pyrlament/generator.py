@@ -355,7 +355,7 @@ class SeatsGenerator:
                 cnt += 1
 
     def _get_svg(self):
-        svg = drawsvg.Drawing(1122, 841, overflow="hidden")
+        svg = drawsvg.Drawing(1122, 740, overflow="hidden")
         if self.parties and self.logotype:
             svg.append(self._draw_logotype())
             svg.append(
