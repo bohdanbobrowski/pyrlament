@@ -161,4 +161,3 @@ cython_debug/
 
 /venv
 tests/coverage
-.idea/

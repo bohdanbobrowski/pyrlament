@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/pyrlament.iml" filepath="$PROJECT_DIR$/.idea/pyrlament.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pyrlament-mobile/.idea/pyrlament-mobile.iml" filepath="$PROJECT_DIR$/../pyrlament-mobile/.idea/pyrlament-mobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/../pyrlament-web/.idea/pyrlament-web.iml" filepath="$PROJECT_DIR$/../pyrlament-web/.idea/pyrlament-web.iml" />
     </modules>
   </component>
