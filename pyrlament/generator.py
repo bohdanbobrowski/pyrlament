@@ -401,23 +401,23 @@ class SeatsGenerator:
         return drawsvg.Text(self.caption, 14, 0, 730, fill="#000000", font_family="sans-serif")
 
     def _draw_legend(self) -> drawsvg.Group:
-        legend = drawsvg.Group(transform="translate(900 20)")
-        legend.append(drawsvg.Text("Legenda:", 15, 0, 0, fill="#000000", font_family="sans-serif"))
+        legend = drawsvg.Group(transform="translate(855 15)")
+        legend.append(drawsvg.Text("Legenda:", 17, 0, 0, fill="#000000", font_family="sans-serif"))
         cr_x = 20
         cr_y = 20
         for p in self.parties:
             legend.append(drawsvg.Circle(cr_x - 12, cr_y - 3, 5, fill=f"#{p.color}"))
             legend.append(
                 drawsvg.Text(
-                    f"{p.label} - {p.support}% ({p.seats} {self._get_mandates_label(p.seats)})",
-                    9,
-                    cr_x,
-                    cr_y,
+                    text=f"{p.label} - {p.support}% ({p.seats} {self._get_mandates_label(p.seats)})",
+                    font_size=12,
+                    x=cr_x,
+                    y=cr_y,
                     fill="#000000",
                     font_family="sans-serif",
                 )
             )
-            cr_y += 15
+            cr_y += 18
         return legend
 
     @staticmethod
