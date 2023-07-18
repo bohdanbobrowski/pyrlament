@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyRLAMENT_logo.svg" width="400" alt="pyRLAMENT Library logo" />
+<img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyRLAMENT_icon.svg" width="300" alt="pyRLAMENT Library logo" />
 </p>
 
 [![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
