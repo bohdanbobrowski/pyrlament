@@ -1,3 +1,4 @@
+import math
 import random
 from typing import List, Optional
 
@@ -14,6 +15,7 @@ class Seat(BaseModel):
     cx: float
     cy: float
     number: int
+    label: int
     fill: str = "#ffffff"
     color: str = "#000000"
     order: int
@@ -24,63 +26,30 @@ class Seat(BaseModel):
 
 
 class SeatsGenerator:
-    _left_sector = [
-        (396, 638, 34),
-        (396, 616, 35),
-        (396, 594, 36),
-        (353, 638, 37),
-        (353, 616, 38),
-        (353, 594, 39),
-        (310, 638, 40),
-        (310, 616, 41),
-        (310, 594, 42),
-        (267, 638, 43),
-        (267, 616, 44),
-        (267, 594, 45),
-        (224, 638, 46),
-        (224, 616, 47),
-        (224, 594, 48),
-        (182, 638, 49),
-        (182, 616, 50),
-        (182, 594, 51),
-        (138, 638, 52),
-        (138, 616, 53),
-        (138, 594, 54),
-        (96, 638, 55),
-        (96, 616, 56),
-        (96, 594, 57),
-        (54, 638, 58),
-        (54, 616, 59),
-        (54, 594, 60),
-        (11, 638, 61),
-        (11, 616, 62),
-        (11, 594, 63),
-    ]
-
     _left_center_sector = [
         (436, 543, 64),
-        (442, 522, 65),
-        (451, 502, 66),
+        (442, 520, 65),
+        (451, 499, 66),
         (395, 543, 67),
         (399, 524, 68),
         (404, 506, 69),
         (411, 488, 70),
-        (422, 471, 71),
+        (421, 469, 71),
         (353, 543, 72),
         (356, 521, 73),
         (362, 500, 74),
         (370, 480, 75),
         (380, 460, 76),
-        (393, 440, 77),
+        (391, 439, 77),
     ]
     _left_center_sector_left = [
         (311, 543, 78),
         (313, 520, 79),
-        (318, 497, 80),
+        (317, 497, 80),
         (269, 543, 81),
         (271, 521, 82),
-        (275, 500, 83),
-        (280, 480, 84),
+        (276, 501, 83),
+        (282, 482, 84),
         (227, 543, 85),
         (228, 523, 86),
         (230, 503, 87),
@@ -90,13 +59,13 @@ class SeatsGenerator:
         (184, 518, 91),
         (188, 493, 92),
         (194, 468, 93),
-        (200, 444, 94),
+        (202, 446, 94),
         (140, 543, 95),
         (142, 518, 96),
         (145, 494, 97),
         (149, 472, 98),
         (154, 451, 99),
-        (160, 427, 100),
+        (161, 428, 100),
         (97, 543, 101),
         (98, 519, 102),
         (100, 496, 103),
@@ -120,39 +89,6 @@ class SeatsGenerator:
         (43, 376, 121),
     ]
 
-    _right_sector = [
-        (725, 594, 472),
-        (725, 616, 473),
-        (725, 638, 474),
-        (768, 594, 475),
-        (768, 616, 476),
-        (768, 638, 477),
-        (810, 594, 478),
-        (810, 616, 479),
-        (810, 638, 480),
-        (853, 594, 481),
-        (853, 616, 482),
-        (853, 638, 483),
-        (896, 594, 484),
-        (896, 616, 485),
-        (896, 638, 486),
-        (939, 594, 487),
-        (939, 616, 488),
-        (939, 638, 489),
-        (981, 594, 490),
-        (981, 616, 491),
-        (981, 638, 492),
-        (1025, 594, 493),
-        (1025, 616, 494),
-        (1025, 638, 495),
-        (1067, 594, 496),
-        (1067, 616, 497),
-        (1067, 638, 498),
-        (1110, 594, 499),
-        (1110, 616, 500),
-        (1110, 638, 501),
-    ]
-
     seats_order = []
 
     seats: List[Seat]
@@ -169,32 +105,55 @@ class SeatsGenerator:
         logotype: Optional[str] = None,
         legend: bool = True,
         skip_empty_seats: bool = True,
-        caption: str = ""
+        caption: str = "",
     ):
         self.parties = parties
         self.logotype = logotype if logotype else "assets/pyRLAMENT_logo.svg"
         self.legend = legend
         self.caption = caption
         self._skip_empty_seats = skip_empty_seats
-        self._multiply_center_sectors()
-        seats_o = self._left_sector + self._center_sector + self._right_sector
-        seats = self._get_left_sector() + self._center_sector + self._right_sector
         self.seats = []
         cnt = 1
-        for seat in seats:
-            self.seats.append(Seat(cx=seat[0], cy=seat[1], number=cnt, order=0))
+        for seat in self._get_seat_positions_and_numbers():
+            self.seats.append(Seat(cx=seat[0], cy=seat[1], number=cnt, label=seat[2], order=0))
             cnt += 1
 
+    def get_center(self):
+        return self._get_center_sectors()
+
+    def _get_seat_positions_and_numbers(self) -> List[tuple]:
+        return self._get_left_sector() + self._get_center_sectors() + self._get_right_sector()
+
     def _get_left_sector(self) -> List[tuple]:
+        """This method generates positions of seats in LEFT sector.
+        :return: [(<seat x>, <seat y>, <seat label>)]
+        """
         ls = []
-        cnt = 34
-        x = 396
-        for i in range(0, 30):
-            ls.append((x, 638, cnt))
-            ls.append((x, 616, cnt+1))
-            ls.append((x, 594, cnt+2))
-            x -= 43
-            cnt += 3
+        seat_label = 34
+        seat_x = 396
+        for i in range(10):
+            seat_y = 638
+            for j in range(3):
+                ls.append((seat_x, seat_y, seat_label))
+                seat_y -= 22
+                seat_label += 1
+            seat_x -= 43
+        return ls
+
+    def _get_right_sector(self) -> List[tuple]:
+        """This method generates positions of seats in RIGHT sector.
+        :return: [(<seat x>, <seat y>, <seat label>)]
+        """
+        ls = []
+        seat_label = 472
+        seat_x = 725
+        for i in range(10):
+            seat_y = 594
+            for j in range(3):
+                ls.append((seat_x, seat_y, seat_label))
+                seat_y += 22
+                seat_label += 1
+            seat_x += 43
         return ls
 
     def _generate_seats_order_l(self, offset: int = 0) -> List[List[int]]:
@@ -267,16 +226,18 @@ class SeatsGenerator:
         result = []
         for seat in sector:
             rotated = self._rotate(complex(seat[0], seat[1]), rotate_by, np.deg2rad(angle))
-            result.append((rotated[0] + move_by[0], rotated[1] + move_by[1], seat_nr))
+            pos_x = int(math.floor(rotated[0] + move_by[0] + 0.5))
+            pos_y = int(math.floor(rotated[1] + move_by[1] + 0.5))
+            result.append((pos_x, pos_y, seat_nr))
             seat_nr += 1
         return result
 
-    def _multiply_center_sectors(self):
+    def _get_center_sectors(self) -> List[tuple]:
         left_center_sector_right = self._rotate_sector(
             self._left_center_sector_left, angle=21, seat_nr=122, move_by=(5, -5)
         )
         left_center_sector = self._left_center_sector + self._left_center_sector_left + left_center_sector_right
-        self._center_sector = (
+        return (
             left_center_sector
             + self._rotate_sector(left_center_sector, angle=45, seat_nr=166, move_by=(5, 0))
             + self._rotate_sector(left_center_sector, angle=92, seat_nr=268, move_by=(-5, 5))
@@ -411,7 +372,7 @@ class SeatsGenerator:
             if not self._skip_empty_seats or (self._skip_empty_seats and seat.fill != "#ffffff"):
                 circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.5")
                 seat_number = drawsvg.Text(
-                    f"{seat.number}",
+                    f"{seat.label}",
                     8,
                     seat.cx,
                     seat.cy,
