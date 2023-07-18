@@ -177,12 +177,25 @@ class SeatsGenerator:
         self.caption = caption
         self._skip_empty_seats = skip_empty_seats
         self._multiply_center_sectors()
-        seats = self._left_sector + self._center_sector + self._right_sector
+        seats_o = self._left_sector + self._center_sector + self._right_sector
+        seats = self._get_left_sector() + self._center_sector + self._right_sector
         self.seats = []
         cnt = 1
         for seat in seats:
             self.seats.append(Seat(cx=seat[0], cy=seat[1], number=cnt, order=0))
             cnt += 1
+
+    def _get_left_sector(self) -> List[tuple]:
+        ls = []
+        cnt = 34
+        x = 396
+        for i in range(0, 30):
+            ls.append((x, 638, cnt))
+            ls.append((x, 616, cnt+1))
+            ls.append((x, 594, cnt+2))
+            x -= 43
+            cnt += 3
+        return ls
 
     def _generate_seats_order_l(self, offset: int = 0) -> List[List[int]]:
         seats_order = []
