@@ -44,14 +44,14 @@ class SeatsGenerator:
     ]
     _left_center_sector_left = [
         (306, 543, 78),
-        (313, 520, 79),
+        (311, 520, 79),
         (317, 497, 80),
         (268, 543, 81),
         (271, 521, 82),
         (276, 501, 83),
         (282, 482, 84),
         (221, 543, 85),
-        (228, 523, 86),
+        (224, 523, 86),
         (230, 503, 87),
         (235, 483, 88),
         (240, 463, 89),
@@ -61,7 +61,7 @@ class SeatsGenerator:
         (194, 468, 93),
         (202, 446, 94),
         (135, 543, 95),
-        (142, 518, 96),
+        (138, 518, 96),
         (145, 494, 97),
         (149, 472, 98),
         (154, 451, 99),
@@ -94,26 +94,34 @@ class SeatsGenerator:
 
     seats: List[Seat]
     parties: List[Party]
-    logotype: Optional[str] = None
-    legend: bool = False
-    caption: str = ""
+    caption: str
+    logotype: Optional[str]
 
-    _skip_empty_seats = True
+    _include_legend: bool
+    _include_seats_numbers: bool
+    _seats_numbers_color: Optional[str]
+    _skip_empty_seats: bool
 
     def __init__(
         self,
         parties: List[Party],
+        caption: str = "",
         logotype: Optional[str] = None,
         legend: bool = True,
         skip_empty_seats: bool = True,
-        caption: str = "",
+        include_seats_numbers: bool = True,
+        seats_numbers_color: Optional[str] = "#ffffff",
     ):
-        self.parties = parties
-        self.logotype = logotype if logotype else "assets/pyRLAMENT_logo.svg"
-        self.legend = legend
-        self.caption = caption
-        self._skip_empty_seats = skip_empty_seats
         self.seats = []
+        self.parties = parties
+        self.caption = caption
+        self.logotype = logotype if logotype else "assets/pyRLAMENT_logo.svg"
+
+        self._include_legend = legend
+        self._include_seats_numbers = include_seats_numbers
+        self._seats_numbers_color = seats_numbers_color
+        self._skip_empty_seats = skip_empty_seats
+
         cnt = 1
         for seat in self._get_seat_positions_and_numbers():
             self.seats.append(Seat(cx=seat[0], cy=seat[1], number=cnt, label=seat[2], order=0))
@@ -361,7 +369,7 @@ class SeatsGenerator:
             svg.append(
                 drawsvg.Text("https://pyrlament.pl", 15, 100, 130, fill="#000000", center=1, font_family="sans-serif")
             )
-        if self.parties and self.legend:
+        if self.parties and self._include_legend:
             svg.append(self._draw_legend())
         svg.append(self._draw_seats())
         svg.append(self._draw_caption())
@@ -372,17 +380,17 @@ class SeatsGenerator:
         for seat in self.seats:
             if not self._skip_empty_seats or (self._skip_empty_seats and seat.fill != "#ffffff"):
                 circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.5")
-                seat_number = drawsvg.Text(
-                    f"{seat.label}",
-                    8,
-                    seat.cx,
-                    seat.cy,
-                    center=0.6,
-                    fill=seat.color,
-                    text_anchor="middle",
-                    font_family="sans-serif",
-                )
                 seats.append(circle)
+                if self._include_seats_numbers:
+                    seat_number = drawsvg.Text(
+                        text=f"{seat.label}",
+                        font_size=7,
+                        x=seat.cx,
+                        y=seat.cy + 2,
+                        fill=self._seats_numbers_color if self._seats_numbers_color else seat.color,
+                        text_anchor="middle",
+                        font_family="sans-serif",
+                    )
                 seats.append(seat_number)
         return seats
 
