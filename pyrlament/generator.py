@@ -384,7 +384,7 @@ class SeatsGenerator:
                 if self._include_seats_numbers:
                     seat_number = drawsvg.Text(
                         text=f"{seat.label}",
-                        font_size=7,
+                        font_size=8,
                         x=seat.cx,
                         y=seat.cy + 2,
                         fill=self._seats_numbers_color if self._seats_numbers_color else seat.color,
