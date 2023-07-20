@@ -21,4 +21,4 @@ for party in election.parties:
 g = SeatsGenerator(parties=election.parties, caption="Źródło: CBOS, Lipiec 2023")
 g.colorize()
 g.save_svg("assets/pyrlament_sample.svg")
-g.convert_svg_to_png("assets/pyrlament_sample.svg", "assets/pyrlament_sample.png")
+g.save_png("assets/pyrlament_sample.png")

@@ -11,6 +11,8 @@ from pyrlament.configs import PYRLAMENT_PROPERTIES
 from pyrlament.data import GERMAN_MINORITY, Party
 
 
+from PIL import Image, ImageDraw, ImageFilter
+
 class Seat(BaseModel):
     cx: float
     cy: float
@@ -101,6 +103,8 @@ class SeatsGenerator:
     _include_seats_numbers: bool
     _seats_numbers_color: Optional[str]
     _skip_empty_seats: bool
+
+    _svg = None
 
     def __init__(
         self,
@@ -362,18 +366,15 @@ class SeatsGenerator:
                 self._set_seat_color(seat, color)
                 cnt += 1
 
-    def _get_svg(self):
-        svg = drawsvg.Drawing(1122, 740, overflow="hidden")
-        if self.parties and self.logotype:
-            svg.append(self._draw_logotype())
-            svg.append(
-                drawsvg.Text("https://pyrlament.pl", 12, 100, 160, fill="#ffffff", center=1, font_family="sans-serif", opacity=0.5)
-            )
-        if self.parties and self._include_legend:
-            svg.append(self._draw_legend())
-        svg.append(self._draw_seats())
-        svg.append(self._draw_caption())
-        return svg
+    def _get_svg(self, forced=False):
+        if not self._svg or forced:
+            self._svg = drawsvg.Drawing(1122, 740, overflow="hidden")
+            if self.parties and self.logotype:
+                self._svg.append(self._draw_logotype())
+            if self.parties and self._include_legend:
+                self._svg.append(self._draw_legend())
+            self._svg.append(self._draw_seats())
+            self._svg.append(self._draw_caption())
 
     def _draw_seats(self) -> drawsvg.Group:
         seats = drawsvg.Group(transform="translate(0 50)")
@@ -395,7 +396,7 @@ class SeatsGenerator:
         return seats
 
     def _draw_logotype(self) -> drawsvg.Image:
-        return drawsvg.Image(x="0", y="0", width="200", height="200", path=self.logotype, embed=True)
+        return drawsvg.Image(x="0", y="0", width="200", height="200", id="logo", path=self.logotype, embed=True)
 
     def _draw_caption(self) -> drawsvg.Text:
         return drawsvg.Text(self.caption, 14, 0, 730, fill="#000000", font_family="sans-serif")
@@ -429,17 +430,23 @@ class SeatsGenerator:
         return "mandatów"
 
     def get_svg(self):
-        svg = self._get_svg()
-        return svg.as_svg()
+        self._get_svg()
+        return self._svg.as_svg()
 
     def save_svg(self, svg_filename: str):
-        svg = self._get_svg()
-        svg.save_svg(svg_filename)
+        self._get_svg()
+        self._svg.save_svg(svg_filename)
 
-    @staticmethod
-    def convert_svg_to_png(svg_filename: str, png_filename: str):
-        with open(svg_filename, "rb") as svg_file:
-            PNGSurface.convert(bytestring=svg_file.read(), width=1122, height=841, write_to=open(png_filename, "wb"))
+    def save_png(self, png_filename: str):
+        self._get_svg()
+        self._svg.save_png(png_filename)
+        # lines below are only to fix bug with saving embed svg images to bitmaps in drawsvg lib
+        if self.logotype.find(".svg"):
+            logo = self.logotype.replace(".svg", ".png")
+            chart = Image.open(png_filename)
+            logotype = Image.open(logo)
+            chart.paste(logotype)
+            chart.save(png_filename)
 
     @staticmethod
     def hex_to_rgb(h: str) -> tuple:
