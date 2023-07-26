@@ -16,11 +16,18 @@ class SeatsCounter:
     def __init__(self, parties: List[Party]):
         self.parties = parties
         self._check_total_support()
+        self._set_given_order()
 
     def _get_german_minority(self):
         if self.include_german_minority:
             if GERMAN_MINORITY not in self.parties:
                 self.parties.append(GERMAN_MINORITY)
+
+    def _set_given_order(self):
+        """ This method sets given order if none is set. """
+        if sum([p.order for p in self.parties]) == 0:
+            for i in range(0, len(self.parties)):
+                self.parties[i].order = i
 
     def _update_district_support(self):
         self.districts = []

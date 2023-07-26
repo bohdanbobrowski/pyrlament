@@ -1,14 +1,14 @@
 import unittest
 
-from pyrlament import PYRLAMENT_PROPERTIES, SeatsCounter
+from pyrlament import PYRLAMENT_PROPERTIES, SeatsCounter, SeatsCounterException
 from pyrlament.data import DISTRICTS, Party
 
 PARTIES_2019 = [
-    Party(name="PiS", support=43.59, threshold=8),
-    Party(name="KO", support=27.4, threshold=8),
     Party(name="Lewica", support=12.56),
+    Party(name="KO", support=27.4, threshold=8),
     Party(name="PSL", support=8.55),
     Party(name="Konfederacja", support=6.81),
+    Party(name="PiS", support=43.59, threshold=8),
 ]
 
 
@@ -947,13 +947,49 @@ class TestSeatsCounter(unittest.TestCase):
                 given.append([c.party_name, c.votes])
             self.assertListEqual(expected, given)
 
-    def test_district_mandates(self):
-        # given
-        # when
-        election = SeatsCounter(parties=PARTIES_2019)
-        election.count()
-        # then
-
     def test_districts(self):
         """This test is awkward."""
         assert len(DISTRICTS), 41
+
+    def test_total_support_exceeds_100percent(self):
+        # given
+        parties = PARTIES_2019
+        parties[0].support = 100
+        # when
+        with self.assertRaises(SeatsCounterException):
+            election = SeatsCounter(parties=PARTIES_2019)
+
+    def test_sort_parties_by_support(self):
+        # given
+        election = SeatsCounter(parties=PARTIES_2019)
+        election.count()
+        expected = ['PiS', 'KO', 'Lewica', 'PSL', 'Konfederacja', 'Mniejszość niemiecka']
+        # when
+        election.sort_parties_by_support()
+        order = [p.name for p in election.parties]
+        # then
+        self.assertListEqual(order, expected)
+
+
+    def test_sort_parties_by_seats(self):
+        # given
+        election = SeatsCounter(parties=PARTIES_2019)
+        election.count()
+        expected = ['PiS', 'KO', 'Lewica', 'PSL', 'Konfederacja', 'Mniejszość niemiecka']
+        # when
+        election.sort_parties_by_seats()
+        order = [p.name for p in election.parties]
+        # then
+        self.assertListEqual(order, expected)
+
+
+    def test_sort_parties_by_order(self):
+        # given
+        election = SeatsCounter(parties=PARTIES_2019)
+        election.count()
+        expected = ['Lewica', 'Mniejszość niemiecka', 'KO', 'PSL', 'Konfederacja', 'PiS']
+        # when
+        election.sort_parties_by_order()
+        order = [p.name for p in election.parties]
+        # then
+        self.assertListEqual(order, expected)

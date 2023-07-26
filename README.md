@@ -61,6 +61,17 @@ Known bug: for some reason png output is missing logotype.
 <img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyrlament_sample.png" alt="pyRLAMENT example" />
 </p>
 
+## Tests coverage
+
+|Module|statements|missing|excluded|coverage|
+|------|----------|-------|--------|--------|
+|pyrlament/__init__.py|4|0|0|100%|
+|pyrlament/configs.py|13|0|0|100%|
+|pyrlament/counter.py|93|0|0|100%|
+|pyrlament/data.py|68|0|0|100%|
+|pyrlament/generator.py|289|167|0|42%|
+|Total|467|167|0|64%|
+
 ## Implemented and planned features
 
 Here are my plans (some already implemented) for this library:
