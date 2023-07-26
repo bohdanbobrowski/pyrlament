@@ -4,14 +4,12 @@ from typing import List, Optional
 
 import drawsvg
 import numpy as np
-from cairosvg.surface import PNGSurface
+from PIL import Image
 from pydantic import BaseModel
 
 from pyrlament.configs import PYRLAMENT_PROPERTIES
 from pyrlament.data import GERMAN_MINORITY, Party
 
-
-from PIL import Image, ImageDraw, ImageFilter
 
 class Seat(BaseModel):
     cx: float
@@ -89,7 +87,6 @@ class SeatsGenerator:
         (26, 429, 119),
         (36, 402, 120),
         (47, 377, 121),
-        # (43, 376, 121),
     ]
 
     seats_order = []
