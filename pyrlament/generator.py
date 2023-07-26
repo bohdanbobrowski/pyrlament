@@ -404,6 +404,8 @@ class SeatsGenerator:
         cr_x = 20
         cr_y = 20
         for p in self.parties:
+            if p.seats == 0:
+                continue
             legend.append(drawsvg.Circle(cr_x - 12, cr_y - 3, 5, fill=f"#{p.color}"))
             legend.append(
                 drawsvg.Text(

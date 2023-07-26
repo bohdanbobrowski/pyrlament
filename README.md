@@ -9,7 +9,7 @@
 
 # pyRLAMENT
 
-Python library for visualizing seats in the Sejm of the Republic of Poland. So far, a very early version, and its main goal is to practice the capabilities of the python language on various platforms (web/mobile/desktop).
+Python library for visualizing seats in the Sejm of the Republic of Poland. So far still in development. Its main goal is to practice the capabilities of Python on various platforms (web/mobile/desktop).
 
 ## SeatsCounter:
 
@@ -67,14 +67,14 @@ Here are my plans (some already implemented) for this library:
 
 - [x] count seats basing on election support
 - [x] cover code with unit tests
-- [ ] 5% and 8% support threshold
+- [x] 5% and 8% support threshold
 - [ ] check if all support does not reach 100%
 - [x] draw svg with seats
 - [x] randomise seats colors
 - [x] split seats between parties
 - [ ] improve seats placement (it's a bit messy)
 - [x] svg output
-- [ ] fix png output
+- [x] fix png output (I've implemented workaround)
 - [x] [build webapp using Flask](https://www.pyrlament.pl)
 - [ ] build mobile app using Kivy
 - [ ] build desktop app using Kivy

@@ -4,6 +4,10 @@ from typing import Dict, List
 from pyrlament.data import DISTRICTS, GENERAL_SUPPORT, GERMAN_MINORITY, District, Party
 
 
+class SeatsCounterException(Exception):
+    pass
+
+
 class SeatsCounter:
     parties: List[Party]
     include_german_minority: bool = True
@@ -11,6 +15,7 @@ class SeatsCounter:
 
     def __init__(self, parties: List[Party]):
         self.parties = parties
+        self._check_total_support()
 
     def _get_german_minority(self):
         if self.include_german_minority:
@@ -33,21 +38,28 @@ class SeatsCounter:
                     if sup.name == party.name:
                         past_support = sup.support
                 p_sup = d.get_support(party.name)
-                if p_sup and past_support > 0:
-                    new_district.add_support(
-                        party_name=party.name,
-                        party_support=party.support / past_support * p_sup.support,
-                    )
-                else:
-                    new_district.add_support(party_name=party.name, party_support=party.support)
+                if party.support >= party.threshold:
+                    if p_sup and past_support > 0:
+                        new_district.add_support(
+                            party_name=party.name,
+                            party_support=party.support / past_support * p_sup.support,
+                        )
+                    else:
+                        new_district.add_support(party_name=party.name, party_support=party.support)
             self.districts.append(new_district)
+
+    def _check_total_support(self):
+        total_support = math.fsum([p.support for p in self.parties])
+        if total_support > 100:
+            raise SeatsCounterException(f"Total support exceeds 100%! ({total_support})")
 
     def _get_party_votes(self, district: District) -> Dict:
         output = {}
         for party in self.parties:
             party_support_in_district = district.get_support(party_name=party.name)
-            party_votes = party_support_in_district.support * district.votes / 100
-            output[party.name] = int(math.floor(party_votes + 0.5))
+            if party_support_in_district:
+                party_votes = party_support_in_district.support * district.votes / 100
+                output[party.name] = int(math.floor(party_votes + 0.5))
         return output
 
     def _calculate_candidates_votes(
