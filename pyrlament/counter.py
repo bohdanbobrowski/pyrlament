@@ -24,7 +24,7 @@ class SeatsCounter:
                 self.parties.append(GERMAN_MINORITY)
 
     def _set_given_order(self):
-        """ This method sets given order if none is set. """
+        """This method sets given order if none is set."""
         if sum([p.order for p in self.parties]) == 0:
             for i in range(0, len(self.parties)):
                 self.parties[i].order = i

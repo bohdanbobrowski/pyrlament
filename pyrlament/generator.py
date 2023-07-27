@@ -230,7 +230,7 @@ class SeatsGenerator:
     @staticmethod
     def _rotate(points, origin, angle):
         rotated = (points - origin) * np.exp(complex(0, angle)) + origin
-        return (rotated.real, rotated.imag)
+        return rotated.real, rotated.imag
 
     def _rotate_sector(self, sector, angle, seat_nr, rotate_by=complex(561, 561), move_by=(0, 0)):
         result = []

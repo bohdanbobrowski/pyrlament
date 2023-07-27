@@ -957,37 +957,35 @@ class TestSeatsCounter(unittest.TestCase):
         parties[0].support = 100
         # when
         with self.assertRaises(SeatsCounterException):
-            election = SeatsCounter(parties=PARTIES_2019)
+            SeatsCounter(parties=PARTIES_2019)
 
     def test_sort_parties_by_support(self):
         # given
         election = SeatsCounter(parties=PARTIES_2019)
         election.count()
-        expected = ['PiS', 'KO', 'Lewica', 'PSL', 'Konfederacja', 'Mniejszość niemiecka']
+        expected = ["PiS", "KO", "Lewica", "PSL", "Konfederacja", "Mniejszość niemiecka"]
         # when
         election.sort_parties_by_support()
         order = [p.name for p in election.parties]
         # then
         self.assertListEqual(order, expected)
 
-
     def test_sort_parties_by_seats(self):
         # given
         election = SeatsCounter(parties=PARTIES_2019)
         election.count()
-        expected = ['PiS', 'KO', 'Lewica', 'PSL', 'Konfederacja', 'Mniejszość niemiecka']
+        expected = ["PiS", "KO", "Lewica", "PSL", "Konfederacja", "Mniejszość niemiecka"]
         # when
         election.sort_parties_by_seats()
         order = [p.name for p in election.parties]
         # then
         self.assertListEqual(order, expected)
 
-
     def test_sort_parties_by_order(self):
         # given
         election = SeatsCounter(parties=PARTIES_2019)
         election.count()
-        expected = ['Lewica', 'Mniejszość niemiecka', 'KO', 'PSL', 'Konfederacja', 'PiS']
+        expected = ["Lewica", "Mniejszość niemiecka", "KO", "PSL", "Konfederacja", "PiS"]
         # when
         election.sort_parties_by_order()
         order = [p.name for p in election.parties]
