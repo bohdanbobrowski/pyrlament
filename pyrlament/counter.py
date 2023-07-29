@@ -10,11 +10,19 @@ class SeatsCounterException(Exception):
 
 class SeatsCounter:
     parties: List[Party]
+    past_support: bool
     include_german_minority: bool = True
     districts: List[District] = []
 
-    def __init__(self, parties: List[Party]):
+    def __init__(self, parties: List[Party], past_support=None):
         self.parties = parties
+        if past_support is not None:
+            self.past_support = past_support
+        else:
+            if len(parties) == 5:
+                self.past_support = True
+            else:
+                self.past_support = False
         self._check_total_support()
         self._set_given_order()
 
@@ -42,7 +50,7 @@ class SeatsCounter:
             past_support = 0
             for party in self.parties:
                 for sup in GENERAL_SUPPORT:
-                    if sup.name == party.name:
+                    if sup.name == party.name and self.past_support:
                         past_support = sup.support
                 p_sup = d.get_support(party.name)
                 if party.support >= party.threshold:
