@@ -23,3 +23,7 @@ def demo():
     g.colorize()
     g.save_svg("assets/pyrlament_sample.svg")
     g.save_png("assets/pyrlament_sample.png")
+
+
+if __name__ == "__main__":
+    demo()
