@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import List
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class PyrlamentProperties(BaseSettings):
@@ -15,8 +15,7 @@ class PyrlamentProperties(BaseSettings):
         "5778a2",
     ]
 
-    class Config:
-        env_prefix: str = "PYRLAMENT_"
+    model_config = SettingsConfigDict(env_prefix="pyrlament_")
 
 
 @lru_cache(maxsize=1)

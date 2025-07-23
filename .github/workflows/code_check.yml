@@ -1,4 +1,4 @@
-name: Ruff
+name: Linter, formatter and static code analyse
 
 on: [push]
 
@@ -23,5 +23,4 @@ jobs:
         poetry run ruff format . --check
         poetry run ruff check .
     - name: Static code analysis with mypy
-      run: |
-        mypy .
+      run: poetry run mypy .

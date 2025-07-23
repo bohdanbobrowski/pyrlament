@@ -1,5 +1,4 @@
 import math
-from typing import Dict, List
 
 from pyrlament.data import DISTRICTS, GENERAL_SUPPORT, GERMAN_MINORITY, District, Party
 
@@ -9,12 +8,12 @@ class SeatsCounterException(Exception):
 
 
 class SeatsCounter:
-    parties: List[Party]
+    parties: list[Party]
     past_support: bool
     include_german_minority: bool = True
-    districts: List[District] = []
+    districts: list[District] = []
 
-    def __init__(self, parties: List[Party], past_support=None):
+    def __init__(self, parties: list[Party], past_support=None):
         self.parties = parties
         if past_support is not None:
             self.past_support = past_support
@@ -68,7 +67,7 @@ class SeatsCounter:
         if total_support > 100:
             raise SeatsCounterException(f"Total support exceeds 100%! ({total_support})")
 
-    def _get_party_votes(self, district: District) -> Dict:
+    def _get_party_votes(self, district: District) -> dict:
         output = {}
         for party in self.parties:
             party_support_in_district = district.get_support(party_name=party.name)
@@ -121,7 +120,7 @@ class SeatsCounter:
         self.parties.sort(key=lambda x: x.support, reverse=reverse)
 
     def sort_parties_by_seats(self, reverse: bool = True):
-        self.parties.sort(key=lambda x: x.seats, reverse=reverse)
+        self.parties.sort(key=lambda x: x.seats, reverse=reverse)  # type: ignore
 
     def sort_parties_by_order(self, reverse: bool = False):
         self.parties.sort(key=lambda x: x.order, reverse=reverse)

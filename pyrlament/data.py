@@ -1,5 +1,3 @@
-from typing import Dict, List, Optional
-
 from pydantic import BaseModel
 
 
@@ -8,8 +6,8 @@ class Party(BaseModel):
     label: str
     support: float
     threshold: int = 5
-    seats: Optional[int] = None
-    color: Optional[str] = None
+    seats: int | None = None
+    color: str | None = None
     order: int = 0
 
     def __init__(self, **kwargs):
@@ -26,10 +24,10 @@ class Candidate(BaseModel):
 class PartySupport(BaseModel):
     name: str
     support: float
-    votes: Optional[int] = None
-    seats: Optional[int] = None
-    year: Optional[int]
-    candidates_votes: List[Candidate] = []
+    votes: int | None = None
+    seats: int | None = None
+    year: int | None
+    candidates_votes: list[Candidate] = []
 
     def add_candidate_vote(self, party_name: str, votes: int):
         self.candidates_votes.append(
@@ -44,9 +42,9 @@ class PartySupport(BaseModel):
 
 
 class PartySupportList(BaseModel):
-    support: List[PartySupport]
+    support: list[PartySupport]
 
-    def add_support(self, party_name: str, party_support: float, year: Optional[int] = None):
+    def add_support(self, party_name: str, party_support: float, year: int | None = None):
         ps = PartySupport(name=party_name, support=party_support, year=year)
         self.support.append(ps)
 
@@ -60,14 +58,14 @@ class PartySupportList(BaseModel):
             if party_support.name == party_name:
                 party_support.seats = seats
 
-    def get_support(self, party_name: str) -> Optional[PartySupport]:
+    def get_support(self, party_name: str) -> PartySupport | None:
         for party_support in self.support:
             if party_support.name == party_name:
                 return party_support
         return None
 
     @staticmethod
-    def load(support: Dict, year: int):
+    def load(support: dict, year: int):
         support_list = []
         for party_name in support:
             support_list.append(PartySupport(name=party_name, support=support[party_name], year=year))
@@ -79,7 +77,7 @@ class District(PartySupportList):
     votes: int
     capital: str
     voivodeship: str
-    candidates_votes: List[Candidate] = []
+    candidates_votes: list[Candidate] = []
 
     def add_candidate_vote(self, party_name: str, votes: int):
         self.candidates_votes.append(

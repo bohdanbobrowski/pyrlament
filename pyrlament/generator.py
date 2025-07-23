@@ -1,8 +1,8 @@
 import math
 import random
-from typing import List, Optional
+from typing import Optional
 
-import drawsvg
+import drawsvg  # type: ignore
 import numpy as np
 from PIL import Image
 from pydantic import BaseModel
@@ -89,10 +89,10 @@ class SeatsGenerator:
         (47, 377, 121),
     ]
 
-    seats_order = []
+    seats_order: list[list[int]] = []
 
-    seats: List[Seat]
-    parties: List[Party]
+    seats: list[Seat]
+    parties: list[Party]
     caption: str
     logotype: Optional[str]
 
@@ -105,7 +105,7 @@ class SeatsGenerator:
 
     def __init__(
         self,
-        parties: List[Party],
+        parties: list[Party],
         caption: str = "",
         logotype: Optional[str] = None,
         legend: bool = True,
@@ -131,10 +131,10 @@ class SeatsGenerator:
     def get_center(self):
         return self._get_center_sectors()
 
-    def _get_seat_positions_and_numbers(self) -> List[tuple]:
+    def _get_seat_positions_and_numbers(self) -> list[tuple]:
         return self._get_left_sector() + self._get_center_sectors() + self._get_right_sector()
 
-    def _get_left_sector(self) -> List[tuple]:
+    def _get_left_sector(self) -> list[tuple]:
         """This method generates positions of seats in LEFT sector.
         :return: [(<seat x>, <seat y>, <seat label>)]
         """
@@ -150,7 +150,7 @@ class SeatsGenerator:
             seat_x -= 43
         return ls
 
-    def _get_right_sector(self) -> List[tuple]:
+    def _get_right_sector(self) -> list[tuple]:
         """This method generates positions of seats in RIGHT sector.
         :return: [(<seat x>, <seat y>, <seat label>)]
         """
@@ -166,7 +166,7 @@ class SeatsGenerator:
             seat_x += 43
         return ls
 
-    def _generate_seats_order_l(self, offset: int = 0) -> List[List[int]]:
+    def _generate_seats_order_l(self, offset: int = 0) -> list[list[int]]:
         seats_order = []
         sequence = [
             [1, 4, 7, 10, 13, 16, 19, 22, 25, 28],
@@ -180,7 +180,7 @@ class SeatsGenerator:
             seats_order.append(new_row)
         return seats_order
 
-    def _generate_seats_order_c(self, offset: int = 0) -> List[List[int]]:
+    def _generate_seats_order_c(self, offset: int = 0) -> list[list[int]]:
         seats_order = []
         sequence = [
             [31, 34, 39, 45, 48, 52, 57, 62, 68, 75, 82],
@@ -206,8 +206,8 @@ class SeatsGenerator:
         return seats_order
 
     def _move_random_seats_to_end(self, seats_to_move: int = 9):
-        seats_moved = []
-        rows_modified = []
+        seats_moved: list[int] = []
+        rows_modified: list[int] = []
         while len(seats_moved) < seats_to_move:
             row_nr = random.randint(2, 59)
             if row_nr not in rows_modified:
@@ -242,7 +242,7 @@ class SeatsGenerator:
             seat_nr += 1
         return result
 
-    def _get_center_sectors(self) -> List[tuple]:
+    def _get_center_sectors(self) -> list[tuple]:
         left_center_sector_right = self._rotate_sector(
             self._left_center_sector_left, angle=21, seat_nr=122, move_by=(5, -5)
         )
@@ -264,20 +264,22 @@ class SeatsGenerator:
         for seat in self.seats:
             self._set_seat_color(seat, random.choice(PYRLAMENT_PROPERTIES.COLORS))
 
-    def _get_seat_by_number(self, seat_nr: int) -> Seat:
+    def _get_seat_by_number(self, seat_nr: int) -> Seat | None:
         for seat in self.seats:
             if seat.number == seat_nr:
                 return seat
+        return None
 
-    def _get_seat_by_sequence(self, seat_nr: int) -> int:
+    def _get_seat_by_sequence(self, seat_nr: int) -> int | None:
         cnt = 0
         for row in self.seats_order:
             for real_seat_nr in row:
                 if seat_nr == cnt:
                     return real_seat_nr - 1
                 cnt += 1
+        return None
 
-    def _get_seats_for_german_minority(self) -> List[int]:
+    def _get_seats_for_german_minority(self) -> list[int]:
         seats_order = []
         seats_order += self._generate_seats_order_c()
         seats_order += self._generate_seats_order_c(102)
@@ -288,7 +290,7 @@ class SeatsGenerator:
             seats_for_german_minority.append(row[-1])
         return seats_for_german_minority
 
-    def _get_seats_fill_colors(self, seats: List[int]) -> List[str]:
+    def _get_seats_fill_colors(self, seats: list[int]) -> list[str]:
         seats_colors = []
         for seat in self.seats:
             if seat.number in seats:
@@ -306,11 +308,13 @@ class SeatsGenerator:
                 good_seat = possible_seats[x]
         return good_seat
 
-    def _get_seat_map(self, parties: List[Party]):
+    @staticmethod
+    def _get_seat_map(parties: list[Party]):
         seat_map = []
         for party in parties:
-            for x in range(0, party.seats):
-                seat_map.append(party.color)
+            if party.seats:
+                for x in range(0, party.seats):
+                    seat_map.append(party.color)
         return seat_map
 
     def _get_parties_and_german_minority(self):
@@ -330,8 +334,9 @@ class SeatsGenerator:
         self._generate_seats_order()
         for y in range(0, len(seat_map)):
             real_y = self._get_seat_by_sequence(y)
-            seat = self.seats[real_y]
-            self._set_seat_color(seat, seat_map[y])
+            if real_y:
+                seat = self.seats[real_y]
+                self._set_seat_color(seat, seat_map[y])
 
     def colorize(self):
         german_minority, parties = self._get_parties_and_german_minority()
@@ -434,13 +439,15 @@ class SeatsGenerator:
 
     def save_svg(self, svg_filename: str):
         self._get_svg()
-        self._svg.save_svg(svg_filename)
+        if self._svg:
+            self._svg.save_svg(svg_filename)
 
     def save_png(self, png_filename: str):
         self._get_svg()
-        self._svg.save_png(png_filename)
+        if self._svg:
+            self._svg.save_png(png_filename)
         # lines below are only to fix bug with saving embed svg images to bitmaps in drawsvg lib
-        if self.logotype.find(".svg"):
+        if isinstance(self.logotype, str) and self.logotype.find(".svg"):
             logo = self.logotype.replace(".svg", ".png")
             chart = Image.open(png_filename)
             logotype = Image.open(logo)
