@@ -11,6 +11,10 @@
 
 Python library for visualizing seats in the Sejm of the Republic of Poland. So far still in development. Its main goal is to practice the capabilities of Python on various platforms (web/mobile/desktop).
 
+## Dev environment installation
+
+    poetry install --with=dev
+
 ## SeatsCounter:
 
     from pyrlament import SeatsCounter

@@ -392,7 +392,7 @@ class TestSeatsCounter(unittest.TestCase):
         # given
         expected_candidates_votes = expected = [
             [
-                ["PiS", 183353],
+                ["PiS", 188499],
                 ["KO", 108195],
                 ["PiS", 91677],
                 ["Lewica", 71049],

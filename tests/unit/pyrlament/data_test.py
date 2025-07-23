@@ -1,4 +1,5 @@
 from pyrlament.data import PartySupport, PartySupportList
+import pytest
 
 
 class TestData:
@@ -11,16 +12,22 @@ class TestData:
         result = (2000, {"A": 50, "B": 25, "C": 12.5})
         assert result, expected
 
-    def test_create_party_support_list(self):
+    @pytest.mark.parametrize(
+        "year,pis,ko,lewica,psl,konfederacja",
+        [
+            (2019, 43.59, 27.4, 12.56, 8.55, 6.81),
+        ],
+    )
+    def test_create_party_support_list(self, year, pis, ko, lewica, psl, konfederacja):
         list_1 = PartySupportList.load(
             {
-                "PiS": 43.59,
-                "KO": 27.4,
-                "Lewica": 12.56,
-                "PSL": 8.55,
-                "Konfederacja": 6.81,
+                "PiS": pis,
+                "KO": ko,
+                "Lewica": lewica,
+                "PSL": psl,
+                "Konfederacja": konfederacja,
             },
-            2019,
+            year,
         )
         assert len(list_1), 5
-        assert list[-1], PartySupport(name="Konfederacja", support=6.81, year=2019)
+        assert list_1[-1], PartySupport(name="Konfederacja", support=konfederacja, year=year)

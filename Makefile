@@ -1,50 +1,32 @@
-.SILENT: help
-.PHONY: help
-
-
-help:
-	echo "Pyrlament"
-
-start:
-	poetry run flask --app web_ui/pyrlament.py run --reload
+.SILENT: update requirements format ruff check mypy pyclean
+.PHONY: update requirements format ruff check mypy pyclean
 
 update:
 	poetry lock
 	poetry install
 
-test:
-	poetry run pytest tests/unit -W ignore::DeprecationWarning
-
 requirements:
 	pipreqs . --force
 
-format: black ruff autoflake isort no_implicit_optional
+format: ruff
 
 ruff:
-	poetry run ruff --fix .
+	poetry run ruff format .
+	poetry run ruff check . --fix
 
-autoflake:
-	poetry run autoflake --remove-all-unused-imports -i .
-
-black:
-	poetry run black .
-
-isort:
-	poetry run isort  --profile black .
-
-no_implicit_optional:
-	poetry run no_implicit_optional .
-
-check_mypy:
+check:
 	poetry run mypy --incremental --show-error-codes --pretty .
 
-mypy: check_mypy
+mypy: check
 
 pyclean:
 	poetry run pyclean .
 
-check_coverage: pyclean
+test:
+	poetry run pytest tests/unit
+
+test_coverage: pyclean
 	poetry run coverage run -m pytest tests/unit && poetry run coverage report -m
 
-check_coverage_html: pyclean
+test_coverage_html: pyclean
 	poetry run coverage run -m pytest tests/unit && poetry run coverage html
