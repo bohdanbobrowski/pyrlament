@@ -20,8 +20,8 @@ jobs:
       run: poetry install --with=dev
     - name: Run Ruff linter and code formatter
       run: |
-        ruff format . --check
-        ruff check .
+        poetry run ruff format . --check
+        poetry run ruff check .
     - name: Static code analysis with mypy
       run: |
         mypy .
