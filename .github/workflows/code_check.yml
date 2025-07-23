@@ -15,8 +15,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      run: |
-        poetry install --with=dev
+      run: poetry install --with=dev
     - name: Run Ruff linter and code formatter
       run: |
         ruff format . --check
