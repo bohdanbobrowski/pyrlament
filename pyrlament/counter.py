@@ -13,8 +13,9 @@ class SeatsCounter:
     include_german_minority: bool = True
     districts: list[District] = []
 
-    def __init__(self, parties: list[Party], past_support=None):
+    def __init__(self, parties: list[Party], past_support=None, include_german_minority=True):
         self.parties = parties
+        self.include_german_minority = include_german_minority
         if past_support is not None:
             self.past_support = past_support
         else:
