@@ -11,18 +11,22 @@ from pyrlament.configs import PYRLAMENT_PROPERTIES
 from pyrlament.data import GERMAN_MINORITY, Party
 
 
+WHITE = "#ffffff"
+BLACK = "#000000"
+
+
 class Seat(BaseModel):
     cx: float
     cy: float
     number: int
     label: int
-    fill: str = "#ffffff"
-    color: str = "#000000"
+    fill: str = WHITE
+    color: str = BLACK
     order: int
 
     def reset_colors(self):
-        self.fill = "#ffffff"
-        self.color = "#000000"
+        self.fill = WHITE
+        self.color = BLACK
 
 
 class SeatsGenerator:
@@ -111,7 +115,7 @@ class SeatsGenerator:
         legend: bool = True,
         skip_empty_seats: bool = True,
         include_seats_numbers: bool = True,
-        seats_numbers_color: Optional[str] = "#ffffff",
+        seats_numbers_color: Optional[str] = WHITE,
     ):
         self.seats = []
         self.parties = parties
@@ -183,20 +187,20 @@ class SeatsGenerator:
     def _generate_seats_order_c(self, offset: int = 0) -> list[list[int]]:
         seats_order = []
         sequence = [
-            [31, 34, 39, 45, 48, 52, 57, 62, 68, 75, 82],
-            [32, 35, 40, 46, 49, 53, 58, 63, 69, 76, 83],
-            [36, 41, 47, 50, 54, 59, 64, 70, 77, 84],
-            [51, 55, 60, 65, 71, 78, 85],
-            [66, 72, 79, 86],
-            [73, 80, 87],
-            [56, 61, 67, 74, 81, 88],
-            [96, 101, 106, 112, 119, 126],
-            [113, 120, 127],
-            [107, 114, 121, 128],
-            [92, 97, 102, 108, 115, 122, 129],
-            [37, 42, 89, 93, 98, 103, 109, 116, 123, 130],
-            [43, 90, 94, 99, 104, 110, 117, 124, 131],
-            [33, 38, 44, 91, 95, 100, 105, 111, 118, 125, 132],
+            (31, 34, 39, 45, 48, 52, 57, 62, 68, 75, 82),
+            (32, 35, 40, 46, 49, 53, 58, 63, 69, 76, 83),
+            (36, 41, 47, 50, 54, 59, 64, 70, 77, 84),
+            (51, 55, 60, 65, 71, 78, 85),
+            (66, 72, 79, 86),
+            (73, 80, 87),
+            (56, 61, 67, 74, 81, 88),
+            (96, 101, 106, 112, 119, 126),
+            (113, 120, 127),
+            (107, 114, 121, 128),
+            (92, 97, 102, 108, 115, 122, 129),
+            (37, 42, 89, 93, 98, 103, 109, 116, 123, 130),
+            (43, 90, 94, 99, 104, 110, 117, 124, 131),
+            (33, 38, 44, 91, 95, 100, 105, 111, 118, 125, 132),
         ]
         for row in sequence:
             new_row = []
@@ -221,10 +225,8 @@ class SeatsGenerator:
         self.seats_order = []
         self.seats_order += self._generate_seats_order_l()
         self.seats_order += self._generate_seats_order_c()
-        self.seats_order += self._generate_seats_order_c(102)
-        self.seats_order += self._generate_seats_order_c(204)
-        self.seats_order += self._generate_seats_order_c(306)
-        self.seats_order += self._generate_seats_order_l(438)
+        for s in range(1, 5):
+            self.seats_order += self._generate_seats_order_c(s * 102)
         self._move_random_seats_to_end()
 
     @staticmethod
@@ -282,9 +284,8 @@ class SeatsGenerator:
     def _get_seats_for_german_minority(self) -> list[int]:
         seats_order = []
         seats_order += self._generate_seats_order_c()
-        seats_order += self._generate_seats_order_c(102)
-        seats_order += self._generate_seats_order_c(204)
-        seats_order += self._generate_seats_order_c(306)
+        for s in range(1, 4):
+            seats_order += self._generate_seats_order_c(102 * s)
         seats_for_german_minority = []
         for row in seats_order:
             seats_for_german_minority.append(row[-1])
@@ -304,7 +305,7 @@ class SeatsGenerator:
         for x in range(1, len(possible_seats) - 1):
             p_f = possible_seats_f[x - 1]
             n_f = possible_seats_f[x + 1]
-            if p_f != n_f and "#ffffff" not in [p_f, n_f] and possible_seats_f[x] == "#ffffff":
+            if p_f != n_f and WHITE not in [p_f, n_f] and possible_seats_f[x] == WHITE:
                 good_seat = possible_seats[x]
         return good_seat
 
@@ -381,7 +382,7 @@ class SeatsGenerator:
     def _draw_seats(self) -> drawsvg.Group:
         seats = drawsvg.Group(transform="translate(0 50)")
         for seat in self.seats:
-            if not self._skip_empty_seats or (self._skip_empty_seats and seat.fill != "#ffffff"):
+            if not self._skip_empty_seats or (self._skip_empty_seats and seat.fill != WHITE):
                 circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.5")
                 seats.append(circle)
                 if self._include_seats_numbers:
@@ -394,18 +395,18 @@ class SeatsGenerator:
                         text_anchor="middle",
                         font_family="sans-serif",
                     )
-                seats.append(seat_number)
+                    seats.append(seat_number)
         return seats
 
     def _draw_logotype(self) -> drawsvg.Image:
         return drawsvg.Image(x="0", y="0", width="200", height="200", id="logo", path=self.logotype, embed=True)
 
     def _draw_caption(self) -> drawsvg.Text:
-        return drawsvg.Text(self.caption, 14, 0, 730, fill="#000000", font_family="sans-serif")
+        return drawsvg.Text(self.caption, 14, 0, 730, fill=BLACK, font_family="sans-serif")
 
     def _draw_legend(self) -> drawsvg.Group:
         legend = drawsvg.Group(transform="translate(855 15)")
-        legend.append(drawsvg.Text("Legenda:", 17, 0, 0, fill="#000000", font_family="sans-serif"))
+        legend.append(drawsvg.Text("Legenda:", 17, 0, 0, fill=BLACK, font_family="sans-serif"))
         cr_x = 20
         cr_y = 20
         for p in self.parties:
@@ -418,7 +419,7 @@ class SeatsGenerator:
                     font_size=12,
                     x=cr_x,
                     y=cr_y,
-                    fill="#000000",
+                    fill=BLACK,
                     font_family="sans-serif",
                 )
             )

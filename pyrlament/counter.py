@@ -130,4 +130,3 @@ class SeatsCounter:
         self._update_district_support()
         self._calculate_deputies_seats()
         self._get_german_minority()
-        pass

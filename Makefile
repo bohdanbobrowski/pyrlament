@@ -8,6 +8,8 @@ update:
 requirements:
 	pipreqs . --force
 
+precommit: ruff check test
+
 format: ruff
 
 ruff:
