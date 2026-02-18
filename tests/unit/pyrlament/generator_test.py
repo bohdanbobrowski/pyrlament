@@ -1,6 +1,13 @@
 import unittest
 
+from pytest import fixture
+
 from pyrlament import SeatsGenerator
+
+
+@fixture
+def given_generator():
+    return SeatsGenerator(parties=[])
 
 
 class TestSeatsPositions(unittest.TestCase):
@@ -26,3 +33,9 @@ class TestSeatsPositions(unittest.TestCase):
         for x in [372, 377, 383, 430, 434, 439, 444, 450, 457, 464, 471]:
             seat = self.get_seat_by_number(center, x)
             assert seat[1] == 543
+
+    def test_get_mandates_label(self, given_generator):
+        # Given
+        pass
+        # When
+        # Then
