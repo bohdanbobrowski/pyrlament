@@ -8,14 +8,14 @@ from pyrlament import SeatsGenerator
 def given_generator():
     return SeatsGenerator(parties=[])
 
+
 def get_seat_by_number(c, x):
     for s in c:
         if s[2] == x:
             return s
 
+
 class TestSeatsPositions:
-
-
     def test_two_center_columns_seat_y_position(self):
         generator = SeatsGenerator(parties=[])
         center = generator.get_center()
@@ -33,14 +33,17 @@ class TestSeatsPositions:
             seat = get_seat_by_number(center, x)
             assert seat[1] == 543
 
-    @pytest.mark.parametrize("given_amount,expected_result", [
-        (1,"mandat"),
-        (2,"mandaty"),
-        (5,"mandatów"),
-        (22,"mandaty"),
-        (55,"mandatów"),
-    ])
-    def test_get_mandates_label(self, given_generator,given_amount,expected_result):
+    @pytest.mark.parametrize(
+        "given_amount,expected_result",
+        [
+            (1, "mandat"),
+            (2, "mandaty"),
+            (5, "mandatów"),
+            (22, "mandaty"),
+            (55, "mandatów"),
+        ],
+    )
+    def test_get_mandates_label(self, given_generator, given_amount, expected_result):
         # When
         result = given_generator._get_mandates_label(given_amount)
         # Then
