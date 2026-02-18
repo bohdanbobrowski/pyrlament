@@ -334,10 +334,12 @@ class SeatsGenerator:
     def _colorize_seats(self, seat_map):
         self._generate_seats_order()
         for y in range(0, len(seat_map)):
-            real_y = self._get_seat_by_sequence(y)
-            if real_y and real_y in self.seats:
-                seat = self.seats[real_y]
-                self._set_seat_color(seat, seat_map[y])
+            if real_y := self._get_seat_by_sequence(y):
+                try:
+                    seat = self.seats[real_y]
+                    self._set_seat_color(seat, seat_map[y])
+                except IndexError:
+                    pass
 
     def colorize(self):
         german_minority, parties = self._get_parties_and_german_minority()

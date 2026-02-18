@@ -12,6 +12,7 @@ dependencies = [
     "pydantic-settings",
     "pillow",
     "drawsvg",
+    "cairosvg (>=2.8.2,<3.0.0)",
 ]
 
 [project.optional-dependencies]
