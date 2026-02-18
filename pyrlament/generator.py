@@ -428,7 +428,7 @@ class SeatsGenerator:
     def _get_mandates_label(seats) -> str:
         if seats == 1:
             return "mandat"
-        if 1 < seats < 6 or seats > 20 and str(seats)[-1] in ["2", "3", "4"]:
+        if 1 < seats < 5 or seats > 20 and str(seats)[-1] in ["2", "3", "4"]:
             return "mandaty"
         return "mandatów"
 
