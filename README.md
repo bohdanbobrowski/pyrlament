@@ -59,8 +59,6 @@ As a result of the operation of the `count` method, the `parties` parameter will
 
 #### PNG example:
 
-Known bug: for some reason png output is missing logotype. 
-
 <p align="center">
 <img src="https://raw.githubusercontent.com/bohdanbobrowski/pyrlament/master/assets/pyrlament_sample.png" alt="pyRLAMENT example" />
 </p>
