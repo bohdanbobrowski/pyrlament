@@ -65,14 +65,15 @@ As a result of the operation of the `count` method, the `parties` parameter will
 
 ## Tests coverage
 
-|Module|statements|missing|excluded|coverage|
-|------|----------|-------|--------|--------|
-|pyrlament/__init__.py|4|0|0|100%|
-|pyrlament/configs.py|13|0|0|100%|
-|pyrlament/counter.py|93|0|0|100%|
-|pyrlament/data.py|68|0|0|100%|
-|pyrlament/generator.py|289|167|0|42%|
-|Total|467|167|0|64%|
+| Name                      |    Stmts |     Miss |   Cover |
+|-------------------------- | -------: | -------: | ------: |
+| pyrlament/\_\_init\_\_.py |        4 |        0 |    100% |
+| pyrlament/configs.py      |       12 |        0 |    100% |
+| pyrlament/counter.py      |       98 |        1 |     99% |
+| pyrlament/data.py         |       67 |        0 |    100% |
+| pyrlament/generator.py    |      295 |      167 |     43% |
+|                 **TOTAL** |  **476** |  **168** | **65%** |
+
 
 ## Implemented and planned features
 

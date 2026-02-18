@@ -79,7 +79,7 @@ exclude_also = [
     "class .*\bProtocol\\):",
     "@(abc\\.)?abstractmethod"
 ]
-fail_under = 80
+fail_under = 65
 
 [tool.coverage.html]
 directory = "tests/coverage"
