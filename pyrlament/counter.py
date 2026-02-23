@@ -72,7 +72,7 @@ class SeatsCounter:
     def _check_total_seats(self):
         total_seats = math.fsum([p.seats for p in self.parties])
         if total_seats > 460:
-            raise SeatsCounterException(f"Total seats exceeds 460! ({total_support})")
+            raise SeatsCounterException(f"Total seats exceeds 460! ({total_seats})")
 
     def _get_party_votes(self, district: District) -> dict:
         output = {}
