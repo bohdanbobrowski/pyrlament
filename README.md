@@ -92,6 +92,5 @@ Here are my plans (some already implemented) for this library:
 - [x] svg output
 - [x] fix png output (I've implemented workaround)
 - [x] [build webapp using Flask](https://www.pyrlament.pl)
-- [ ] build mobile app using Kivy
-- [ ] build desktop app using Kivy
-- [ ] cli interface for library
+- [ ] build mobile/desktop app using Kivy
+- [ ] command line interface for library

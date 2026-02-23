@@ -460,13 +460,6 @@ class SeatsGenerator:
         self._get_svg()
         if self._svg:
             self._svg.save_png(png_filename)
-        # lines below are only to fix bug with saving embed svg images to bitmaps in drawsvg lib
-        if isinstance(self.logotype, str) and self.logotype.find(".svg"):
-            logo = self.logotype.replace(".svg", ".png")
-            chart = Image.open(png_filename)
-            logotype = Image.open(logo)
-            chart.paste(logotype)
-            chart.save(png_filename)
 
     @staticmethod
     def hex_to_rgb(h: str) -> tuple:
