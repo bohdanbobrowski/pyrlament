@@ -7,4 +7,5 @@ __all__ = [
     "SeatsCounter",
     "SeatsCounterException",
     "SeatsGenerator",
+    "SeatsGeneratorException",
 ]
