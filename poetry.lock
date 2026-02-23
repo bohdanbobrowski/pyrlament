@@ -1392,4 +1392,4 @@ dev = ["autoflake", "isort", "mypy", "ruff"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11.6,<3.14"
-content-hash = "003a470c827396d8c4aa9c07227ef044636d1fbef4bec8579678d7db4c399f53"
+content-hash = "c1477b83041e1a06c1743a46ce5c32fd7c08ee37bcdc18a69dd9c777b08c1a3b"

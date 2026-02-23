@@ -13,7 +13,7 @@ dependencies = [
     "pillow",
     "drawsvg",
     "cairosvg (>=2.8.2,<3.0.0)",
-    "h11 (==0.16)",
+    "h11 (>=0.16)",
 ]
 
 [project.optional-dependencies]
