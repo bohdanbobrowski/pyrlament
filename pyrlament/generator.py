@@ -4,7 +4,6 @@ from typing import Optional
 
 import drawsvg  # type: ignore
 import numpy as np
-from PIL import Image
 from pydantic import BaseModel
 
 from pyrlament.configs import PYRLAMENT_PROPERTIES
