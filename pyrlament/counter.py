@@ -24,7 +24,6 @@ class SeatsCounter:
             else:
                 self.past_support = False
         self._check_total_support()
-        self._check_total_seats()
         self._set_given_order()
 
     def _get_german_minority(self):
@@ -68,11 +67,6 @@ class SeatsCounter:
         total_support = math.fsum([p.support for p in self.parties])
         if total_support > 100:
             raise SeatsCounterException(f"Total support exceeds 100%! ({total_support})")
-
-    def _check_total_seats(self):
-        total_seats = math.fsum([p.seats for p in self.parties])
-        if total_seats > 460:
-            raise SeatsCounterException(f"Total seats exceeds 460! ({total_seats})")
 
     def _get_party_votes(self, district: District) -> dict:
         output = {}

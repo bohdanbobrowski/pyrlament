@@ -25,6 +25,10 @@ class Seat(BaseModel):
         self.color = "#000000"
 
 
+class SeatsGeneratorException(Exception):
+    pass
+
+
 class SeatsGenerator:
     _left_center_sector = [
         (433, 543, 64),
@@ -127,6 +131,16 @@ class SeatsGenerator:
         for seat in self._get_seat_positions_and_numbers():
             self.seats.append(Seat(cx=seat[0], cy=seat[1], number=cnt, label=seat[2], order=0))
             cnt += 1
+
+        self._check_total_seats()
+
+    def _check_total_seats(self):
+        total_seats = 0
+        for p in self.parties:
+            if p.seats:
+                total_seats += p.seats
+        if total_seats > 460:
+            raise SeatsGeneratorException(f"Total seats exceeds 460! ({total_seats})")
 
     def get_center(self):
         return self._get_center_sectors()
