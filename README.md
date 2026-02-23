@@ -65,14 +65,16 @@ As a result of the operation of the `count` method, the `parties` parameter will
 
 ## Tests coverage
 
+    poetry run coverage report --format=markdown
+
 | Name                      |    Stmts |     Miss |   Cover |
 |-------------------------- | -------: | -------: | ------: |
 | pyrlament/\_\_init\_\_.py |        4 |        0 |    100% |
 | pyrlament/configs.py      |       12 |        0 |    100% |
 | pyrlament/counter.py      |       98 |        1 |     99% |
 | pyrlament/data.py         |       67 |        0 |    100% |
-| pyrlament/generator.py    |      295 |      167 |     43% |
-|                 **TOTAL** |  **476** |  **168** | **65%** |
+| pyrlament/generator.py    |      306 |      104 |     66% |
+|                 **TOTAL** |  **487** |  **105** | **78%** |
 
 
 ## Implemented and planned features

@@ -1,7 +1,8 @@
 import pytest
-
+from unittest.mock import patch
 
 from pyrlament import SeatsGenerator
+from pyrlament.data import Party
 
 
 @pytest.fixture
@@ -48,3 +49,23 @@ class TestSeatsPositions:
         result = given_generator._get_mandates_label(given_amount)
         # Then
         assert result == expected_result
+
+    @pytest.mark.parametrize(
+        "given_parties,expected_result",
+        [
+            (
+                [
+                    Party(name="AAA", support=50, seats=2),
+                    Party(name="BBB", support=50, seats=2),
+                ],
+                4,
+            ),
+        ],
+    )
+    @patch("pyrlament.generator.SeatsGenerator._set_seat_color")
+    def test_colorize_seats(self, set_seat_color_mock, given_generator, given_parties, expected_result):
+        # When
+        seats_generator = SeatsGenerator(parties=given_parties)
+        seats_generator.colorize()
+        # Then
+        assert set_seat_color_mock.call_count == expected_result
