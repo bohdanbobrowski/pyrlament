@@ -84,12 +84,12 @@ Here are my plans (some already implemented) for this library:
 - [x] count seats basing on election support
 - [x] cover code with unit tests
 - [x] 5% and 8% support threshold
-- [X] validate support does not reach 100%
+- [x] validate support does not reach 100%
 - [x] draw svg with seats
 - [x] randomise seats colors
 - [x] split seats between parties
-- [ ] improve seats placement (it's a bit messy)
 - [x] svg/png output
 - [x] [build webapp using Flask](https://www.pyrlament.pl)
-- [ ] build mobile/desktop app using Kivy
+- [ ] improve seats drwaing and placement (it's buggy)
 - [ ] command line interface for library
+- [ ] build mobile/desktop app using Kivy
