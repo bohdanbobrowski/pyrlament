@@ -1,8 +1,15 @@
+[build-system]
+requires = [
+    "setuptools",
+]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "pyrlament"
 description = "Pyrlament"
-version = "0.4.7"
+version = "0.5.0"
 license = "MIT"
+requires-python= ">=3.13.0"
 authors = [
     {name = "Bohdan Bobrowski", email = "bohdan@bobrowski.com.pl"}
 ]
@@ -12,8 +19,8 @@ dependencies = [
     "pydantic-settings",
     "pillow",
     "drawsvg",
-    "cairosvg (>=2.8.2,<3.0.0)",
-    "h11 (>=0.16)",
+    "cairosvg",
+    "h11",
 ]
 
 [project.optional-dependencies]
@@ -22,6 +29,17 @@ dev = [
     "isort",
     "mypy",
     "ruff",
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.setuptools]
+packages = ["pyrlament"]
+
+[tool.setuptools.package-data]
+"assets" = [
+    "*.svg",
+    "*.png",
 ]
 
 [tool.ruff]
@@ -29,40 +47,6 @@ line-length = 120
 extend-exclude = [
     # TODO: try to keep these lines empty
 ]
-
-[tool.poetry]
-name = "pyrlament"
-version = "0.4.7"
-description = ""
-authors = ["Bohdan Bobrowski <bohdan@bobrowski.com.pl>"]
-readme = "README.md"
-packages = [
-    {"include" = "pyrlament"},
-]
-
-[tool.poetry.dependencies]
-python = ">=3.11.6,<3.14"
-numpy = "^2.3.1"
-pydantic = "^2.11.7"
-pydantic-settings = "^2.10.1"
-drawsvg = {extras = ["raster"], version = "^2.2.0"}
-svglib = "^1.5.1"
-pillow = "^12"
-
-[tool.poetry.group.dev.dependencies]
-mypy = "^1.17.0"
-ruff = "^0.12.4"
-faker = "^37.4.2"
-coverage = "^7.9.2"
-types-python-slugify = "^8.0.2.20240310"
-python-slugify = "^8.0.4"
-no-implicit-optional = "^1.3"
-pydevd-pycharm = "^252.23892.194"
-pytest-asyncio = "^1.1.0"
-pytest-mock = "^3.14.1"
-httpx-oauth = "^0.11.2"
-asgi-lifespan = "^2.1.0"
-pyclean = "^3.1.0"
 
 [tool.coverage.run]
 omit = [".*", "*/site-packages/*", "*/tests/*"]
@@ -80,15 +64,10 @@ exclude_also = [
     "class .*\bProtocol\\):",
     "@(abc\\.)?abstractmethod"
 ]
-fail_under = 65
+fail_under = 70
 
 [tool.coverage.html]
 directory = "tests/coverage"
 
 [tool.black]
 line-length = 120
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-

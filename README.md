@@ -13,7 +13,9 @@ Python library for visualizing seats in the Sejm of the Republic of Poland. So f
 
 ## Dev environment installation
 
-    poetry install --with=dev
+    python -m venv .venv
+    source .venv/venv/activate
+    pip install -e .[dev]
 
 ## SeatsCounter:
 
@@ -65,7 +67,7 @@ As a result of the operation of the `count` method, the `parties` parameter will
 
 ## Tests coverage
 
-    poetry run coverage report --format=markdown
+    coverage report --format=markdown
 
 | Name                      |    Stmts |     Miss |   Cover |
 |-------------------------- | -------: | -------: | ------: |
