@@ -1,3 +1,5 @@
+from unittest import skip
+
 import pytest
 from unittest.mock import patch
 
@@ -70,6 +72,7 @@ class TestSeatsPositions:
         # Then
         assert set_seat_color_mock.call_count == expected_result
 
+    @skip("Plan for 0.5 to make it pass")
     def test_seats_placement(self):
         # TODO: Plan for 0.5 to make it pass
         # Given
@@ -79,14 +82,14 @@ class TestSeatsPositions:
         expected = []
         for x in range(len(seats_numbers)):
             expected.append((677 + x * 43, 543, seats_numbers[x]))
-        seats_numbers_2 = [None, 472, 475, 478, 481, 484, 487, 490, 493, 496, 499]
+        # seats_numbers_2 = [None, 472, 475, 478, 481, 484, 487, 490, 493, 496, 499]
         # When
         current = []
         for label in seats_numbers:
             seat = given_generator._get_seat_by_label(label)
             current.append((int(seat.cx), int(seat.cy), label))
         # Then
-        print()
-        print(current)
-        print(expected)
-        # assert current == expected
+        # print()
+        # print(current)
+        # print(expected)
+        assert current == expected

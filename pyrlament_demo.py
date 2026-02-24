@@ -19,10 +19,10 @@ def demo():
     election.count()
     g = SeatsGenerator(parties=election.parties, caption=CAPTION)
     g.colorize()
-    # g.save_svg("assets/pyrlament_sample.svg")
-    # g.save_png("assets/pyrlament_sample.png")
+    g.save_svg("assets/pyrlament_sample.svg")
+    g.save_png("assets/pyrlament_sample.png")
 
-    g2 = SeatsGenerator(parties=[], legend=False)
+    g2 = SeatsGenerator(parties=[], legend=False, logotype=False)
     g2.gray()
     g2.save_svg("assets/pyrlament_sample_gray.svg")
     g2.save_png("assets/pyrlament_sample_gray.png")
