@@ -82,13 +82,15 @@ class TestSeatsPositions:
         y_list_2 = []
         for label in seats_numbers:
             seat = given_generator._get_seat_by_label(label)
-            x_list.append(seat.cx)
-            y_list.append(seat.cy)
+            if seat:
+                x_list.append(seat.cx)
+                y_list.append(seat.cy)
         for label in seats_numbers_2:
             if label:
                 seat = given_generator._get_seat_by_label(label)
-                x_list_2.append(seat.cx)
-                y_list_2.append(seat.cy)
+                if seat:
+                    x_list_2.append(seat.cx)
+                    y_list_2.append(seat.cy)
             else:
                 x_list_2.append(None)
                 y_list_2.append(None)

@@ -16,13 +16,16 @@ class Seat(BaseModel):
     number: int
     label: int
     fill: str = "#ffffff"
-    color: str = "#000000"
+    color: str = "#ffffff"
     order: int
 
     def reset_colors(self):
         self.fill = "#ffffff"
-        self.color = "#000000"
+        self.color = "#ffffff"
 
+    def gray_colors(self):
+        self.fill = "#999999"
+        self.color = "#000000"
 
 class SeatsGeneratorException(Exception):
     pass
@@ -344,6 +347,10 @@ class SeatsGenerator:
         else:
             parties = self.parties
         return german_minority, parties
+
+    def gray(self):
+        for seat in self.seats:
+            seat.gray_colors()
 
     def _clear_colors(self):
         for seat in self.seats:
