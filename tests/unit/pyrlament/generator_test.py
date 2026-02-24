@@ -71,46 +71,22 @@ class TestSeatsPositions:
         assert set_seat_color_mock.call_count == expected_result
 
     def test_seats_placement(self):
+        # TODO: Plan for 0.5 to make it pass
         # Given
         given_generator = SeatsGenerator(parties=[])
         seats_numbers = [372, 377, 383, 430, 434, 439, 444, 450, 457, 464, 471]
-        seats_numbers_2 = [None, 472, 475, 478, 481, 484, 487, 490, 493, 496, 499]
-        # When
-        x_list = []
-        x_list_2 = []
-        y_list = []
-        y_list_2 = []
-        for label in seats_numbers:
-            seat = given_generator._get_seat_by_label(label)
-            if seat:
-                x_list.append(seat.cx)
-                y_list.append(seat.cy)
-        for label in seats_numbers_2:
-            if label:
-                seat = given_generator._get_seat_by_label(label)
-                if seat:
-                    x_list_2.append(seat.cx)
-                    y_list_2.append(seat.cy)
-            else:
-                x_list_2.append(None)
-                y_list_2.append(None)
-        # Then
-        print()
-        print(y_list)
-        print(y_list_2)
-        print(x_list)
-        print(x_list_2)
-
         # Expected 372-471 Positions
         expected = []
-        for x in range(len(x_list)):
-            expected.append((543, 677+x*43))
+        for x in range(len(seats_numbers)):
+            expected.append((677 + x * 43, 543, seats_numbers[x]))
+        seats_numbers_2 = [None, 472, 475, 478, 481, 484, 487, 490, 493, 496, 499]
+        # When
+        current = []
+        for label in seats_numbers:
+            seat = given_generator._get_seat_by_label(label)
+            current.append((int(seat.cx), int(seat.cy), label))
+        # Then
+        print()
+        print(current)
         print(expected)
-
-        for y in y_list:
-            pass
-            # assert y == y_list[0]
-        for i in range(0, len(x_list_2) - 1):
-            pass
-            # assert x_list[i] == x_list[i+1] - 43
-            # assert x_list_2[i] == x_list_2[i+1] - 43
+        # assert current == expected
