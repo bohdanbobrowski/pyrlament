@@ -72,3 +72,10 @@ directory = "tests/coverage"
 
 [tool.black]
 line-length = 120
+
+[tool.mypy]
+exclude = [
+    "tests",
+    ".venv",
+    "venv",
+]
