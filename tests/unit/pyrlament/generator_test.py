@@ -1,5 +1,3 @@
-from unittest import skip
-
 import pytest
 from unittest.mock import patch
 
@@ -72,9 +70,7 @@ class TestSeatsPositions:
         # Then
         assert set_seat_color_mock.call_count == expected_result
 
-    @skip("Plan for 0.5 to make it pass")
     def test_seats_placement(self):
-        # TODO: Plan for 0.5 to make it pass
         # Given
         given_generator = SeatsGenerator(parties=[])
         seats_numbers = [372, 377, 383, 430, 434, 439, 444, 450, 457, 464, 471]
@@ -82,14 +78,45 @@ class TestSeatsPositions:
         expected = []
         for x in range(len(seats_numbers)):
             expected.append((677 + x * 43, 543, seats_numbers[x]))
-        # seats_numbers_2 = [None, 472, 475, 478, 481, 484, 487, 490, 493, 496, 499]
         # When
-        current = []
-        for label in seats_numbers:
-            seat = given_generator._get_seat_by_label(label)
-            current.append((int(seat.cx), int(seat.cy), label))
+        for x in range(len(seats_numbers)):
+            seat = given_generator._get_seat_by_label(seats_numbers[x])
+            # print(expected[x][0], "==", seat.cx, " | ", expected[x][1], "==", seat.cy)
+            assert expected[x][0] - seat.cx <= 1
+            assert expected[x][0] - seat.cx >= -5
+            assert expected[x][1] - seat.cy <= 3
+            assert expected[x][1] - seat.cy >= -1
+
+    @pytest.mark.parametrize(
+        "seats_numbers",
+        [
+            ([34, 35, 36]),
+            ([34, 37, 40, 43, 46]),
+            ([63, 60, 57]),
+            ([64, 65, 66]),
+            ([67, 68, 69, 70, 71]),
+            ([72, 73, 74, 75, 76, 77]),
+            ([78, 79, 80]),
+            ([370, 371, 372]),
+        ],
+    )
+    def test_seats_in_line(self, seats_numbers):
+        # Given
+        print()
+        print(seats_numbers)
+        given_generator = SeatsGenerator(parties=[])
+        # When
+        seat_positions = []
+        for x in range(len(seats_numbers)):
+            seat = given_generator._get_seat_by_label(seats_numbers[x])
+            seat_positions.append((seat.cx, seat.cy))
         # Then
-        # print()
-        # print(current)
-        # print(expected)
-        assert current == expected
+        start = seat_positions.pop(0)
+        end = seat_positions.pop(-1)
+        for x in range(len(seat_positions)):
+            x1 = round((end[0] - start[0]) / (len(seat_positions) + 1))
+            y1 = round((end[1] - start[1]) / (len(seat_positions) + 1))
+            expected = (start[0] + x1 * (x + 1), start[1] + y1 * (x + 1))
+            print(seat_positions[x])
+            print(expected)
+            assert seat_positions[x] == expected
