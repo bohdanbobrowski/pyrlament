@@ -16,8 +16,6 @@
 <text x="20" y="74" font-size="12" fill="#000000" font-family="sans-serif">PiS - 22.7% (119 mandatów)</text>
 <circle cx="8" cy="89" r="5" fill="#a37a16" />
 <text x="20" y="92" font-size="12" fill="#000000" font-family="sans-serif">Konfederacja Korony Polskiej - 9.9% (45 mandatów)</text>
-<circle cx="8" cy="107" r="5" fill="#444444" />
-<text x="20" y="110" font-size="12" fill="#000000" font-family="sans-serif">Mniejszość niemiecka - 1.0% (1 mandat)</text>
 </g>
 <g transform="translate(0 50)">
 <circle cx="396.0" cy="638.0" r="9" fill="#d6001c" stroke="black" stroke-width="0.3" />
@@ -184,6 +182,8 @@
 <text x="79.0" y="397.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">114</text>
 <circle cx="9.0" cy="543.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="9.0" y="545.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">115</text>
+<circle cx="13.0" cy="512.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
+<text x="13.0" y="514.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">116</text>
 <circle cx="16.0" cy="485.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="16.0" y="487.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">117</text>
 <circle cx="20.0" cy="458.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
@@ -270,10 +270,6 @@
 <text x="176.0" y="230.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">158</text>
 <circle cx="57.0" cy="341.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="57.0" y="343.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">159</text>
-<circle cx="72.0" cy="314.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
-<text x="72.0" y="316.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">160</text>
-<circle cx="84.0" cy="290.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
-<text x="84.0" y="292.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">161</text>
 <circle cx="98.0" cy="266.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="98.0" y="268.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">162</text>
 <circle cx="114.0" cy="241.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
@@ -384,6 +380,10 @@
 <text x="323.0" y="115.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">215</text>
 <circle cx="343.0" cy="103.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="343.0" y="105.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">216</text>
+<circle cx="188.0" cy="158.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
+<text x="188.0" y="160.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">217</text>
+<circle cx="213.0" cy="139.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
+<text x="213.0" y="141.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">218</text>
 <circle cx="234.0" cy="122.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="234.0" y="124.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">219</text>
 <circle cx="256.0" cy="106.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
@@ -468,16 +468,12 @@
 <text x="507.0" y="58.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">259</text>
 <circle cx="529.0" cy="53.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="529.0" y="55.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">260</text>
-<circle cx="365.0" cy="49.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
-<text x="365.0" y="51.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">261</text>
-<circle cx="447.0" cy="25.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
-<text x="447.0" y="27.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">264</text>
+<circle cx="395.0" cy="41.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
+<text x="395.0" y="43.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">262</text>
 <circle cx="476.0" cy="19.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="476.0" y="21.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">265</text>
 <circle cx="505.0" cy="17.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="505.0" y="19.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">266</text>
-<circle cx="529.0" cy="10.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
-<text x="529.0" y="12.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">267</text>
 <circle cx="578.0" cy="445.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="578.0" y="447.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">268</text>
 <circle cx="598.0" cy="453.0" r="9" fill="#1a304f" stroke="black" stroke-width="0.3" />
@@ -512,7 +508,7 @@
 <text x="607.0" y="323.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">283</text>
 <circle cx="629.0" cy="324.0" r="9" fill="#1a304f" stroke="black" stroke-width="0.3" />
 <text x="629.0" y="326.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">284</text>
-<circle cx="584.0" cy="273.0" r="9" fill="#1a304f" stroke="black" stroke-width="0.3" />
+<circle cx="584.0" cy="273.0" r="9" fill="#f68f2e" stroke="black" stroke-width="0.3" />
 <text x="584.0" y="275.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">285</text>
 <circle cx="605.0" cy="277.0" r="9" fill="#1a304f" stroke="black" stroke-width="0.3" />
 <text x="605.0" y="279.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">286</text>
@@ -672,8 +668,12 @@
 <text x="793.0" y="72.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">363</text>
 <circle cx="820.0" cy="86.0" r="9" fill="#1a304f" stroke="black" stroke-width="0.3" />
 <text x="820.0" y="88.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">364</text>
-<circle cx="891.0" cy="130.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
-<text x="891.0" y="132.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">367</text>
+<circle cx="843.0" cy="99.0" r="9" fill="#1a304f" stroke="black" stroke-width="0.3" />
+<text x="843.0" y="101.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">365</text>
+<circle cx="867.0" cy="114.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
+<text x="867.0" y="116.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">366</text>
+<circle cx="913.0" cy="150.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
+<text x="913.0" y="152.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">368</text>
 <circle cx="933.0" cy="163.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
 <text x="933.0" y="165.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">369</text>
 <circle cx="660.0" cy="503.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
@@ -788,10 +788,6 @@
 <text x="1016.0" y="269.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">424</text>
 <circle cx="1033.0" cy="292.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
 <text x="1033.0" y="294.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">425</text>
-<circle cx="1045.0" cy="318.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
-<text x="1045.0" y="320.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">426</text>
-<circle cx="1059.0" cy="338.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
-<text x="1059.0" y="340.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">427</text>
 <circle cx="798.0" cy="499.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
 <text x="798.0" y="501.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">428</text>
 <circle cx="804.0" cy="522.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
@@ -874,7 +870,7 @@
 <text x="1090.0" y="433.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">467</text>
 <circle cx="1097.0" cy="458.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
 <text x="1097.0" y="460.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">468</text>
-<circle cx="1103.0" cy="487.0" r="9" fill="#444444" stroke="black" stroke-width="0.3" />
+<circle cx="1103.0" cy="487.0" r="9" fill="#5778a2" stroke="black" stroke-width="0.3" />
 <text x="1103.0" y="489.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">469</text>
 <circle cx="1105.0" cy="516.0" r="9" fill="#a37a16" stroke="black" stroke-width="0.3" />
 <text x="1105.0" y="518.0" font-size="8" fill="#ffffff" text-anchor="middle" font-family="sans-serif">470</text>

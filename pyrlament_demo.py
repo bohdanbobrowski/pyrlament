@@ -15,8 +15,12 @@ CAPTION = "Źródło: United Surveys by IBRIS dla Wirtualnej Polski (13-15/02/20
 
 
 def demo():
-    election = SeatsCounter(parties=PARTIES)
+    election = SeatsCounter(parties=PARTIES, include_german_minority=False)
     election.count()
+
+    for party in election.parties:
+        print(f"{party.name}: {party.seats}")
+
     g = SeatsGenerator(parties=election.parties, caption=CAPTION)
     g.colorize()
     g.save_svg("assets/pyrlament_sample.svg")
