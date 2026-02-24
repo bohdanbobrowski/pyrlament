@@ -74,7 +74,7 @@ class TestSeatsPositions:
         # Given
         given_generator = SeatsGenerator(parties=[])
         seats_numbers = [372, 377, 383, 430, 434, 439, 444, 450, 457, 464, 471]
-        seats_numbers_2 = [472, 475, 478, 481, 484, 487, 490, 493, 496, 499]
+        seats_numbers_2 = [None, 472, 475, 478, 481, 484, 487, 490, 493, 496, 499]
         # When
         x_list = []
         x_list_2 = []
@@ -85,14 +85,25 @@ class TestSeatsPositions:
             x_list.append(seat.cx)
             y_list.append(seat.cy)
         for label in seats_numbers_2:
-            seat = given_generator._get_seat_by_label(label)
-            x_list_2.append(seat.cx)
-            y_list_2.append(seat.cy)
+            if label:
+                seat = given_generator._get_seat_by_label(label)
+                x_list_2.append(seat.cx)
+                y_list_2.append(seat.cy)
+            else:
+                x_list_2.append(None)
+                y_list_2.append(None)
         # Then
         print()
         print(y_list)
+        print(y_list_2)
         print(x_list)
-        print([" - "] + x_list_2)
+        print(x_list_2)
+
+        # Expected 372-471 Positions
+        expected = []
+        for x in range(len(x_list)):
+            expected.append((543, 677+x*43))
+        print(expected)
 
         for y in y_list:
             pass
