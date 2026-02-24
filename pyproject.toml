@@ -76,6 +76,8 @@ line-length = 120
 [tool.mypy]
 exclude = [
     "tests",
+    "build",
+    "dist",
     ".venv",
     "venv",
 ]
