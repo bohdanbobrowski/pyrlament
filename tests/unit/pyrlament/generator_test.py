@@ -69,3 +69,35 @@ class TestSeatsPositions:
         seats_generator.colorize()
         # Then
         assert set_seat_color_mock.call_count == expected_result
+
+    def test_seats_placement(self):
+        # Given
+        given_generator = SeatsGenerator(parties=[])
+        seats_numbers = [372, 377, 383, 430, 434, 439, 444, 450, 457, 464, 471]
+        seats_numbers_2 = [472, 475, 478, 481, 484, 487, 490, 493, 496, 499]
+        # When
+        x_list = []
+        x_list_2 = []
+        y_list = []
+        y_list_2 = []
+        for label in seats_numbers:
+            seat = given_generator._get_seat_by_label(label)
+            x_list.append(seat.cx)
+            y_list.append(seat.cy)
+        for label in seats_numbers_2:
+            seat = given_generator._get_seat_by_label(label)
+            x_list_2.append(seat.cx)
+            y_list_2.append(seat.cy)
+        # Then
+        print()
+        print(y_list)
+        print(x_list)
+        print([" - "] + x_list_2)
+
+        for y in y_list:
+            pass
+            # assert y == y_list[0]
+        for i in range(0, len(x_list_2) - 1):
+            pass
+            # assert x_list[i] == x_list[i+1] - 43
+            # assert x_list_2[i] == x_list_2[i+1] - 43
