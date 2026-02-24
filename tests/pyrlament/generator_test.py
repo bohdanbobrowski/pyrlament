@@ -128,3 +128,22 @@ class TestSeatsPositions:
             print(seat_positions[x])
             print(expected)
             assert seat_positions[x] == expected
+
+
+    def test_get_sgv(self):
+        # given
+        given_generator_1 = SeatsGenerator(parties=[], legend=False)
+        given_generator_2 = SeatsGenerator(parties=[], legend=False)
+        # When
+        given_generator_1.gray()
+        result_1 = given_generator_1.get_svg()
+        given_generator_2.randomize()
+        result_2 = given_generator_2.get_svg()
+        # Then
+        assert result_1
+        assert result_2
+        for x in range(34, 502):
+            assert result_1.find(f">{x}</text>\n") > -1
+            assert result_2.find(f">{x}</text>\n") > -1
+        assert result_1 != result_2
+

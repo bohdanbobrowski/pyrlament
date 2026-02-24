@@ -258,21 +258,12 @@ class SeatsGenerator:
             seat_nr += 1
         return result
 
-    def _ddd(self):
-        expected = []
-        for x in range(11):
-            if x<3:
-                expected.append((682 + x * 43, 543, x+900))
-        return expected
-
     def _get_center_sectors(self) -> list[tuple]:
         left_center_sector_right = self._rotate_sector(
             self._left_center_sector_left, angle=21, seat_nr=122, move_by=(5, -5)
         )
         left_center_sector = self._left_center_sector + self._left_center_sector_left + left_center_sector_right
         return (
-            # self._ddd()
-            # + self._rotate_sector(self._ddd(), angle=-135, seat_nr=500, move_by=(-7, 16))
             left_center_sector
             + self._rotate_sector(left_center_sector, angle=45, seat_nr=166, move_by=(5, 0))
             + self._rotate_sector(left_center_sector, angle=92, seat_nr=268, move_by=(-5, 5))
@@ -288,6 +279,7 @@ class SeatsGenerator:
     def randomize(self):
         for seat in self.seats:
             self._set_seat_color(seat, random.choice(PYRLAMENT_PROPERTIES.COLORS))
+            pass
 
     def _get_seat_by_number(self, seat_nr: int) -> Seat | None:
         for seat in self.seats:

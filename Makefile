@@ -18,10 +18,10 @@ pyclean:
 	pyclean .
 
 test:
-	pytest tests/unit
+	pytest ./tests
 
 test_coverage: pyclean
-	coverage run -m pytest tests/unit && coverage report -m
+	coverage run -m pytest ./tests && coverage report -m
 
 test_coverage_html: pyclean
-	coverage run -m pytest tests/unit && coverage html
+	coverage run -m pytest ./tests && coverage html

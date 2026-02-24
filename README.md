@@ -73,11 +73,10 @@ As a result of the operation of the `count` method, the `parties` parameter will
 |-------------------------- | -------: | -------: | ------: |
 | pyrlament/\_\_init\_\_.py |        4 |        0 |    100% |
 | pyrlament/configs.py      |       12 |        0 |    100% |
-| pyrlament/counter.py      |       98 |        1 |     99% |
-| pyrlament/data.py         |       67 |        0 |    100% |
-| pyrlament/generator.py    |      306 |      104 |     66% |
-|                 **TOTAL** |  **487** |  **105** | **78%** |
-
+| pyrlament/counter.py      |       96 |        1 |     99% |
+| pyrlament/data.py         |       54 |        0 |    100% |
+| pyrlament/generator.py    |      298 |       72 |     76% |
+| **TOTAL**                 |  **464** |   **73** | **84%** |
 
 ## Implemented and planned features
 
