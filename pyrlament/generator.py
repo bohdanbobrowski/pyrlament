@@ -27,6 +27,7 @@ class Seat(BaseModel):
         self.fill = "#999999"
         self.color = "#000000"
 
+
 class SeatsGeneratorException(Exception):
     pass
 

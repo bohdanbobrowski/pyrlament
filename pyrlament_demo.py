@@ -31,5 +31,6 @@ def demo():
     g2.save_svg("assets/pyrlament_sample_gray.svg")
     g2.save_png("assets/pyrlament_sample_gray.png")
 
+
 if __name__ == "__main__":
     demo()

@@ -129,7 +129,6 @@ class TestSeatsPositions:
             print(expected)
             assert seat_positions[x] == expected
 
-
     def test_get_sgv(self):
         # given
         given_generator_1 = SeatsGenerator(parties=[], legend=False)
@@ -146,4 +145,3 @@ class TestSeatsPositions:
             assert result_1.find(f">{x}</text>\n") > -1
             assert result_2.find(f">{x}</text>\n") > -1
         assert result_1 != result_2
-
