@@ -4,7 +4,6 @@ from typing import Optional
 
 import drawsvg  # type: ignore
 import numpy as np
-from PIL import Image
 from pydantic import BaseModel
 
 from pyrlament.configs import PYRLAMENT_PROPERTIES
@@ -17,11 +16,15 @@ class Seat(BaseModel):
     number: int
     label: int
     fill: str = "#ffffff"
-    color: str = "#000000"
+    color: str = "#ffffff"
     order: int
 
     def reset_colors(self):
         self.fill = "#ffffff"
+        self.color = "#ffffff"
+
+    def gray_colors(self):
+        self.fill = "#999999"
         self.color = "#000000"
 
 
@@ -31,66 +34,66 @@ class SeatsGeneratorException(Exception):
 
 class SeatsGenerator:
     _left_center_sector = [
-        (433, 543, 64),
-        (442, 520, 65),
-        (451, 499, 66),
-        (391, 543, 67),
-        (397, 524, 68),
-        (404, 506, 69),
-        (411, 488, 70),
-        (421, 469, 71),
-        (349, 543, 72),
-        (356, 521, 73),
-        (362, 500, 74),
-        (370, 480, 75),
-        (380, 460, 76),
-        (391, 439, 77),
+        (439, 543, 64),
+        (447, 523, 65),
+        (456, 504, 66),  #
+        (396, 543, 67),
+        (403, 526, 68),
+        (410, 509, 69),
+        (417, 492, 70),
+        (425, 474, 71),  #
+        (353, 543, 72),
+        (361, 523, 73),
+        (369, 503, 74),
+        (377, 483, 75),
+        (385, 463, 76),
+        (395, 443, 77),  #
     ]
     _left_center_sector_left = [
-        (306, 543, 78),
-        (311, 520, 79),
-        (317, 497, 80),
-        (268, 543, 81),
-        (271, 521, 82),
-        (276, 501, 83),
-        (282, 482, 84),
-        (221, 543, 85),
-        (224, 523, 86),
-        (230, 503, 87),
-        (235, 483, 88),
-        (240, 463, 89),
-        (180, 543, 90),
-        (184, 518, 91),
-        (188, 493, 92),
-        (194, 468, 93),
-        (202, 446, 94),
-        (135, 543, 95),
+        (310, 543, 78),
+        (314, 519, 79),
+        (317, 496, 80),  #
+        (267, 543, 81),
+        (270, 522, 82),
+        (273, 501, 83),
+        (277, 479, 84),  #
+        (224, 543, 85),
+        (228, 523, 86),
+        (232, 503, 87),
+        (236, 483, 88),
+        (238, 462, 89),  #
+        (181, 543, 90),
+        (185, 519, 91),
+        (189, 495, 92),
+        (193, 471, 93),
+        (198, 445, 94),  #
+        (138, 543, 95),
         (138, 518, 96),
         (145, 494, 97),
         (149, 472, 98),
         (154, 451, 99),
-        (161, 428, 100),
-        (93, 543, 101),
+        (159, 429, 100),  #
+        (95, 543, 101),
         (98, 519, 102),
         (100, 496, 103),
         (104, 473, 104),
         (110, 452, 105),
         (116, 431, 106),
-        (122, 410, 107),
-        (47, 543, 108),
+        (119, 412, 107),  #
+        (52, 543, 108),
         (55, 514, 109),
         (57, 490, 110),
         (61, 465, 111),
         (67, 442, 112),
         (73, 416, 113),
-        (81, 392, 114),
-        (11, 543, 115),
+        (79, 395, 114),  #
+        (9, 543, 115),
         (13, 512, 116),
         (16, 485, 117),
         (20, 458, 118),
         (26, 429, 119),
         (36, 402, 120),
-        (47, 377, 121),
+        (40, 378, 121),  #
     ]
 
     seats_order: list[list[int]] = []
@@ -265,7 +268,7 @@ class SeatsGenerator:
             left_center_sector
             + self._rotate_sector(left_center_sector, angle=45, seat_nr=166, move_by=(5, 0))
             + self._rotate_sector(left_center_sector, angle=92, seat_nr=268, move_by=(-5, 5))
-            + self._rotate_sector(left_center_sector, angle=135, seat_nr=370, move_by=(1, 16))
+            + self._rotate_sector(left_center_sector, angle=135, seat_nr=370, move_by=(0, 16))
         )
 
     def _set_seat_color(self, seat: Seat, x: str):
@@ -277,10 +280,17 @@ class SeatsGenerator:
     def randomize(self):
         for seat in self.seats:
             self._set_seat_color(seat, random.choice(PYRLAMENT_PROPERTIES.COLORS))
+            pass
 
     def _get_seat_by_number(self, seat_nr: int) -> Seat | None:
         for seat in self.seats:
             if seat.number == seat_nr:
+                return seat
+        return None
+
+    def _get_seat_by_label(self, label: int) -> Seat | None:
+        for seat in self.seats:
+            if seat.label == label:
                 return seat
         return None
 
@@ -340,6 +350,10 @@ class SeatsGenerator:
             parties = self.parties
         return german_minority, parties
 
+    def gray(self):
+        for seat in self.seats:
+            seat.gray_colors()
+
     def _clear_colors(self):
         for seat in self.seats:
             seat.reset_colors()
@@ -396,7 +410,7 @@ class SeatsGenerator:
         seats = drawsvg.Group(transform="translate(0 50)")
         for seat in self.seats:
             if not self._skip_empty_seats or (self._skip_empty_seats and seat.fill != "#ffffff"):
-                circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.5")
+                circle = drawsvg.Circle(seat.cx, seat.cy, 9, fill=seat.fill, stroke="black", stroke_width="0.3")
                 seats.append(circle)
                 if self._include_seats_numbers:
                     seat_number = drawsvg.Text(

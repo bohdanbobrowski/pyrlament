@@ -13,21 +13,26 @@ Python library for visualizing seats in the Sejm of the Republic of Poland. So f
 
 ## Dev environment installation
 
-    poetry install --with=dev
+    python -m venv .venv
+    source .venv/venv/activate
+    pip install -e .[dev]
 
 ## SeatsCounter:
 
     from pyrlament import SeatsCounter
     from pyrlament.data import Party
 
-    election2019 = {
-        Party(name="PiS", support=43.59, threshold=8),
-        Party(name="KO", support=27.4, threshold=8),
-        Party(name="Lewica", support=12.56),
-        Party(name="PSL", label="Polska 2050-PSL", support=10.8, threshold=8, color="DCB44B"),
-        Party(name="Konfederacja", support=6.81),
-    }
-    election = SeatsCounter(parties=election2019)
+    polls_02_2026 = [
+        Party(name="Razem", support=3.1, color="870f57"),
+        Party(name="Lewica", support=8.0, color="d6001c"),
+        Party(name="KO", support=32.5, threshold=8, color="f68f2e"),
+        Party(name="Polska 2050", support=2.0, color="f9c408"),
+        Party(name="PSL", support=4.8, color="3cb63a"),
+        Party(name="Konfederacja", support=13.0, color="1a304f"),
+        Party(name="PiS", support=22.7, threshold=8, color="5778a2"),
+        Party(name="Konfederacja Korony Polskiej", support=9.9, color="a37a16"),
+    ]
+    election = SeatsCounter(parties=polls_02_2026, include_german_minority=False)
     election.count()
 
 As a result of the operation of the `count` method, the `parties` parameter will contain information about the seats in the parliament, ex.:
@@ -37,12 +42,14 @@ As a result of the operation of the `count` method, the `parties` parameter will
 
 ...should print:
 
-    PiS: 235,
-    KO: 134,
-    Lewica: 49,
-    PSL: 30
-    Konfederacja: 11
-    Mniejszość niemiecka: 1
+    Razem: 0
+    Lewica: 37
+    KO: 196
+    Polska 2050: 0
+    PSL: 0
+    Konfederacja: 62
+    PiS: 119
+    Konfederacja Korony Polskiej: 45
 
 ## SeatsGenerator:
 
@@ -65,17 +72,16 @@ As a result of the operation of the `count` method, the `parties` parameter will
 
 ## Tests coverage
 
-    poetry run coverage report --format=markdown
+    coverage report --format=markdown
 
 | Name                      |    Stmts |     Miss |   Cover |
 |-------------------------- | -------: | -------: | ------: |
 | pyrlament/\_\_init\_\_.py |        4 |        0 |    100% |
 | pyrlament/configs.py      |       12 |        0 |    100% |
-| pyrlament/counter.py      |       98 |        1 |     99% |
-| pyrlament/data.py         |       67 |        0 |    100% |
-| pyrlament/generator.py    |      306 |      104 |     66% |
-|                 **TOTAL** |  **487** |  **105** | **78%** |
-
+| pyrlament/counter.py      |       96 |        1 |     99% |
+| pyrlament/data.py         |       54 |        0 |    100% |
+| pyrlament/generator.py    |      298 |       72 |     76% |
+| **TOTAL**                 |  **464** |   **73** | **84%** |
 
 ## Implemented and planned features
 

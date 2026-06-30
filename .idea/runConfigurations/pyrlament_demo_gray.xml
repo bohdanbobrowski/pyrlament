@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="pyrlament_demo" type="PythonConfigurationType" factoryName="Python">
+  <configuration default="false" name="pyrlament_demo_gray" type="PythonConfigurationType" factoryName="Python">
     <module name="pyrlament" />
     <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
@@ -18,7 +18,7 @@
       <option name="DIRENV_TRUSTED" value="false" />
     </EXTENSION>
     <option name="RUN_TOOL" value="" />
-    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyrlament_demo.py" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pyrlament_demo_gray.py" />
     <option name="PARAMETERS" value="" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
